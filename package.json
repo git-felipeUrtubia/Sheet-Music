@@ -1,0 +1,71 @@
+{
+  "name": "sheet-music",
+  "version": "0.1.0",
+  "private": true,
+  "main": "electron/main.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "electron:preview": "next build && electron .",
+    "electron:build": "next build && electron-builder"
+  },
+  "build": {
+    "appId": "com.sheetmusic.app",
+    "productName": "SheetMusic",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "out/**/*",
+      "electron/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "${productName}-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "SheetMusic",
+      "uninstallDisplayName": "SheetMusic - Entrenador de Lectura Musical",
+      "deleteAppDataOnUninstall": false
+    }
+  },
+  "dependencies": {
+    "electron-serve": "^3.0.1",
+    "lucide-react": "^1.71.0",
+    "next": "16.4.6",
+    "opensheetmusicdisplay": "^2.3.0",
+    "pitchy": "^4.1.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "smplr": "^1.2.0",
+    "vexflow": "^5.0.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/turbopack": "4.3.3",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "electron": "^45.3.1",
+    "electron-builder": "^26.18.0",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.6",
+    "tailwindcss": "4.3.3",
+    "typescript": "^5"
+  }
+}
