@@ -155,12 +155,18 @@ ipcMain.handle("db:get-score-xml", (_event, scoreId) => {
 
 // 4. Crear ventana de Electron
 async function createWindow() {
+
+    const iconPath = app.isPackaged
+        ? path.join(process.resourcesPath, "app.asar.unpacked", "public", "icon3.png")
+        : path.join(__dirname, "..", "public", "icon3.png");
+
     const win = new BrowserWindow({
         width: 1280,
         height: 820,
         minWidth: 960,
         minHeight: 650,
         show: false,
+        icon: iconPath,
         autoHideMenuBar: true,
         webPreferences: {
             preload: path.join(__dirname, "preload.js"),
