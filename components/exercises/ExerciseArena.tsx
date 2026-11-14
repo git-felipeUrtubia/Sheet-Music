@@ -4,7 +4,7 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import Vex from "vexflow";
 import { EXERCISES_DATA } from "@/data/exercises";
-import { useAudioPitch } from "@/hooks/useAudioPitch";
+import { useMidiInput } from "@/hooks/useMidiInput";
 import { DifficultyLevel } from "@/types/exercise";
 import { loadAppSettings, formatNoteBySystem, AppSettings } from "@/types/settings";
 
@@ -18,35 +18,49 @@ export default function ExerciseArena({ onBack, level }: ExerciseArenaProps) {
     const [maxUnlockedExercise, setMaxUnlockedExercise] = useState(0);
     const [currentNoteIndex, setCurrentNoteIndex] = useState<number>(0);
 
-    // Estado reactivo de los ajustes para detectar en vivo si el micrófono se apaga o enciende
     const [appSettings, setAppSettings] = useState<AppSettings>(() => loadAppSettings());
-    const isMicEnabled = appSettings.micEnabled !== false;
 
-    // Estados del Metrónomo y Línea de Tiempo
+    // Estados del Metrónomo, Aguja y Ancho Dinámico del Pentagrama
     const [bpm, setBpm] = useState<number>(70);
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
     const [beatStep, setBeatStep] = useState<number>(0);
+
+    // Conexión WebMIDI instantánea
+    const { detectedMidi, noteHitId, isConnected } = useMidiInput();
+
     const [statusMessage, setStatusMessage] = useState<string>(
-        loadAppSettings().micEnabled === false
-            ? "Activa el micrófono en Ajustes (⚙️) para iniciar"
-            : "Presiona Play para iniciar"
+        !isConnected ? "Conecta un instrumento MIDI USB para iniciar" : "Presiona Play para iniciar"
     );
     const [cursorX, setCursorX] = useState<number>(80);
     const [cursorTransitionMs, setCursorTransitionMs] = useState<number>(0);
-
-    const { detectedMidi } = useAudioPitch();
+    const [staveWidth, setStaveWidth] = useState<number>(700);
 
     // Referencias
+    const scrollContainerRef = useRef<HTMLDivElement | null>(null);
     const containerRef = useRef<HTMLDivElement | null>(null);
-    const notePositionsRef = useRef<number[]>([]);
     const metroAudioCtxRef = useRef<AudioContext | null>(null);
     const beatStartTimeRef = useRef<number>(0);
 
     const currentNoteIndexRef = useRef<number>(0);
     currentNoteIndexRef.current = currentNoteIndex;
-    const lastMatchedMidiRef = useRef<number | null>(null);
 
-    const exercisesDataFiltered = EXERCISES_DATA.filter((it) => it.level === level);
+    const lastMatchedHitIdRef = useRef<number>(-1);
+
+    const [exercisesDataFiltered, setExercisesDataFiltered] = useState(() =>
+        EXERCISES_DATA.filter((it) => it.level === level)
+    );
+
+    useEffect(() => {
+        if (typeof window !== "undefined" && window.electronDB) {
+            window.electronDB.getExercisesByLevel(level).then((rows) => {
+                if (rows && rows.length > 0) {
+                    setExercisesDataFiltered(rows);
+                    setExerciseInPlay(0);
+                }
+            });
+        }
+    }, [level]);
+
     const currentExercise = exercisesDataFiltered[exerciseInPlay];
 
     const isExerciseFinished = currentNoteIndex >= currentExercise.notes.length;
@@ -56,36 +70,31 @@ export default function ExerciseArena({ onBack, level }: ExerciseArenaProps) {
     const canGoPrev = exerciseInPlay > 0;
     const canGoNext = isExerciseFinished || exerciseInPlay < maxUnlockedExercise;
 
-    // Escuchar cambios en Ajustes (⚙️) en tiempo real
+    const resetScrollToStart = useCallback(() => {
+        if (scrollContainerRef.current) {
+            scrollContainerRef.current.scrollTo({ left: 0, behavior: "smooth" });
+        }
+    }, []);
+
+    // Escuchar cambios en Ajustes o estado MIDI USB
     useEffect(() => {
         const handleSettingsUpdate = () => {
-            const updated = loadAppSettings();
-            setAppSettings(updated);
-
-            if (updated.micEnabled === false) {
-                setIsPlaying(false);
-                setBeatStep(0);
-                setCursorTransitionMs(0);
-                if (notePositionsRef.current.length > 0) {
-                    setCursorX(notePositionsRef.current[0]);
-                }
-                setStatusMessage("Micrófono desactivado • Actívalo en Ajustes (⚙️)");
-            } else {
-                setStatusMessage((prev) =>
-                    prev.includes("Micrófono") || prev.includes("Activa el micrófono")
-                        ? "Presiona Play para iniciar"
-                        : prev
-                );
-            }
+            setAppSettings(loadAppSettings());
         };
-
         window.addEventListener("app-settings-updated", handleSettingsUpdate);
-        window.addEventListener("storage", handleSettingsUpdate);
-        return () => {
-            window.removeEventListener("app-settings-updated", handleSettingsUpdate);
-            window.removeEventListener("storage", handleSettingsUpdate);
-        };
-    }, []);
+
+        if (!isConnected) {
+            setIsPlaying(false);
+            setBeatStep(0);
+            setCursorTransitionMs(0);
+            resetScrollToStart();
+            setStatusMessage("Sin conexión MIDI • Conecta tu instrumento por USB");
+        } else if (!isPlaying) {
+            setStatusMessage("Presiona Play para iniciar");
+        }
+
+        return () => window.removeEventListener("app-settings-updated", handleSettingsUpdate);
+    }, [isConnected, isPlaying, resetScrollToStart]);
 
     // 1. Generador de sonido "Clic" del metrónomo
     const playMetronomeClick = useCallback((isStrongBeat: boolean) => {
@@ -117,38 +126,31 @@ export default function ExerciseArena({ onBack, level }: ExerciseArenaProps) {
         }
     }, []);
 
-    // 2. Botón Play / Detener (Bloqueado si el micrófono está apagado)
+    // 2. Botón Play / Detener
     const handleTogglePlay = () => {
-        if (!isMicEnabled) {
-            setStatusMessage("Debes activar el micrófono en Ajustes (⚙️) para practicar");
-            return;
-        }
+        if (!isConnected) return;
 
         setCursorTransitionMs(0);
+        resetScrollToStart();
+
         if (isPlaying) {
             setIsPlaying(false);
             setCurrentNoteIndex(0);
             currentNoteIndexRef.current = 0;
-            lastMatchedMidiRef.current = null;
+            lastMatchedHitIdRef.current = -1;
             setBeatStep(0);
             setStatusMessage("Detenido");
-            if (notePositionsRef.current.length > 0) {
-                setCursorX(notePositionsRef.current[0]);
-            }
         } else {
             setCurrentNoteIndex(0);
             currentNoteIndexRef.current = 0;
-            lastMatchedMidiRef.current = null;
+            lastMatchedHitIdRef.current = -1;
             setBeatStep(-4);
             setIsPlaying(true);
             setStatusMessage("Prepárate: 4...");
-            if (notePositionsRef.current.length > 0) {
-                setCursorX(notePositionsRef.current[0]);
-            }
         }
     };
 
-    // 3. Reloj del Metrónomo + Movimiento continuo de la aguja
+    // 3. Reloj del Metrónomo + Aguja + Auto-Scroll
     useEffect(() => {
         if (!isPlaying) return;
 
@@ -194,40 +196,35 @@ export default function ExerciseArena({ onBack, level }: ExerciseArenaProps) {
             }
         }
 
-        let raf1: number;
-        let raf2: number;
+        let raf1: number | null = null;
+        let raf2: number | null = null;
 
         if (beatStep < 0) {
             setStatusMessage(`Prepárate: ${Math.abs(beatStep)}...`);
             setCursorTransitionMs(0);
-            if (notePositionsRef.current.length > 0) {
-                setCursorX(notePositionsRef.current[0]);
-            }
         } else if (beatStep < currentExercise.notes.length) {
-            const currentMeasureBeat = Math.floor(accumulatedBeats) + 1;
+            const currentMeasureBeat = (Math.floor(accumulatedBeats) % 4) + 1;
             setStatusMessage(
                 `Pulso ${currentMeasureBeat} • Nota ${beatStep + 1} de ${currentExercise.notes.length}`
             );
 
-            const currentX = notePositionsRef.current[beatStep] ?? 80;
-            const nextX =
-                beatStep + 1 < notePositionsRef.current.length
-                    ? notePositionsRef.current[beatStep + 1]
-                    : 660;
-
-            if (beatStep === 0) {
-                setCursorTransitionMs(stepDurationMs);
-                setCursorX(nextX);
-            } else {
-                setCursorTransitionMs(0);
-                setCursorX(currentX);
-                raf1 = requestAnimationFrame(() => {
-                    raf2 = requestAnimationFrame(() => {
-                        setCursorTransitionMs(stepDurationMs);
-                        setCursorX(nextX);
+            // AUTO-SCROLL
+            const scrollEl = scrollContainerRef.current;
+            if (scrollEl) {
+                // Cálculo estimado basado en el ancho de VexFlow
+                const currentX = (beatStep / currentExercise.notes.length) * staveWidth;
+                const halfViewport = scrollEl.clientWidth / 2;
+                if (currentX > halfViewport) {
+                    scrollEl.scrollTo({
+                        left: currentX - halfViewport,
+                        behavior: "smooth",
                     });
-                });
+                }
             }
+
+            setCursorTransitionMs(stepDurationMs);
+            const targetWidth = ((beatStep + 1) / currentExercise.notes.length) * staveWidth;
+            setCursorX(targetWidth);
         }
 
         const beatTimeoutId = setTimeout(() => {
@@ -250,33 +247,25 @@ export default function ExerciseArena({ onBack, level }: ExerciseArenaProps) {
         return () => {
             clearTimeout(beatTimeoutId);
             extraClickTimers.forEach(clearTimeout);
-            if (raf1) cancelAnimationFrame(raf1);
-            if (raf2) cancelAnimationFrame(raf2);
+            if (raf1 !== null) cancelAnimationFrame(raf1);
+            if (raf2 !== null) cancelAnimationFrame(raf2);
         };
-    }, [isPlaying, beatStep, bpm, currentExercise, exerciseInPlay, playMetronomeClick]);
+    }, [isPlaying, beatStep, bpm, currentExercise, exerciseInPlay, staveWidth, playMetronomeClick]);
 
-    // 4. Validación de notas en el pentagrama
+    // 4. Validación de notas MIDI exacta (Cero latencia, candado por pulsación)
     useEffect(() => {
-        if (!isPlaying || beatStep < -1) return;
-        if (detectedMidi === null) {
-            lastMatchedMidiRef.current = null;
-            return;
-        }
+        if (!isPlaying || beatStep < 0 || detectedMidi === null) return;
         if (currentNoteIndex >= currentExercise.notes.length) return;
+        if (currentNoteIndex > beatStep) return;
 
         const targetNote = currentExercise.notes[currentNoteIndex];
-        const prevNote = currentNoteIndex > 0 ? currentExercise.notes[currentNoteIndex - 1] : null;
-
-        if (
-            prevNote &&
-            prevNote.midiNote === targetNote.midiNote &&
-            detectedMidi === lastMatchedMidiRef.current
-        ) {
-            return;
-        }
 
         if (detectedMidi === targetNote.midiNote) {
-            lastMatchedMidiRef.current = detectedMidi;
+            // El candado es exacto: el noteHitId cambia por cada orden física enviada por el piano USB
+            if (noteHitId === lastMatchedHitIdRef.current) return;
+
+            lastMatchedHitIdRef.current = noteHitId;
+
             const nextIdx = currentNoteIndex + 1;
             currentNoteIndexRef.current = nextIdx;
             setCurrentNoteIndex(nextIdx);
@@ -285,33 +274,43 @@ export default function ExerciseArena({ onBack, level }: ExerciseArenaProps) {
                 setMaxUnlockedExercise((prev) => Math.max(prev, exerciseInPlay + 1));
             }
         }
-    }, [detectedMidi, isPlaying, beatStep, currentNoteIndex, currentExercise, exerciseInPlay]);
+    }, [detectedMidi, noteHitId, beatStep, isPlaying, currentNoteIndex, currentExercise, exerciseInPlay]);
 
-    // 5. Dibujado del Pentagrama con VexFlow
+    // 5. Dibujado del Pentagrama con VexFlow (Multi-compás y ancho dinámico)
     useEffect(() => {
         const container = containerRef.current;
         if (!container) return;
 
-        const { Renderer, Stave, StaveNote, Voice, Formatter, Beam } = (Vex as any).Flow || Vex;
+        const { Renderer, Stave, StaveNote, Voice, Formatter, Beam, BarNote, Accidental } =
+            (Vex as any).Flow || Vex;
 
         container.innerHTML = "";
 
-        const renderer = new Renderer(container, Renderer.Backends.SVG);
-        renderer.resize(700, 180);
-        const context = renderer.getContext();
+        const getBeats = (dur: string) =>
+            dur === "w" ? 4 : dur === "h" ? 2 : dur === "8" ? 0.5 : dur === "16" ? 0.25 : 1;
 
-        const stave = new Stave(10, 30, 680);
-        stave
-            .addClef(currentExercise.clef)
-            .addTimeSignature(currentExercise.timeSignature);
-        stave.setContext(context).draw();
+        const beatsPerMeasure = parseInt(currentExercise.timeSignature.split("/")[0], 10) || 4;
 
-        const vexNotes = currentExercise.notes.map((noteItem, index) => {
+        const tickables: any[] = [];
+        const onlyStaveNotes: any[] = [];
+        let accBeats = 0;
+
+        currentExercise.notes.forEach((noteItem, index) => {
+            if (index > 0 && Math.abs(accBeats % beatsPerMeasure) < 0.001) {
+                tickables.push(new BarNote());
+            }
+
             const staveNote = new StaveNote({
                 clef: currentExercise.clef,
                 keys: [noteItem.pitch],
                 duration: noteItem.duration,
             });
+
+            const keyName = noteItem.pitch.split("/")[0];
+            if (keyName.length > 1) {
+                const accSymbol = keyName.slice(1);
+                staveNote.addModifier(new Accidental(accSymbol), 0);
+            }
 
             if (index < currentNoteIndex) {
                 staveNote.setStyle({ fillStyle: "#10B981", strokeStyle: "#10B981" });
@@ -319,23 +318,34 @@ export default function ExerciseArena({ onBack, level }: ExerciseArenaProps) {
                 staveNote.setStyle({ fillStyle: "#2563EB", strokeStyle: "#2563EB" });
             }
 
-            return staveNote;
+            tickables.push(staveNote);
+            onlyStaveNotes.push(staveNote);
+            accBeats += getBeats(noteItem.duration);
         });
 
-        const voice = new Voice({ numBeats: 4, beatValue: 4 });
-        voice.addTickables(vexNotes);
+        const dynamicWidth = Math.max(700, onlyStaveNotes.length * 55 + 140);
+        setStaveWidth(dynamicWidth);
 
-        new Formatter().joinVoices([voice]).format([voice], 580);
-        const beams = Beam.generateBeams(vexNotes);
+        const renderer = new Renderer(container, Renderer.Backends.SVG);
+        renderer.resize(dynamicWidth, 180);
+        const context = renderer.getContext();
+
+        const stave = new Stave(10, 30, dynamicWidth - 20);
+        stave.addClef(currentExercise.clef).addTimeSignature(currentExercise.timeSignature);
+        stave.setContext(context).draw();
+
+        const voice = new Voice({ numBeats: Math.ceil(accBeats), beatValue: 4 });
+        voice.setStrict(false);
+        voice.addTickables(tickables);
+
+        new Formatter().joinVoices([voice]).format([voice], dynamicWidth - 120);
+        const beams = Beam.generateBeams(onlyStaveNotes);
         voice.draw(context, stave);
         beams.forEach((beam: any) => beam.setContext(context).draw());
 
-        const positions = vexNotes.map((note) => note.getAbsoluteX() + 6);
-        notePositionsRef.current = positions;
-
-        if (!isPlaying && positions.length > 0) {
+        if (!isPlaying) {
             setCursorTransitionMs(0);
-            setCursorX(positions[0]);
+            setCursorX(80);
         }
     }, [currentExercise, currentNoteIndex, isPlaying]);
 
@@ -360,23 +370,23 @@ export default function ExerciseArena({ onBack, level }: ExerciseArenaProps) {
                             {level[0].toLocaleUpperCase() + level.slice(1)}
                         </h1>
                         <p className="text-xs text-[#94A3B8]">
-                            Toca cada nota cuando la aguja pase sobre ella
+                            Toca cada nota en tu teclado MIDI al ritmo de la aguja
                         </p>
                     </div>
                 </div>
             </header>
 
-            {/* Alerta visible cuando el micrófono está desactivado */}
-            {!isMicEnabled && (
-                <div className="w-full mt-6 p-4 rounded-xl bg-amber-500/10 border border-amber-500/40 flex items-center justify-between gap-4 text-amber-300">
+            {/* Alerta cuando no hay instrumento MIDI conectado */}
+            {!isConnected && (
+                <div className="w-full mt-6 p-4 rounded-xl bg-rose-500/10 border border-rose-500/40 flex items-center justify-between gap-4 text-rose-300">
                     <div className="flex items-center gap-3">
-                        <span className="text-lg">⚠️</span>
+                        <span className="text-lg">🎹</span>
                         <div>
-                            <p className="text-xs md:text-sm font-bold text-amber-200">
-                                El micrófono está desactivado
+                            <p className="text-xs md:text-sm font-bold text-rose-200">
+                                No se detectó un teclado MIDI
                             </p>
-                            <p className="text-xs text-amber-300/90">
-                                Debes tener el micrófono encendido en Ajustes (⚙️) en el menú principal para poder iniciar y evaluar los ejercicios.
+                            <p className="text-xs text-rose-300/90">
+                                Conecta tu instrumento por cable USB a la computadora para comenzar la práctica interactiva.
                             </p>
                         </div>
                     </div>
@@ -407,7 +417,7 @@ export default function ExerciseArena({ onBack, level }: ExerciseArenaProps) {
                             max={140}
                             step={5}
                             value={bpm}
-                            disabled={isPlaying || !isMicEnabled}
+                            disabled={isPlaying || !isConnected}
                             onChange={(e) => setBpm(Number(e.target.value))}
                             className="w-32 md:w-44 accent-blue-500 cursor-pointer disabled:opacity-50"
                         />
@@ -415,13 +425,13 @@ export default function ExerciseArena({ onBack, level }: ExerciseArenaProps) {
 
                     <div className="flex items-center gap-2">
                         <span
-                            className={`px-3.5 py-1.5 rounded-full text-xs font-bold border ${!isMicEnabled
-                                    ? "bg-rose-500/10 border-rose-500/40 text-rose-300"
-                                    : beatStep < 0 && isPlaying
-                                        ? "bg-amber-500/10 border-amber-500/40 text-amber-300 animate-pulse"
-                                        : isExerciseFinished
-                                            ? "bg-emerald-500/10 border-emerald-500/40 text-emerald-300"
-                                            : "bg-blue-500/10 border-blue-500/30 text-blue-300"
+                            className={`px-3.5 py-1.5 rounded-full text-xs font-bold border ${!isConnected
+                                ? "bg-rose-500/10 border-rose-500/40 text-rose-300"
+                                : beatStep < 0 && isPlaying
+                                    ? "bg-amber-500/10 border-amber-500/40 text-amber-300 animate-pulse"
+                                    : isExerciseFinished
+                                        ? "bg-emerald-500/10 border-emerald-500/40 text-emerald-300"
+                                        : "bg-blue-500/10 border-blue-500/30 text-blue-300"
                                 }`}
                         >
                             {statusMessage}
@@ -430,24 +440,19 @@ export default function ExerciseArena({ onBack, level }: ExerciseArenaProps) {
 
                     <button
                         type="button"
-                        disabled={!isMicEnabled}
+                        disabled={!isConnected}
                         onClick={handleTogglePlay}
-                        title={
-                            !isMicEnabled
-                                ? "Activa el micrófono en Ajustes para poder iniciar"
-                                : undefined
-                        }
-                        className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold text-[#F1F5F9] shadow-lg transition-all ${!isMicEnabled
-                                ? "bg-slate-700 text-slate-400 opacity-50 cursor-not-allowed shadow-none"
-                                : isPlaying
-                                    ? "bg-rose-600 hover:bg-rose-500 cursor-pointer active:scale-95"
-                                    : "bg-emerald-600 hover:bg-emerald-500 cursor-pointer active:scale-95"
+                        className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold text-[#F1F5F9] shadow-lg transition-all ${!isConnected
+                            ? "bg-slate-700 text-slate-400 opacity-50 cursor-not-allowed shadow-none"
+                            : isPlaying
+                                ? "bg-rose-600 hover:bg-rose-500 cursor-pointer active:scale-95"
+                                : "bg-emerald-600 hover:bg-emerald-500 cursor-pointer active:scale-95"
                             }`}
                     >
                         <span>{isPlaying ? "■" : "▶"}</span>
                         <span>
-                            {!isMicEnabled
-                                ? "Micrófono Apagado"
+                            {!isConnected
+                                ? "Sin Conexión"
                                 : isPlaying
                                     ? "Detener"
                                     : "Play Metrónomo"}
@@ -456,15 +461,20 @@ export default function ExerciseArena({ onBack, level }: ExerciseArenaProps) {
                 </div>
 
                 <div className="flex justify-between items-center mb-4 text-xs font-semibold tracking-wider uppercase text-[#94A3B8]">
-                    <span>Compás 1 • {currentExercise.timeSignature}</span>
+                    <span>Compás {currentExercise.timeSignature}</span>
                     <span>
                         Progreso: {currentNoteIndex} / {currentExercise.notes.length} Notas
                     </span>
                 </div>
 
-                {/* Pentagrama + Aguja Vertical suave estilo MuseScore */}
-                <div className="w-full bg-[#E2E8F0] text-[#0A1128] rounded-xl p-4 flex items-center justify-center overflow-x-auto shadow-inner">
-                    <div className="relative w-[700px] min-h-[180px] flex items-center justify-center">
+                <div
+                    ref={scrollContainerRef}
+                    className="w-full bg-[#E2E8F0] text-[#0A1128] rounded-xl p-4 flex items-center justify-start overflow-x-auto shadow-inner scroll-smooth"
+                >
+                    <div
+                        style={{ width: `${staveWidth}px` }}
+                        className="relative min-h-[180px] shrink-0 flex items-center justify-start mx-auto"
+                    >
                         <div
                             style={{
                                 transform: `translateX(${cursorX}px)`,
@@ -474,16 +484,19 @@ export default function ExerciseArena({ onBack, level }: ExerciseArenaProps) {
                                         : "none",
                             }}
                             className={`absolute left-0 top-5 bottom-5 w-[2.5px] rounded-sm z-10 pointer-events-none ${beatStep < 0 && isPlaying
-                                    ? "bg-slate-500/50"
-                                    : "bg-blue-600/65"
+                                ? "bg-slate-500/50"
+                                : "bg-blue-600/65"
                                 }`}
                         />
 
-                        <div ref={containerRef} className="w-[700px] h-[180px]" />
+                        <div
+                            ref={containerRef}
+                            style={{ width: `${staveWidth}px` }}
+                            className="h-[180px]"
+                        />
                     </div>
                 </div>
 
-                {/* Feedback inferior */}
                 <div className="mt-6 flex items-center justify-center gap-3">
                     <span className="px-3 py-1 rounded-md bg-blue-500/20 border border-blue-400 text-xs font-bold text-blue-300">
                         {currentExercise.notes[currentNoteIndex]
@@ -495,30 +508,25 @@ export default function ExerciseArena({ onBack, level }: ExerciseArenaProps) {
                     </span>
                 </div>
 
-                {/* Controles inferiores de navegación y reinicio */}
                 <div className="mt-8 pt-6 border-t border-blue-900/40 flex flex-wrap items-center justify-between gap-4">
-                    {/* Botón Reiniciar */}
                     <button
                         type="button"
-                        disabled={!isMicEnabled}
+                        disabled={!isConnected}
                         className="px-4 py-2.5 rounded-xl bg-[#162247] hover:bg-[#1E2E5C] text-sm font-medium text-[#E2E8F0] cursor-pointer transition-colors disabled:opacity-40 disabled:pointer-events-none"
                         onClick={() => {
                             setIsPlaying(false);
                             setCurrentNoteIndex(0);
                             currentNoteIndexRef.current = 0;
-                            lastMatchedMidiRef.current = null;
+                            lastMatchedHitIdRef.current = -1;
                             setBeatStep(0);
                             setCursorTransitionMs(0);
+                            resetScrollToStart();
                             setStatusMessage("Reiniciado");
-                            if (notePositionsRef.current.length > 0) {
-                                setCursorX(notePositionsRef.current[0]);
-                            }
                         }}
                     >
                         ↺ Reiniciar ejercicio
                     </button>
 
-                    {/* Navegación entre ejercicios de la lección */}
                     <div className="flex items-center gap-3">
                         <button
                             type="button"
@@ -528,15 +536,16 @@ export default function ExerciseArena({ onBack, level }: ExerciseArenaProps) {
                                 if (canGoPrev) {
                                     setIsPlaying(false);
                                     setCursorTransitionMs(0);
+                                    resetScrollToStart();
                                     setExerciseInPlay((prev) => prev - 1);
                                     setCurrentNoteIndex(0);
                                     currentNoteIndexRef.current = 0;
-                                    lastMatchedMidiRef.current = null;
+                                    lastMatchedHitIdRef.current = -1;
                                     setBeatStep(0);
                                     setStatusMessage(
-                                        isMicEnabled
+                                        isConnected
                                             ? "Presiona Play para iniciar"
-                                            : "Activa el micrófono en Ajustes (⚙️) para iniciar"
+                                            : "Conecta tu instrumento MIDI para iniciar"
                                     );
                                 }
                             }}
@@ -556,15 +565,16 @@ export default function ExerciseArena({ onBack, level }: ExerciseArenaProps) {
                                 if (!isLastExercise && canGoNext) {
                                     setIsPlaying(false);
                                     setCursorTransitionMs(0);
+                                    resetScrollToStart();
                                     setExerciseInPlay((prev) => prev + 1);
                                     setCurrentNoteIndex(0);
                                     currentNoteIndexRef.current = 0;
-                                    lastMatchedMidiRef.current = null;
+                                    lastMatchedHitIdRef.current = -1;
                                     setBeatStep(0);
                                     setStatusMessage(
-                                        isMicEnabled
+                                        isConnected
                                             ? "Presiona Play para iniciar"
-                                            : "Activa el micrófono en Ajustes (⚙️) para iniciar"
+                                            : "Conecta tu instrumento MIDI para iniciar"
                                     );
                                 } else if (isLessonFinished) {
                                     setIsPlaying(false);

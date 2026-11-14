@@ -1,115 +1,194 @@
 // electron/main.js
-const { app, BrowserWindow, session, protocol, net, shell, dialog } = require("electron");
+const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 const fs = require("fs");
-const { pathToFileURL } = require("url");
+const http = require("http");
+const Database = require("better-sqlite3");
 
-// Permiso guardado únicamente en la memoria de la sesión actual (se reinicia al cerrar la app)
-let micAllowedForSession = null;
+let db;
+let staticServerPort = null;
 
-protocol.registerSchemesAsPrivileged([
-    {
-        scheme: "app",
-        privileges: {
-            standard: true,
-            secure: true,
-            supportFetchAPI: true,
-            corsEnabled: true,
-            stream: true,
-        },
-    },
-]);
+// 1. Inicializar SQLite (seed.db / sheetmusic.db)
+function initDatabase() {
+    const userDbPath = path.join(app.getPath("userData"), "sheetmusic.db");
+    const seedDbPath = app.isPackaged
+        ? path.join(process.resourcesPath, "database", "seed.db")
+        : path.join(__dirname, "..", "database", "seed.db");
 
-function createWindow() {
-    const mainWindow = new BrowserWindow({
-        width: 1360,
-        height: 860,
-        minWidth: 1024,
-        minHeight: 700,
-        backgroundColor: "#0A1128",
-        autoHideMenuBar: true,
-        webPreferences: {
-            nodeIntegration: false,
-            contextIsolation: true,
-        },
-    });
+    if (!fs.existsSync(userDbPath) && fs.existsSync(seedDbPath)) {
+        fs.mkdirSync(path.dirname(userDbPath), { recursive: true });
+        fs.copyFileSync(seedDbPath, userDbPath);
+    }
 
-    // Abrir enlaces externos (donaciones, links web) en el navegador predeterminado del PC
-    mainWindow.webContents.setWindowOpenHandler(({ url }) => {
-        if (url.startsWith("http://") || url.startsWith("https://")) {
-            shell.openExternal(url);
-            return { action: "deny" };
-        }
-        return { action: "allow" };
-    });
-
-    // Permitir verificación síncrona de dispositivos de audio si aún no fue bloqueado
-    session.defaultSession.setPermissionCheckHandler((webContents, permission) => {
-        if (permission === "media") {
-            return micAllowedForSession !== false;
-        }
-        return false;
-    });
-
-    // Interceptar solicitudes de uso del micrófono
-    session.defaultSession.setPermissionRequestHandler(async (webContents, permission, callback) => {
-        if (permission === "media") {
-            // Si el usuario ya tomó una decisión mientras la app estuvo abierta, aplicarla
-            if (micAllowedForSession !== null) {
-                return callback(micAllowedForSession);
-            }
-
-            const { response } = await dialog.showMessageBox(mainWindow, {
-                type: "question",
-                buttons: ["Permitir mientras la app esté abierta", "Bloquear micrófono"],
-                defaultId: 0,
-                cancelId: 1,
-                title: "Permiso de Micrófono",
-                message: "¿Deseas permitir que SheetMusic utilice tu micrófono?",
-                detail:
-                    "El micrófono se usará exclusivamente mientras la aplicación permanezca abierta para detectar las notas que tocas en tiempo real.",
-            });
-
-            micAllowedForSession = response === 0;
-            return callback(micAllowedForSession);
-        }
-
-        callback(false);
-    });
-
-    mainWindow.loadURL("app://-/index.html");
+    const activeDbPath = app.isPackaged ? userDbPath : seedDbPath;
+    db = new Database(activeDbPath);
+    db.pragma("journal_mode = WAL");
 }
 
-app.whenReady().then(() => {
-    const outDir = path.join(__dirname, "..", "out");
+// 2. Servidor estático interno para servir la carpeta "out" (preview y producción)
+const MIME_TYPES = {
+    ".html": "text/html; charset=utf-8",
+    ".css": "text/css; charset=utf-8",
+    ".js": "application/javascript; charset=utf-8",
+    ".json": "application/json; charset=utf-8",
+    ".png": "image/png",
+    ".jpg": "image/jpeg",
+    ".jpeg": "image/jpeg",
+    ".svg": "image/svg+xml",
+    ".ico": "image/x-icon",
+    ".woff": "font/woff",
+    ".woff2": "font/woff2",
+    ".ttf": "font/ttf",
+    ".xml": "application/xml; charset=utf-8",
+    ".musicxml": "application/xml; charset=utf-8",
+};
 
-    protocol.handle("app", (request) => {
-        const urlObj = new URL(request.url);
-        let relPath = decodeURIComponent(urlObj.pathname);
+function startStaticOutServer() {
+    return new Promise((resolve) => {
+        const outDir = path.join(__dirname, "..", "out");
 
-        if (relPath === "/" || relPath === "") {
-            relPath = "/index.html";
-        }
+        const server = http.createServer((req, res) => {
+            const cleanUrl = decodeURIComponent((req.url || "/").split("?")[0]);
+            let filePath = path.join(outDir, cleanUrl === "/" ? "index.html" : cleanUrl);
 
-        let targetPath = path.join(outDir, relPath);
-
-        if (!fs.existsSync(targetPath) || fs.statSync(targetPath).isDirectory()) {
-            const htmlCandidate = path.join(outDir, `${relPath.replace(/\/$/, "")}.html`);
-            const indexCandidate = path.join(outDir, relPath, "index.html");
-
-            if (fs.existsSync(htmlCandidate)) {
-                targetPath = htmlCandidate;
-            } else if (fs.existsSync(indexCandidate)) {
-                targetPath = indexCandidate;
-            } else {
-                return new Response("Not Found", { status: 404 });
+            // Si la ruta es una carpeta o ruta de Next sin extensión, buscar su .html o index.html
+            if (!path.extname(filePath)) {
+                if (fs.existsSync(`${filePath}.html`)) {
+                    filePath = `${filePath}.html`;
+                } else {
+                    filePath = path.join(filePath, "index.html");
+                }
             }
-        }
 
-        return net.fetch(pathToFileURL(targetPath).toString());
+            fs.readFile(filePath, (err, content) => {
+                if (err) {
+                    res.writeHead(404);
+                    res.end("Not found");
+                    return;
+                }
+                const ext = path.extname(filePath).toLowerCase();
+                res.writeHead(200, { "Content-Type": MIME_TYPES[ext] || "application/octet-stream" });
+                res.end(content);
+            });
+        });
+
+        // Puerto 0 asigna un puerto libre del sistema automáticamente sin colisionar
+        server.listen(0, "127.0.0.1", () => {
+            staticServerPort = server.address().port;
+            resolve(staticServerPort);
+        });
+    });
+}
+
+// Comprueba rápido si localhost:3000 está encendido (modo dev en vivo)
+function isPort3000Running() {
+    return new Promise((resolve) => {
+        const req = http.get("http://localhost:3000", () => {
+            resolve(true);
+        });
+        req.on("error", () => resolve(false));
+        req.setTimeout(400, () => {
+            req.destroy();
+            resolve(false);
+        });
+    });
+}
+
+// 3. Canales IPC de SQLite
+ipcMain.handle("db:get-exercises", (_event, level) => {
+    if (!db) return [];
+    const rows = db.prepare("SELECT * FROM exercises WHERE level = ?").all(level);
+    return rows.map((r) => ({
+        id: r.id,
+        title: r.title,
+        level: r.level,
+        clef: r.clef,
+        timeSignature: r.time_signature,
+        notes: JSON.parse(r.notes_json),
+    }));
+});
+
+ipcMain.handle("db:save-progress", (_event, exerciseId, bpm) => {
+    if (!db) return { ok: false };
+    const stmt = db.prepare(`
+    INSERT INTO user_progress (exercise_id, completed, best_bpm, updated_at)
+    VALUES (?, 1, ?, CURRENT_TIMESTAMP)
+    ON CONFLICT(exercise_id) DO UPDATE SET
+      completed = 1,
+      best_bpm = MAX(best_bpm, excluded.best_bpm),
+      updated_at = CURRENT_TIMESTAMP
+  `);
+    stmt.run(exerciseId, bpm);
+    return { ok: true };
+});
+
+ipcMain.handle("db:get-catalog", () => {
+    if (!db) return [];
+    const rows = db.prepare(`
+    SELECT id, title, composer, level, genre, instrument, clef,
+           time_signature, bpm, measures_count, score_file
+    FROM scores
+  `).all();
+
+    return rows.map((r) => ({
+        id: r.id,
+        title: r.title,
+        composer: r.composer,
+        level: r.level,
+        genre: r.genre,
+        instrument: r.instrument,
+        clef: r.clef,
+        timeSignature: r.time_signature,
+        bpm: r.bpm,
+        measuresCount: r.measures_count,
+        scoreFile: r.score_file,
+    }));
+});
+
+ipcMain.handle("db:get-score-xml", (_event, scoreId) => {
+    if (!db) return null;
+    const row = db
+        .prepare("SELECT musicxml_content FROM scores WHERE id = ?")
+        .get(scoreId);
+    return row ? row.musicxml_content : null;
+});
+
+// 4. Crear ventana de Electron
+async function createWindow() {
+    const win = new BrowserWindow({
+        width: 1280,
+        height: 820,
+        minWidth: 960,
+        minHeight: 650,
+        show: false,
+        autoHideMenuBar: true,
+        webPreferences: {
+            preload: path.join(__dirname, "preload.js"),
+            contextIsolation: true,
+            nodeIntegration: false,
+        },
     });
 
-    createWindow();
+    win.maximize();
+    win.show();
+
+    // Si estamos en desarrollo con "npm run dev" abierto, usa el puerto 3000;
+    // si corremos "electron:preview" o el .exe final, sirve la carpeta "out" con todos sus estilos
+    const devServerActive = !app.isPackaged && (await isPort3000Running());
+
+    if (devServerActive) {
+        win.loadURL("http://localhost:3000");
+    } else {
+        if (!staticServerPort) {
+            await startStaticOutServer();
+        }
+        win.loadURL(`http://127.0.0.1:${staticServerPort}`);
+    }
+}
+
+app.whenReady().then(async () => {
+    initDatabase();
+    await createWindow();
 
     app.on("activate", () => {
         if (BrowserWindow.getAllWindows().length === 0) createWindow();
@@ -117,5 +196,6 @@ app.whenReady().then(() => {
 });
 
 app.on("window-all-closed", () => {
+    if (db) db.close();
     if (process.platform !== "darwin") app.quit();
 });

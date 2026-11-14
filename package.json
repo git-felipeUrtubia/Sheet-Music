@@ -9,7 +9,9 @@
     "start": "next start",
     "lint": "eslint",
     "electron:preview": "next build && electron .",
-    "electron:build": "next build && electron-builder"
+    "electron:build": "next build && electron-builder",
+    "postinstall": "electron-builder install-app-deps",
+    "db:seed": "node database/init-seed.js"
   },
   "build": {
     "appId": "com.sheetmusic.app",
@@ -21,6 +23,12 @@
       "out/**/*",
       "electron/**/*",
       "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "database/seed.db",
+        "to": "database/seed.db"
+      }
     ],
     "win": {
       "target": [
@@ -46,6 +54,7 @@
     }
   },
   "dependencies": {
+    "better-sqlite3": "^13.1.1",
     "electron-serve": "^3.0.1",
     "lucide-react": "^1.71.0",
     "next": "16.4.6",
@@ -57,10 +66,13 @@
     "vexflow": "^5.0.0"
   },
   "devDependencies": {
+    "@electron/rebuild": "^4.2.1",
     "@tailwindcss/turbopack": "4.3.3",
+    "@types/better-sqlite3": "^9.6.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/webmidi": "^2.1.0",
     "electron": "^45.3.1",
     "electron-builder": "^26.18.0",
     "eslint": "^9",
