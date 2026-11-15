@@ -10,11 +10,13 @@ import {
   KeyboardMusic,
   Library,
   Moon,
+  Plus,
   Settings,
   Sun,
 } from "lucide-react";
 import SettingsModal from "@/components/settings/SettingsModal";
 import ScoreRequestModal from "@/components/email/ScoreRequestModal";
+import { WebDownloadLink } from "@/components/landing/WebLandingPage";
 
 const THEME_KEY = "sheetmusic-theme";
 
@@ -30,7 +32,13 @@ function isCurrent(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
-export default function AppShell({ children }: { children: ReactNode }) {
+export default function AppShell({
+  children,
+  onShowLanding,
+}: {
+  children: ReactNode;
+  onShowLanding?: () => void;
+}) {
   const pathname = usePathname();
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [settingsOpen, setSettingsOpen] = useState(false);
@@ -118,7 +126,8 @@ export default function AppShell({ children }: { children: ReactNode }) {
             onClick={() => setRequestOpen(true)}
             className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-gradient-to-r from-pink-400 to-rose-400 px-3 py-3 text-sm font-semibold text-rose-950 shadow-lg shadow-pink-300/40 transition hover:brightness-105 active:scale-[0.98]"
           >
-            ➕ Sugerir Partitura
+            <Plus className="h-4 w-4" strokeWidth={1.75} />
+            Sugerir Partitura
           </button>
           <div className="grid grid-cols-2 gap-2">
             <button
@@ -146,6 +155,11 @@ export default function AppShell({ children }: { children: ReactNode }) {
           </div>
         </div>
       </aside>
+
+      <WebDownloadLink
+        onShowLanding={onShowLanding}
+        className="fixed inset-x-4 top-[5.15rem] z-50 flex-wrap justify-between md:inset-x-auto md:right-6 md:top-5 md:w-auto md:flex-nowrap md:justify-end"
+      />
 
       <header className="fixed inset-x-4 top-4 z-40 flex items-center gap-2 md:hidden">
         <div className="flex min-w-0 flex-1 items-center gap-2 rounded-full border border-pink-200/80 bg-white/85 px-3 py-2 shadow-lg shadow-pink-200/30 backdrop-blur-xl dark:border-pink-500/20 dark:bg-slate-900/80 dark:shadow-black/40">
@@ -178,9 +192,10 @@ export default function AppShell({ children }: { children: ReactNode }) {
         <button
           type="button"
           onClick={() => setRequestOpen(true)}
-          className="mb-2 flex w-full cursor-pointer items-center justify-center rounded-full bg-gradient-to-r from-pink-400 to-rose-400 px-4 py-3 text-sm font-semibold text-rose-950 shadow-lg shadow-pink-300/40"
+          className="mb-2 flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-gradient-to-r from-pink-400 to-rose-400 px-4 py-3 text-sm font-semibold text-rose-950 shadow-lg shadow-pink-300/40"
         >
-          ➕ Sugerir Partitura
+          <Plus className="h-4 w-4" strokeWidth={1.75} />
+          Sugerir Partitura
         </button>
         <div className="grid grid-cols-4 rounded-[1.6rem] border border-pink-200/80 bg-white/90 p-1.5 shadow-xl shadow-pink-200/30 backdrop-blur-xl dark:border-pink-500/20 dark:bg-slate-900/85 dark:shadow-black/40">
           {NAV.map((item) => {
@@ -201,7 +216,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
         </div>
       </nav>
 
-      <div className="relative z-10 px-4 pb-44 pt-24 md:pb-8 md:pl-[256px] md:pr-6 md:pt-6">
+      <div className="app-main relative z-10 px-4 pb-44 pt-24 md:pb-8 md:pl-[256px] md:pr-6 md:pt-6">
         {children}
       </div>
 

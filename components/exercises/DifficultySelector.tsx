@@ -1,3 +1,4 @@
+import { ArrowRight } from "lucide-react";
 import { DifficultyLevel } from "@/types/exercise";
 
 interface DifficultySelectorProps {
@@ -41,8 +42,9 @@ export default function DifficultySelector({ selectedLevel }: DifficultySelector
               Figuras redondas y blancas en compás de 4/4. Ideal para ubicar notas centrales sin presión de tiempo.
             </p>
           </div>
-          <span className="text-xs font-semibold text-emerald-700 transition group-hover:translate-x-1 dark:text-emerald-300">
-            Iniciar nivel →
+          <span className="inline-flex items-center text-xs font-semibold text-emerald-700 transition group-hover:translate-x-1 dark:text-emerald-300">
+            Iniciar nivel
+            <ArrowRight className="ml-1.5 inline h-3.5 w-3.5" strokeWidth={1.75} />
           </span>
         </button>
 
@@ -64,8 +66,9 @@ export default function DifficultySelector({ selectedLevel }: DifficultySelector
               Negras, corcheas y alteraciones simples (sostenidos y bemoles) alternando posiciones.
             </p>
           </div>
-          <span className="text-xs font-semibold text-sky-700 transition group-hover:translate-x-1 dark:text-sky-300">
-            Iniciar nivel →
+          <span className="inline-flex items-center text-xs font-semibold text-sky-700 transition group-hover:translate-x-1 dark:text-sky-300">
+            Iniciar nivel
+            <ArrowRight className="ml-1.5 inline h-3.5 w-3.5" strokeWidth={1.75} />
           </span>
         </button>
 
@@ -87,7 +90,10 @@ export default function DifficultySelector({ selectedLevel }: DifficultySelector
               Lectura rápida con saltos de octava, líneas adicionales y ritmos sincopados.
             </p>
           </div>
-          <span className="text-xs font-semibold transition group-hover:translate-x-1">Iniciar nivel →</span>
+          <span className="inline-flex items-center text-xs font-semibold transition group-hover:translate-x-1">
+            Iniciar nivel
+            <ArrowRight className="ml-1.5 h-3.5 w-3.5" strokeWidth={1.75} />
+          </span>
         </button>
       </div>
     </section>

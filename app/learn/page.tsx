@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { THEORY_CHAPTERS, type TheoryChapter } from "@/data/theoryLessons";
 import TheoryInteractiveCard from "@/components/learn/TheoryInteractiveCard";
 import { getLessons } from "@/lib/sheetData";
@@ -42,9 +43,10 @@ export default function LearnSheetMusicPage() {
           </p>
           <Link
             href="/exercises"
-            className="mt-6 inline-flex rounded-full bg-gradient-to-r from-pink-400 to-rose-400 px-5 py-2.5 text-sm font-semibold text-rose-950 shadow-lg shadow-pink-300/40"
+            className="mt-6 inline-flex items-center rounded-full bg-gradient-to-r from-pink-400 to-rose-400 px-5 py-2.5 text-sm font-semibold text-rose-950 shadow-lg shadow-pink-300/40"
           >
-            Ir a Ejercicios Prácticos →
+            Ir a Ejercicios Prácticos
+            <ArrowRight className="ml-1.5 h-4 w-4" strokeWidth={1.75} />
           </Link>
         </header>
 
@@ -97,7 +99,8 @@ export default function LearnSheetMusicPage() {
               onClick={() => setActiveChapterIdx((prev) => prev - 1)}
               className="cursor-pointer rounded-full border border-pink-200/80 bg-white/80 px-5 py-2.5 text-xs font-bold text-rose-900 disabled:pointer-events-none disabled:opacity-40 dark:border-pink-500/20 dark:bg-slate-950/40 dark:text-pink-50"
             >
-              ← Lección Anterior
+              <ArrowLeft className="mr-1.5 inline h-3.5 w-3.5" strokeWidth={1.75} />
+              Lección Anterior
             </button>
 
             {activeChapterIdx < chapters.length - 1 ? (
@@ -106,14 +109,16 @@ export default function LearnSheetMusicPage() {
                 onClick={() => setActiveChapterIdx((prev) => prev + 1)}
                 className="cursor-pointer rounded-full bg-gradient-to-r from-pink-400 to-rose-400 px-6 py-2.5 text-xs font-bold text-rose-950 shadow-lg shadow-pink-300/40"
               >
-                Siguiente Lección →
+                Siguiente Lección
+                <ArrowRight className="ml-1.5 inline h-3.5 w-3.5" strokeWidth={1.75} />
               </button>
             ) : (
               <Link
                 href="/exercises"
-                className="rounded-full bg-gradient-to-r from-emerald-300 to-teal-300 px-6 py-2.5 text-xs font-bold text-emerald-950 shadow-lg"
+                className="inline-flex items-center rounded-full bg-gradient-to-r from-emerald-300 to-teal-300 px-6 py-2.5 text-xs font-bold text-emerald-950 shadow-lg"
               >
-                ¡Listo! Comenzar Práctica Principiante →
+                ¡Listo! Comenzar Práctica Principiante
+                <ArrowRight className="ml-1.5 h-3.5 w-3.5" strokeWidth={1.75} />
               </Link>
             )}
           </div>

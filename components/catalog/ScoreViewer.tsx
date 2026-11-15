@@ -2,6 +2,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState, useCallback } from "react";
+import { ArrowLeft, Pause, Play, RotateCcw } from "lucide-react";
 import { OpenSheetMusicDisplay } from "opensheetmusicdisplay";
 import { SplendidGrandPiano, Soundfont } from "smplr";
 import { SheetMusicItem } from "@/types/catalog";
@@ -288,7 +289,8 @@ export default function ScoreViewer({ score, onBack }: ScoreViewerProps) {
                         }}
                         className="cursor-pointer rounded-full border border-pink-200/80 bg-white/80 px-4 py-2 text-sm font-medium text-rose-950 shadow-sm backdrop-blur-xl transition hover:-translate-y-0.5 dark:border-pink-500/20 dark:bg-slate-900/80 dark:text-pink-50"
                     >
-                        ← Volver al catálogo
+                        <ArrowLeft className="mr-1.5 inline h-4 w-4" strokeWidth={1.75} />
+                        Volver al catálogo
                     </button>
                     <div>
                         <div className="flex flex-wrap items-center gap-2">
@@ -368,7 +370,7 @@ export default function ScoreViewer({ score, onBack }: ScoreViewerProps) {
                                 title="Reiniciar partitura"
                                 className="grid h-11 w-11 cursor-pointer place-items-center rounded-full border border-pink-200/80 bg-pink-50 text-base font-bold text-rose-950 transition disabled:opacity-40 dark:border-pink-500/20 dark:bg-slate-800 dark:text-pink-50"
                             >
-                                ↺
+                                <RotateCcw className="h-4 w-4" strokeWidth={1.75} />
                             </button>
                             <button
                                 type="button"
@@ -380,7 +382,11 @@ export default function ScoreViewer({ score, onBack }: ScoreViewerProps) {
                                         : "bg-gradient-to-r from-pink-400 to-rose-400 text-rose-950 shadow-pink-300/40"
                                 }`}
                             >
-                                <span>{isPlaying ? "⏸" : "▶"}</span>
+                                {isPlaying ? (
+                                    <Pause className="h-4 w-4 fill-current" strokeWidth={1.75} />
+                                ) : (
+                                    <Play className="h-4 w-4 fill-current" strokeWidth={1.75} />
+                                )}
                                 <span>
                                     {isLoadingAudio
                                         ? "Cargando audio HD..."

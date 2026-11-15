@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Fraunces, Outfit } from "next/font/google";
-import AppShell from "@/components/shell/AppShell";
+import AppEntry from "@/components/shell/AppEntry";
 import "./global.css";
 
 const outfit = Outfit({
@@ -29,10 +29,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full bg-[#FFF8FA] text-slate-800 antialiased dark:bg-[#0B0D17] dark:text-slate-100">
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{if(localStorage.getItem("sheetmusic-theme")==="dark"){document.documentElement.classList.add("dark")}}catch(e){}})();`,
+            __html: `(function(){try{if(localStorage.getItem("sheetmusic-theme")==="dark"){document.documentElement.classList.add("dark")}}catch(e){}try{var desktop=typeof window.electronAPI!=="undefined"||typeof window.electronDB!=="undefined";var entered=sessionStorage.getItem("sheetmusic_web_entered")==="1";document.documentElement.setAttribute("data-sheet-entry",desktop?"desktop":entered?"webapp":"landing")}catch(e){}})();`,
           }}
         />
-        <AppShell>{children}</AppShell>
+        <AppEntry>{children}</AppEntry>
       </body>
     </html>
   );
