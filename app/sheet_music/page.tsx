@@ -8,6 +8,7 @@ import { DifficultyLevel } from "@/types/exercise";
 import { InstrumentType, MusicGenre } from "@/types/catalog";
 import SheetMusicCard from "@/components/catalog/SheetMusicCard";
 import ScoreViewer from "@/components/catalog/ScoreViewer";
+import ScoreRequestModal from "@/components/email/ScoreRequestModal";
 
 // Opciones tipadas para renderizar los botones de filtro limpiamente
 const INSTRUMENT_OPTIONS: { value: "todos" | InstrumentType; label: string }[] = [
@@ -58,6 +59,7 @@ export default function SheetMusicPage() {
     const [selectedInstrument, setSelectedInstrument] = useState<"todos" | InstrumentType>("todos");
     const [selectedLevel, setSelectedLevel] = useState<"todos" | DifficultyLevel>("todos");
     const [selectedGenre, setSelectedGenre] = useState<"todos" | MusicGenre>("todos");
+    const [isRequestModalOpen, setIsRequestModalOpen] = useState(false);
 
     // Estado preparado para cuando conectemos el visor de partituras
     const [selectedScoreId, setSelectedScoreId] = useState<string | null>(null);
@@ -102,6 +104,8 @@ export default function SheetMusicPage() {
         <main className="min-h-screen bg-[#0A1128] text-[#E2E8F0] p-6 md:p-12 flex flex-col select-none">
             <div className="max-w-6xl mx-auto w-full">
 
+
+
                 {/* Navegación superior */}
                 <div className="mb-6">
                     <Link
@@ -121,10 +125,25 @@ export default function SheetMusicPage() {
                     <p className="text-sm md:text-base text-[#94A3B8]">
                         Explora el catálogo offline filtrando por instrumento, nivel de dificultad y género musical.
                     </p>
+
+                    <button
+                        onClick={() => setIsRequestModalOpen(true)}
+                        className="flex items-center gap-2 rounded-xl border border-cyan-500/40 bg-cyan-500/10 px-4 py-2 text-sm font-semibold text-cyan-300 transition hover:bg-cyan-500/20"
+                    >
+                        ➕ Sugerir Partitura
+                    </button>
+
+                    <ScoreRequestModal
+                        isOpen={isRequestModalOpen}
+                        onClose={() => setIsRequestModalOpen(false)}
+                    />
+
                 </header>
+
 
                 {/* Panel de Filtros (Instrumento + Nivel + Género) */}
                 <section className="bg-[#111C3D] border-2 border-blue-900/50 rounded-2xl p-5 mb-8 shadow-lg flex flex-col gap-5">
+
 
                     {/* Fila 1: Filtro por Instrumento */}
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-blue-900/40">
