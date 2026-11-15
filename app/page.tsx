@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { ArrowRight, Coffee, GraduationCap } from "lucide-react";
 
 export default function HomePage() {
   return (
@@ -34,7 +35,7 @@ export default function HomePage() {
             type="button"
             className="ml-1 inline-flex cursor-pointer items-center gap-2 rounded-full border border-pink-200/80 bg-white/70 px-4 py-1.5 text-sm font-medium text-rose-950 transition hover:-translate-y-0.5 dark:border-pink-500/20 dark:bg-slate-950/40 dark:text-pink-50"
           >
-            <span>☕</span>
+            <Coffee className="h-4 w-4" strokeWidth={1.75} />
             <span>Apoyar proyecto</span>
           </button>
         </div>
@@ -68,7 +69,8 @@ export default function HomePage() {
             ))}
           </div>
           <span className="mt-auto inline-flex items-center pt-6 text-sm font-semibold text-rose-600 transition group-hover:translate-x-1 dark:text-pink-300">
-            Explorar catálogo →
+            Explorar catálogo
+            <ArrowRight className="ml-1.5 h-4 w-4" strokeWidth={1.75} />
           </span>
         </Link>
 
@@ -78,8 +80,8 @@ export default function HomePage() {
           style={{ animationDelay: "140ms" }}
         >
           <div className="mb-5 flex items-center justify-between gap-3">
-            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-white text-2xl shadow-sm dark:bg-slate-950/50">
-              🎓
+            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-white text-rose-700 shadow-sm dark:bg-slate-950/50 dark:text-pink-100">
+              <GraduationCap className="h-6 w-6" strokeWidth={1.75} />
             </span>
             <span className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-right text-[11px] font-bold uppercase tracking-wider text-emerald-800 dark:border-emerald-400/30 dark:bg-emerald-500/10 dark:text-emerald-200">
               Paso 1 • Desde Cero
@@ -92,7 +94,8 @@ export default function HomePage() {
             Domina el pentagrama, los tiempos, los silencios y los símbolos básicos con ejemplos sonoros antes de pasar a la práctica.
           </p>
           <span className="mt-auto inline-flex items-center pt-6 text-sm font-semibold text-emerald-700 transition group-hover:translate-x-1 dark:text-emerald-300">
-            Iniciar guía interactiva →
+            Iniciar guía interactiva
+            <ArrowRight className="ml-1.5 h-4 w-4" strokeWidth={1.75} />
           </span>
         </Link>
 
@@ -116,7 +119,8 @@ export default function HomePage() {
             Practica lectura de compases por nivel con detección de notas en tiempo real para avanzar.
           </p>
           <span className="mt-auto inline-flex items-center pt-6 text-sm font-semibold transition group-hover:translate-x-1">
-            Comenzar práctica →
+            Comenzar práctica
+            <ArrowRight className="ml-1.5 h-4 w-4" strokeWidth={1.75} />
           </span>
         </Link>
       </div>

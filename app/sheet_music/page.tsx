@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { KeyboardMusic, Music2, Search, Wind } from "lucide-react";
 import { DifficultyLevel } from "@/types/exercise";
 import { InstrumentType, MusicGenre } from "@/types/catalog";
 import SheetMusicCard from "@/components/catalog/SheetMusicCard";
@@ -9,11 +10,15 @@ import { useCatalog } from "@/hooks/useCatalog";
 import { useFavorites } from "@/hooks/useFavorites";
 import { filterScores } from "@/lib/sheetData";
 
-const INSTRUMENT_OPTIONS: { value: "todos" | InstrumentType; label: string }[] = [
+const INSTRUMENT_OPTIONS: {
+  value: "todos" | InstrumentType;
+  label: string;
+  icon?: typeof KeyboardMusic;
+}[] = [
   { value: "todos", label: "Todos" },
-  { value: "piano", label: "🎹 Piano" },
-  { value: "violin", label: "🎻 Violín" },
-  { value: "flute", label: "🪈 Flauta" },
+  { value: "piano", label: "Piano", icon: KeyboardMusic },
+  { value: "violin", label: "Violín", icon: Music2 },
+  { value: "flute", label: "Flauta", icon: Wind },
 ];
 
 const LEVEL_OPTIONS: {
@@ -91,9 +96,7 @@ export default function SheetMusicPage() {
             Explora el catálogo offline filtrando por instrumento, nivel de dificultad y género musical.
           </p>
           <label className="mt-5 flex items-center gap-2 rounded-full border border-pink-200/80 bg-white/70 px-4 py-2 text-sm text-rose-950 dark:border-pink-500/20 dark:bg-slate-950/40 dark:text-pink-50">
-            <span className="text-rose-400" aria-hidden>
-              ⌕
-            </span>
+            <Search className="h-4 w-4 shrink-0 text-rose-400" strokeWidth={1.75} aria-hidden />
             <input
               value={query}
               onChange={(event) => setQuery(event.target.value)}
@@ -139,6 +142,7 @@ export default function SheetMusicPage() {
                 onClick={() => setSelectedInstrument(option.value)}
                 className={pillClass(selectedInstrument === option.value)}
               >
+                {option.icon && <option.icon className="mr-1.5 h-3.5 w-3.5" strokeWidth={1.75} />}
                 {option.label}
               </button>
             ))}

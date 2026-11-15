@@ -90,6 +90,34 @@ body {
   animation: clef-float 9s ease-in-out infinite;
 }
 
+html:not([data-sheet-entry]) .sheet-landing-root,
+html[data-sheet-entry="desktop"] .sheet-landing-root,
+html[data-sheet-entry="webapp"] .sheet-landing-root {
+  display: none;
+}
+
+html[data-sheet-entry="landing"] .sheet-app-root {
+  display: none;
+}
+
+.web-download-cluster {
+  display: none;
+}
+
+html[data-sheet-entry="webapp"] .web-download-cluster {
+  display: flex;
+}
+
+html[data-sheet-entry="webapp"] .app-main {
+  padding-top: 10rem !important;
+}
+
+@media (min-width: 768px) {
+  html[data-sheet-entry="webapp"] .app-main {
+    padding-top: 4.5rem !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .studio-rise,
   .studio-fade,

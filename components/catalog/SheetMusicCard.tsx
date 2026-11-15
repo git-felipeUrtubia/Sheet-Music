@@ -1,3 +1,4 @@
+import { ArrowRight, Heart, KeyboardMusic, Music2, Wind } from "lucide-react";
 import { DifficultyLevel, ClefType } from "@/types/exercise";
 import { InstrumentType, MusicGenre } from "@/types/catalog";
 
@@ -28,10 +29,16 @@ const LEVEL_BADGE_STYLES: Record<DifficultyLevel, string> = {
     "bg-violet-100 text-violet-800 border-violet-200 dark:bg-violet-500/15 dark:text-violet-200 dark:border-violet-400/30",
 };
 
-const INSTRUMENT_LABELS: Record<InstrumentType, string> = {
-  piano: "🎹 Piano",
-  violin: "🎻 Violín",
-  flute: "🪈 Flauta",
+const INSTRUMENT_ICONS: Record<InstrumentType, typeof KeyboardMusic> = {
+  piano: KeyboardMusic,
+  violin: Music2,
+  flute: Wind,
+};
+
+const INSTRUMENT_NAMES: Record<InstrumentType, string> = {
+  piano: "Piano",
+  violin: "Violín",
+  flute: "Flauta",
 };
 
 const CLEF_LABELS: Record<ClefType | "grand", string> = {
@@ -56,6 +63,8 @@ export default function SheetMusicCard({
   onToggleFavorite,
   onSelect,
 }: SheetMusicCardProps) {
+  const InstrumentIcon = INSTRUMENT_ICONS[instrument];
+
   return (
     <article
       className={`group relative flex h-full flex-col overflow-hidden rounded-[1.7rem_2.4rem_1.5rem_2.2rem] border border-pink-200/80 bg-white/85 p-6 shadow-xl shadow-pink-200/25 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-pink-300/35 dark:border-pink-500/20 dark:bg-slate-900/80 dark:shadow-black/40 ${
@@ -72,8 +81,9 @@ export default function SheetMusicCard({
             >
               {level}
             </span>
-            <span className="rounded-full border border-pink-200 bg-pink-50 px-3 py-1 text-[11px] font-semibold text-rose-800 dark:border-pink-500/30 dark:bg-pink-500/10 dark:text-pink-100">
-              {INSTRUMENT_LABELS[instrument]}
+            <span className="inline-flex items-center gap-1 rounded-full border border-pink-200 bg-pink-50 px-3 py-1 text-[11px] font-semibold text-rose-800 dark:border-pink-500/30 dark:bg-pink-500/10 dark:text-pink-100">
+              <InstrumentIcon className="h-3.5 w-3.5" strokeWidth={1.75} />
+              {INSTRUMENT_NAMES[instrument]}
             </span>
             <span className="rounded-full border border-rose-200/80 bg-white/80 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-rose-700 dark:border-pink-500/20 dark:bg-slate-950/40 dark:text-pink-100">
               {genre}
@@ -82,13 +92,14 @@ export default function SheetMusicCard({
               <button
                 type="button"
                 onClick={() => onToggleFavorite(id)}
-                className={`cursor-pointer rounded-full border px-3 py-1 text-[11px] font-semibold ${
+                className={`inline-flex cursor-pointer items-center gap-1 rounded-full border px-3 py-1 text-[11px] font-semibold ${
                   favorite
                     ? "border-transparent bg-gradient-to-r from-pink-400 to-rose-400 text-rose-950"
                     : "border-pink-200 bg-white/80 text-rose-700 dark:border-pink-500/25 dark:bg-slate-950/40 dark:text-pink-100"
                 }`}
               >
-                {favorite ? "♥ Favorita" : "♡ Favorita"}
+                <Heart className={`h-3.5 w-3.5 ${favorite ? "fill-current" : ""}`} strokeWidth={1.75} />
+                Favorita
               </button>
             )}
           </div>
@@ -130,7 +141,7 @@ export default function SheetMusicCard({
         className="mt-6 flex w-full cursor-pointer items-center justify-center gap-2 rounded-full border border-pink-200 bg-pink-50/80 py-2.5 text-xs font-bold text-rose-800 transition group-hover:border-transparent group-hover:bg-gradient-to-r group-hover:from-pink-400 group-hover:to-rose-400 group-hover:text-rose-950 dark:border-pink-500/25 dark:bg-pink-500/10 dark:text-pink-100"
       >
         <span>Abrir Partitura</span>
-        <span>→</span>
+        <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.75} />
       </button>
     </article>
   );

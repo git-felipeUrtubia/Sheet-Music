@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { X } from "lucide-react";
 
 // Pega aquí la URL de tu Webhook (o guárdala en NEXT_PUBLIC_SCORE_WEBHOOK_URL en tu .env.local)
 const WEBHOOK_URL = "https://discord.com/api/webhooks/1571312953578364930/_Scou5lZG7NvgASChTRUKgb3nXcVlPHveLSI6ucyowzuks0LomZXlkkpn4lMmw7BhKRJ";
@@ -103,7 +104,7 @@ export default function ScoreRequestModal({ isOpen, onClose }: ScoreRequestModal
             onClick={onClose}
             className="grid h-9 w-9 cursor-pointer place-items-center rounded-full border border-pink-200/80 bg-pink-50 text-sm font-bold text-rose-800 transition hover:bg-pink-100 dark:border-pink-500/25 dark:bg-slate-800 dark:text-pink-50"
           >
-            ✕
+            <X className="h-4 w-4" strokeWidth={1.75} />
           </button>
         </div>
 

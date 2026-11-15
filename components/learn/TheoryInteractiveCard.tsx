@@ -2,6 +2,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { Play, Volume2 } from "lucide-react";
 import Vex from "vexflow";
 import { TheoryExampleItem } from "@/data/theoryLessons";
 
@@ -211,9 +212,14 @@ export default function TheoryInteractiveCard({ item }: TheoryInteractiveCardPro
                     type="button"
                     onClick={handlePlayDemo}
                     disabled={isPlayingDemo}
-                    className="cursor-pointer rounded-full bg-gradient-to-r from-pink-400 to-rose-400 px-4 py-2 text-xs font-bold text-rose-950 shadow-md shadow-pink-300/40 transition disabled:from-amber-200 disabled:to-orange-200"
+                    className="inline-flex cursor-pointer items-center gap-1.5 rounded-full bg-gradient-to-r from-pink-400 to-rose-400 px-4 py-2 text-xs font-bold text-rose-950 shadow-md shadow-pink-300/40 transition disabled:from-amber-200 disabled:to-orange-200"
                 >
-                    {isPlayingDemo ? "🔊 Escuchando..." : "▶ Escuchar ejemplo"}
+                    {isPlayingDemo ? (
+                        <Volume2 className="h-3.5 w-3.5" strokeWidth={1.75} />
+                    ) : (
+                        <Play className="h-3.5 w-3.5 fill-current" strokeWidth={1.75} />
+                    )}
+                    {isPlayingDemo ? "Escuchando..." : "Escuchar ejemplo"}
                 </button>
             </div>
         </div>

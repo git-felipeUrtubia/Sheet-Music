@@ -2,6 +2,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState, useCallback } from "react";
+import { ArrowLeft, ArrowRight, Check, KeyboardMusic, Play, RotateCcw, Square } from "lucide-react";
 import Vex from "vexflow";
 import { EXERCISES_DATA } from "@/data/exercises";
 import { useMidiInput } from "@/hooks/useMidiInput";
@@ -391,7 +392,8 @@ export default function ExerciseArena({ onBack, level }: ExerciseArenaProps) {
                             onBack(null);
                         }}
                     >
-                        ← Cambiar nivel
+                        <ArrowLeft className="mr-1.5 inline h-4 w-4" strokeWidth={1.75} />
+                        Cambiar nivel
                     </button>
                     <div>
                         <div className="flex flex-wrap items-center gap-2">
@@ -411,7 +413,7 @@ export default function ExerciseArena({ onBack, level }: ExerciseArenaProps) {
 
             {!isConnected && (
                 <div className="mt-5 flex items-center gap-3 rounded-[1.4rem] border border-rose-200 bg-rose-50/90 px-5 py-4 text-rose-800 dark:border-rose-400/30 dark:bg-rose-500/10 dark:text-rose-100">
-                    <span className="text-lg">🎹</span>
+                    <KeyboardMusic className="h-5 w-5 shrink-0" strokeWidth={1.75} />
                     <div>
                         <p className="text-sm font-semibold">No se detectó un teclado MIDI</p>
                         <p className="text-xs opacity-80">
@@ -521,7 +523,11 @@ export default function ExerciseArena({ onBack, level }: ExerciseArenaProps) {
                                     : "cursor-pointer bg-gradient-to-r from-pink-400 to-rose-400 text-rose-950 shadow-pink-300/40 active:scale-95"
                         }`}
                     >
-                        <span>{isPlaying ? "■" : "▶"}</span>
+                        {isPlaying ? (
+                            <Square className="h-3.5 w-3.5 fill-current" strokeWidth={1.75} />
+                        ) : (
+                            <Play className="h-3.5 w-3.5 fill-current" strokeWidth={1.75} />
+                        )}
                         <span>
                             {!isConnected ? "Sin Conexión" : isPlaying ? "Detener" : "Play Metrónomo"}
                         </span>
@@ -544,7 +550,8 @@ export default function ExerciseArena({ onBack, level }: ExerciseArenaProps) {
                             setStatusMessage("Reiniciado");
                         }}
                     >
-                        ↺ Reiniciar ejercicio
+                        <RotateCcw className="mr-1.5 inline h-4 w-4" strokeWidth={1.75} />
+                        Reiniciar ejercicio
                     </button>
 
                     <div className="flex items-center gap-3">
@@ -570,7 +577,8 @@ export default function ExerciseArena({ onBack, level }: ExerciseArenaProps) {
                                 }
                             }}
                         >
-                            ← Anterior
+                            <ArrowLeft className="mr-1.5 inline h-4 w-4" strokeWidth={1.75} />
+                            Anterior
                         </button>
 
                         <span className="px-2 text-xs font-semibold text-rose-900/50 dark:text-pink-100/50">
@@ -602,7 +610,17 @@ export default function ExerciseArena({ onBack, level }: ExerciseArenaProps) {
                                 }
                             }}
                         >
-                            {isLessonFinished ? "Finalizar Lección ✓" : "Siguiente →"}
+                            {isLessonFinished ? (
+                                <>
+                                    Finalizar Lección
+                                    <Check className="ml-1.5 inline h-4 w-4" strokeWidth={1.75} />
+                                </>
+                            ) : (
+                                <>
+                                    Siguiente
+                                    <ArrowRight className="ml-1.5 inline h-4 w-4" strokeWidth={1.75} />
+                                </>
+                            )}
                         </button>
                     </div>
                 </div>

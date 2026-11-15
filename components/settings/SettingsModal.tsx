@@ -10,6 +10,7 @@ import {
     NotationSystem,
 } from "@/types/settings";
 import { useMidiInput } from "@/hooks/useMidiInput";
+import { Check, KeyboardMusic, Music, Volume2, X } from "lucide-react";
 
 interface SettingsModalProps {
     isOpen: boolean;
@@ -65,15 +66,16 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                         onClick={onClose}
                         className="grid h-9 w-9 cursor-pointer place-items-center rounded-full border border-pink-200/80 bg-pink-50 text-sm font-bold text-rose-800 transition hover:bg-pink-100 dark:border-pink-500/25 dark:bg-slate-800 dark:text-pink-50"
                     >
-                        ✕
+                        <X className="h-4 w-4" strokeWidth={1.75} />
                     </button>
                 </div>
 
                 <div className="flex flex-col gap-5">
                     <div className="flex flex-col gap-2 rounded-[1.3rem] border border-pink-100 bg-rose-50/70 p-4 dark:border-pink-500/15 dark:bg-slate-950/50">
                         <div className="mb-1 flex items-center justify-between">
-                            <label className="text-[11px] font-bold uppercase tracking-[0.16em] text-rose-500 dark:text-pink-300">
-                                🎹 Dispositivo de Entrada MIDI
+                            <label className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.16em] text-rose-500 dark:text-pink-300">
+                                <KeyboardMusic className="h-3.5 w-3.5" strokeWidth={1.75} />
+                                Dispositivo de Entrada MIDI
                             </label>
                             <span className={`flex items-center gap-1.5 text-[10px] font-bold uppercase ${isConnected ? "text-emerald-600 dark:text-emerald-300" : "text-rose-500"}`}>
                                 <span className={`h-2 w-2 rounded-full ${isConnected ? "animate-pulse bg-emerald-400" : "bg-rose-400"}`} />
@@ -102,8 +104,9 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                     </div>
 
                     <div className="flex flex-col gap-2">
-                        <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-rose-500 dark:text-pink-300">
-                            🎵 Nomenclatura de Notas
+                        <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.16em] text-rose-500 dark:text-pink-300">
+                            <Music className="h-3.5 w-3.5" strokeWidth={1.75} />
+                            Nomenclatura de Notas
                         </span>
                         <div className="grid grid-cols-2 gap-3">
                             {(
@@ -136,8 +139,9 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
 
                     <div className="flex flex-col gap-2 rounded-[1.3rem] border border-pink-100 bg-rose-50/70 p-4 dark:border-pink-500/15 dark:bg-slate-950/50">
                         <div className="flex items-center justify-between">
-                            <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-rose-500 dark:text-pink-300">
-                                🔊 Volumen del Metrónomo
+                            <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.16em] text-rose-500 dark:text-pink-300">
+                                <Volume2 className="h-3.5 w-3.5" strokeWidth={1.75} />
+                                Volumen del Metrónomo
                             </span>
                             <span className="font-mono text-xs font-bold text-rose-600 dark:text-pink-300">
                                 {settings.metronomeVolume}%
@@ -179,7 +183,14 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                             onClick={handleSave}
                             className="cursor-pointer rounded-full bg-gradient-to-r from-pink-400 to-rose-400 px-5 py-2 text-xs font-bold text-rose-950 shadow-lg shadow-pink-300/40"
                         >
-                            {savedBanner ? "¡Guardado! ✓" : "Guardar Cambios"}
+                            {savedBanner ? (
+                                <span className="inline-flex items-center gap-1">
+                                    ¡Guardado!
+                                    <Check className="h-3.5 w-3.5" strokeWidth={1.75} />
+                                </span>
+                            ) : (
+                                "Guardar Cambios"
+                            )}
                         </button>
                     </div>
                 </div>
