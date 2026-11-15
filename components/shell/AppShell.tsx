@@ -10,6 +10,7 @@ import {
   KeyboardMusic,
   Library,
   Moon,
+  Music2,
   Plus,
   Settings,
   Sun,
@@ -25,6 +26,7 @@ const NAV = [
   { href: "/sheet_music", label: "Catálogo", icon: Library },
   { href: "/learn", label: "Aprender", icon: GraduationCap },
   { href: "/exercises", label: "Práctica", icon: KeyboardMusic },
+  { href: "/scales", label: "Escalas", icon: Music2 },
 ] as const;
 
 function isCurrent(pathname: string, href: string) {
@@ -62,7 +64,7 @@ export default function AppShell({
 
   const linkClass = (active: boolean, compact = false) =>
     `flex items-center gap-3 rounded-2xl transition duration-200 ${
-      compact ? "flex-col gap-1 px-1 py-2 text-[10px]" : "px-3 py-3 text-sm"
+      compact ? "w-full flex-col justify-center gap-1 px-0.5 py-2 text-center text-[10px] leading-tight" : "px-3 py-3 text-sm"
     } font-medium ${
       active
         ? "bg-gradient-to-r from-pink-400 to-rose-400 text-rose-950 shadow-lg shadow-pink-300/40"
@@ -197,7 +199,7 @@ export default function AppShell({
           <Plus className="h-4 w-4" strokeWidth={1.75} />
           Sugerir Partitura
         </button>
-        <div className="grid grid-cols-4 rounded-[1.6rem] border border-pink-200/80 bg-white/90 p-1.5 shadow-xl shadow-pink-200/30 backdrop-blur-xl dark:border-pink-500/20 dark:bg-slate-900/85 dark:shadow-black/40">
+        <div className="grid grid-cols-5 rounded-[1.6rem] border border-pink-200/80 bg-white/90 p-1.5 shadow-xl shadow-pink-200/30 backdrop-blur-xl dark:border-pink-500/20 dark:bg-slate-900/85 dark:shadow-black/40">
           {NAV.map((item) => {
             const active = isCurrent(pathname, item.href);
             const Icon = item.icon;
