@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Coffee, GraduationCap } from "lucide-react";
+import { ArrowRight, Coffee, GraduationCap, Music2 } from "lucide-react";
 
 export default function HomePage() {
   return (
@@ -120,6 +120,31 @@ export default function HomePage() {
           </p>
           <span className="mt-auto inline-flex items-center pt-6 text-sm font-semibold transition group-hover:translate-x-1">
             Comenzar práctica
+            <ArrowRight className="ml-1.5 h-4 w-4" strokeWidth={1.75} />
+          </span>
+        </Link>
+
+        <Link
+          href="/scales"
+          className="studio-rise group flex h-full flex-col rounded-[1.8rem_2rem_1.4rem_2.2rem] border border-pink-200/80 bg-white/90 p-6 shadow-xl shadow-pink-200/30 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-pink-300/40 dark:border-pink-500/20 dark:bg-slate-900/85 dark:shadow-black/40 md:p-7 lg:col-span-2 xl:col-span-3"
+          style={{ animationDelay: "260ms" }}
+        >
+          <div className="mb-5 flex items-center justify-between gap-3">
+            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-pink-100 text-rose-700 dark:bg-pink-500/15 dark:text-pink-200">
+              <Music2 className="h-6 w-6" strokeWidth={1.75} />
+            </span>
+            <span className="rounded-full bg-rose-100 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-rose-700 dark:bg-pink-500/15 dark:text-pink-200">
+              Hanon · Czerny
+            </span>
+          </div>
+          <h2 className="font-display text-3xl leading-tight text-rose-950 dark:text-pink-50">
+            Laboratorio de Escalas
+          </h2>
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-rose-900/65 dark:text-pink-100/60">
+            Mayores, menores, pentatónicas, blues y modos con digitación, pentagrama a dos claves y metrónomo de 40 a 180 BPM.
+          </p>
+          <span className="mt-auto inline-flex items-center pt-6 text-sm font-semibold text-rose-600 transition group-hover:translate-x-1 dark:text-pink-300">
+            Abrir laboratorio
             <ArrowRight className="ml-1.5 h-4 w-4" strokeWidth={1.75} />
           </span>
         </Link>

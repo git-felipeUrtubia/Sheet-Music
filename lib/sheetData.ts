@@ -1,11 +1,13 @@
 import { EXERCISES_DATA } from "@/data/exercises";
 import { SHEET_MUSIC_CATALOG } from "@/data/catalog";
+import { SCALES, type MusicalScale } from "@/data/scales";
 import { THEORY_CHAPTERS, type TheoryChapter } from "@/data/theoryLessons";
 import type { SheetMusicItem, InstrumentType, MusicGenre } from "@/types/catalog";
 import type { DifficultyLevel, ElectronDataBridge, Exercise } from "@/types/exercise";
 
 export const PROGRESS_KEY = "sheetmusic_progress";
 export const FAVORITES_KEY = "sheetmusic_favorites";
+export const SCALE_PROGRESS_KEY = "sheetmusic_scale_progress";
 
 export interface ProgressEntry {
   completed: boolean;
@@ -21,11 +23,18 @@ export interface UserProgress {
   };
 }
 
+export interface ScaleProgressEntry {
+  mastered: boolean;
+  bestBpm: number;
+  updatedAt: string;
+}
+
 export interface WebDatabase {
   generatedAt?: string;
   scores: SheetMusicItem[];
   exercises: Exercise[];
   lessons: TheoryChapter[];
+  scales?: MusicalScale[];
 }
 
 export interface ScoreQuery {
@@ -87,6 +96,7 @@ export function loadWebDatabase(): Promise<WebDatabase> {
       scores: SHEET_MUSIC_CATALOG,
       exercises: EXERCISES_DATA,
       lessons: THEORY_CHAPTERS,
+      scales: SCALES,
     });
   }
 
@@ -148,6 +158,27 @@ export async function getExercisesByLevel(level: DifficultyLevel): Promise<Exerc
   }
 
   return EXERCISES_DATA.filter((exercise) => exercise.level === level);
+}
+
+export async function getScales(): Promise<MusicalScale[]> {
+  const bridge = getDesktopBridge();
+  if (bridge?.getScales) {
+    try {
+      const rows = await bridge.getScales();
+      if (rows?.length) return rows;
+    } catch (error) {
+      console.error("No se pudieron leer las escalas por IPC:", error);
+    }
+  }
+
+  try {
+    const database = await loadWebDatabase();
+    if (database.scales?.length) return database.scales;
+  } catch (error) {
+    console.warn("Escalas web no disponibles, se usa el respaldo local.", error);
+  }
+
+  return SCALES;
 }
 
 export async function getLessons(): Promise<TheoryChapter[]> {
@@ -260,6 +291,69 @@ export async function saveExerciseProgress(exerciseId: string, bpm: number): Pro
     updatedAt: new Date().toISOString(),
   };
   writeProgressFile(progress);
+  return { ok: true };
+}
+
+function readScaleProgress(): Record<string, ScaleProgressEntry> {
+  if (typeof window === "undefined") return {};
+  try {
+    const raw = localStorage.getItem(SCALE_PROGRESS_KEY);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw) as Record<string, Partial<ScaleProgressEntry>>;
+    const entries: Record<string, ScaleProgressEntry> = {};
+    Object.entries(parsed).forEach(([id, item]) => {
+      if (!item || typeof item !== "object") return;
+      entries[id] = {
+        mastered: Boolean(item.mastered),
+        bestBpm: Number(item.bestBpm) || 0,
+        updatedAt: typeof item.updatedAt === "string" ? item.updatedAt : "",
+      };
+    });
+    return entries;
+  } catch {
+    return {};
+  }
+}
+
+export async function getScaleProgress(): Promise<Record<string, ScaleProgressEntry>> {
+  const bridge = getDesktopBridge();
+  if (bridge?.getScaleProgress) {
+    try {
+      const rows = await bridge.getScaleProgress();
+      const entries: Record<string, ScaleProgressEntry> = {};
+      rows.forEach((row) => {
+        entries[row.scaleId] = {
+          mastered: Boolean(row.mastered),
+          bestBpm: Number(row.bestBpm) || 0,
+          updatedAt: row.updatedAt || "",
+        };
+      });
+      return entries;
+    } catch (error) {
+      console.error("No se pudo leer el progreso de escalas por IPC:", error);
+    }
+  }
+  return readScaleProgress();
+}
+
+export async function saveScaleProgress(
+  scaleId: string,
+  bpm: number,
+  mastered: boolean,
+): Promise<{ ok: boolean }> {
+  const bridge = getDesktopBridge();
+  if (bridge?.saveScaleProgress) {
+    return bridge.saveScaleProgress(scaleId, bpm, mastered);
+  }
+
+  const entries = readScaleProgress();
+  const previous = entries[scaleId];
+  entries[scaleId] = {
+    mastered,
+    bestBpm: Math.max(previous?.bestBpm ?? 0, bpm),
+    updatedAt: new Date().toISOString(),
+  };
+  localStorage.setItem(SCALE_PROGRESS_KEY, JSON.stringify(entries));
   return { ok: true };
 }
 

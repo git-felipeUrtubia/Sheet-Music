@@ -23,6 +23,14 @@ function initDatabase() {
     const activeDbPath = app.isPackaged ? userDbPath : seedDbPath;
     db = new Database(activeDbPath);
     db.pragma("journal_mode = WAL");
+    db.exec(`
+      CREATE TABLE IF NOT EXISTS scale_progress (
+        scale_id TEXT PRIMARY KEY,
+        mastered INTEGER DEFAULT 0,
+        best_bpm INTEGER DEFAULT 0,
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+      );
+    `);
 }
 
 // 2. Servidor estático interno para servir la carpeta "out" (preview y producción)
@@ -151,6 +159,46 @@ ipcMain.handle("db:get-score-xml", (_event, scoreId) => {
         .prepare("SELECT musicxml_content FROM scores WHERE id = ?")
         .get(scoreId);
     return row ? row.musicxml_content : null;
+});
+
+ipcMain.handle("db:get-scales", () => {
+    if (!db) return [];
+    try {
+        const rows = db.prepare("SELECT payload_json FROM scales ORDER BY rowid").all();
+        return rows.map((row) => JSON.parse(row.payload_json));
+    } catch (error) {
+        console.error("Escalas no disponibles en SQLite:", error.message);
+        return [];
+    }
+});
+
+ipcMain.handle("db:save-scale-progress", (_event, scaleId, bpm, mastered) => {
+    if (!db) return { ok: false };
+    db.prepare(`
+      INSERT INTO scale_progress (scale_id, mastered, best_bpm, updated_at)
+      VALUES (?, ?, ?, CURRENT_TIMESTAMP)
+      ON CONFLICT(scale_id) DO UPDATE SET
+        mastered = excluded.mastered,
+        best_bpm = MAX(best_bpm, excluded.best_bpm),
+        updated_at = CURRENT_TIMESTAMP
+    `).run(scaleId, mastered ? 1 : 0, bpm);
+    return { ok: true };
+});
+
+ipcMain.handle("db:get-scale-progress", () => {
+    if (!db) return [];
+    try {
+        return db.prepare(`
+          SELECT scale_id AS scaleId,
+                 mastered,
+                 best_bpm AS bestBpm,
+                 updated_at AS updatedAt
+          FROM scale_progress
+        `).all();
+    } catch (error) {
+        console.error("Progreso de escalas no disponible:", error.message);
+        return [];
+    }
 });
 
 ipcMain.handle("db:get-progress", () => {

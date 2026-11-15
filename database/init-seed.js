@@ -50,6 +50,32 @@ db.exec(`
     best_bpm INTEGER DEFAULT 0,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
   );
+
+  CREATE TABLE scales (
+    id TEXT PRIMARY KEY,
+    name TEXT NOT NULL,
+    tonic TEXT NOT NULL,
+    family TEXT NOT NULL,
+    family_label TEXT NOT NULL,
+    signature TEXT NOT NULL,
+    accidentals INTEGER NOT NULL,
+    accidental_kind TEXT NOT NULL,
+    formula TEXT NOT NULL,
+    level TEXT NOT NULL,
+    reference TEXT NOT NULL,
+    fingering_rh TEXT NOT NULL,
+    fingering_lh TEXT NOT NULL,
+    payload_json TEXT NOT NULL
+  );
+
+  CREATE INDEX idx_scales_filters ON scales(family, level, accidentals);
+
+  CREATE TABLE scale_progress (
+    scale_id TEXT PRIMARY KEY,
+    mastered INTEGER DEFAULT 0,
+    best_bpm INTEGER DEFAULT 0,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+  );
 `);
 
 // 2. Configuración de los 90 ejercicios
@@ -212,6 +238,18 @@ const insertExercise = db.prepare(`
   VALUES (@id, @title, @level, @clef, @timeSignature, @notesJson)
 `);
 
+const insertScale = db.prepare(`
+  INSERT INTO scales (
+    id, name, tonic, family, family_label, signature, accidentals, accidental_kind,
+    formula, level, reference, fingering_rh, fingering_lh, payload_json
+  ) VALUES (
+    @id, @name, @tonic, @family, @familyLabel, @signature, @accidentals, @accidentalKind,
+    @formula, @level, @reference, @fingeringRH, @fingeringLH, @payloadJson
+  )
+`);
+
+const SCALES = loadScales();
+
 const insertScore = db.prepare(`
   INSERT INTO scores (
     id, title, composer, level, genre, instrument, clef,
@@ -275,13 +313,32 @@ const seedTransaction = db.transaction(() => {
       musicxmlContent: xmlContent,
     });
   });
+
+  SCALES.forEach((scale) => {
+    insertScale.run({
+      id: scale.id,
+      name: scale.name,
+      tonic: scale.tonic,
+      family: scale.family,
+      familyLabel: scale.familyLabel,
+      signature: scale.signature,
+      accidentals: scale.accidentals,
+      accidentalKind: scale.accidentalKind,
+      formula: scale.formula,
+      level: scale.level,
+      reference: scale.reference,
+      fingeringRH: scale.fingeringRH,
+      fingeringLH: scale.fingeringLH,
+      payloadJson: JSON.stringify(scale),
+    });
+  });
 });
 
-function loadTheoryLessons() {
+function loadTsExport(relativePath, exportName) {
   try {
     const ts = require("typescript");
     const Module = require("module");
-    const sourcePath = path.join(dbDir, "..", "data", "theoryLessons.ts");
+    const sourcePath = path.join(dbDir, "..", relativePath);
     const source = fs.readFileSync(sourcePath, "utf8");
     const { outputText } = ts.transpileModule(source, {
       compilerOptions: {
@@ -291,15 +348,23 @@ function loadTheoryLessons() {
       },
     });
 
-    const lessonModule = new Module(sourcePath);
-    lessonModule.filename = sourcePath;
-    lessonModule.paths = Module._nodeModulePaths(path.dirname(sourcePath));
-    lessonModule._compile(outputText, sourcePath);
-    return lessonModule.exports.THEORY_CHAPTERS || [];
+    const loaded = new Module(sourcePath);
+    loaded.filename = sourcePath;
+    loaded.paths = Module._nodeModulePaths(path.dirname(sourcePath));
+    loaded._compile(outputText, sourcePath);
+    return loaded.exports[exportName] || [];
   } catch (error) {
-    console.warn("⚠️ No se pudieron incluir las lecciones en web-db.json:", error.message);
+    console.warn(`⚠️ No se pudo cargar ${exportName} desde ${relativePath}:`, error.message);
     return [];
   }
+}
+
+function loadTheoryLessons() {
+  return loadTsExport(path.join("data", "theoryLessons.ts"), "THEORY_CHAPTERS");
+}
+
+function loadScales() {
+  return loadTsExport(path.join("data", "scales.ts"), "SCALES");
 }
 
 function mapExercise(row) {
@@ -343,22 +408,27 @@ function exportWebDatabase() {
     .all()
     .map(mapScore);
   const lessons = loadTheoryLessons();
+  const scales = db
+    .prepare("SELECT payload_json FROM scales ORDER BY rowid")
+    .all()
+    .map((row) => JSON.parse(row.payload_json));
 
   const payload = {
     generatedAt: new Date().toISOString(),
     scores,
     exercises,
     lessons,
+    scales,
   };
 
   const outPath = path.join(publicDir, "web-db.json");
   fs.writeFileSync(outPath, JSON.stringify(payload, null, 2), "utf8");
   console.log(
-    `✅ Catálogo web exportado en public/web-db.json (${scores.length} partituras, ${exercises.length} ejercicios, ${lessons.length} lecciones).`
+    `✅ Catálogo web exportado en public/web-db.json (${scores.length} partituras, ${exercises.length} ejercicios, ${lessons.length} lecciones, ${scales.length} escalas).`
   );
 }
 
 seedTransaction();
 exportWebDatabase();
 db.close();
-console.log("✅ Base de datos database/seed.db creada con 90 ejercicios y las 9 partituras del catálogo.");
+console.log("✅ Base de datos database/seed.db creada con ejercicios, partituras y el laboratorio de escalas.");
