@@ -17,7 +17,7 @@ import {
 import ScoreRequestModal from "@/components/email/ScoreRequestModal";
 
 export const WINDOWS_DOWNLOAD_URL =
-  "https://github.com/git-felipeUrtubia/Sheet-Music-Releases/releases/download/v1.0.0/SheetMusic-Setup-0.1.0.exe";
+  "https://github.com/git-felipeUrtubia/Sheet-Music-Releases/releases/download/v1.0.1/SheetMusic-Setup-0.1.0.exe";
 
 const THEME_KEY = "sheetmusic-theme";
 const GITHUB_URL = "https://github.com/git-felipeUrtubia/Sheet-Music";
