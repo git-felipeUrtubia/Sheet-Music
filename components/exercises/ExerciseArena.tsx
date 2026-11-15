@@ -5,6 +5,7 @@ import React, { useEffect, useRef, useState, useCallback } from "react";
 import Vex from "vexflow";
 import { EXERCISES_DATA } from "@/data/exercises";
 import { useMidiInput } from "@/hooks/useMidiInput";
+import { getExercisesByLevel, getProgress, saveExerciseProgress } from "@/lib/sheetData";
 import { DifficultyLevel } from "@/types/exercise";
 import { loadAppSettings, formatNoteBySystem, AppSettings } from "@/types/settings";
 
@@ -51,15 +52,44 @@ export default function ExerciseArena({ onBack, level }: ExerciseArenaProps) {
     );
 
     useEffect(() => {
-        if (typeof window !== "undefined" && window.electronDB) {
-            window.electronDB.getExercisesByLevel(level).then((rows) => {
-                if (rows && rows.length > 0) {
-                    setExercisesDataFiltered(rows);
-                    setExerciseInPlay(0);
-                }
-            });
-        }
+        let active = true;
+        const fallback = EXERCISES_DATA.filter((item) => item.level === level);
+        setExercisesDataFiltered(fallback);
+        setExerciseInPlay(0);
+
+        (async () => {
+            try {
+                const rows = await getExercisesByLevel(level);
+                if (!active) return;
+                const list = rows.length > 0 ? rows : fallback;
+                setExercisesDataFiltered(list);
+
+                const progress = await getProgress();
+                if (!active) return;
+                let unlocked = 0;
+                list.forEach((exercise, index) => {
+                    if (progress.entries[exercise.id]?.completed) {
+                        unlocked = Math.max(unlocked, index + 1);
+                    }
+                });
+                setMaxUnlockedExercise(Math.min(unlocked, Math.max(0, list.length - 1)));
+            } catch (error) {
+                console.error("No se pudieron cargar los ejercicios:", error);
+            }
+        })();
+
+        return () => {
+            active = false;
+        };
     }, [level]);
+
+    useEffect(() => {
+        const exercise = exercisesDataFiltered[exerciseInPlay];
+        if (!exercise || currentNoteIndex < exercise.notes.length) return;
+        saveExerciseProgress(exercise.id, bpm).catch((error) => {
+            console.error("No se pudo guardar el progreso:", error);
+        });
+    }, [bpm, currentNoteIndex, exerciseInPlay, exercisesDataFiltered]);
 
     const currentExercise = exercisesDataFiltered[exerciseInPlay];
 

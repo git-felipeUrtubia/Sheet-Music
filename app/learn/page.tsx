@@ -1,13 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { THEORY_CHAPTERS } from "@/data/theoryLessons";
+import { THEORY_CHAPTERS, type TheoryChapter } from "@/data/theoryLessons";
 import TheoryInteractiveCard from "@/components/learn/TheoryInteractiveCard";
+import { getLessons } from "@/lib/sheetData";
 
 export default function LearnSheetMusicPage() {
+  const [chapters, setChapters] = useState<TheoryChapter[]>(THEORY_CHAPTERS);
   const [activeChapterIdx, setActiveChapterIdx] = useState<number>(0);
-  const currentChapter = THEORY_CHAPTERS[activeChapterIdx];
+  const currentChapter = chapters[activeChapterIdx] ?? chapters[0];
+
+  useEffect(() => {
+    let active = true;
+    getLessons()
+      .then((rows) => {
+        if (active && rows.length > 0) setChapters(rows);
+      })
+      .catch((error) => {
+        console.error("No se pudieron cargar las lecciones:", error);
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  if (!currentChapter) return null;
 
   return (
     <div className="mx-auto flex w-full max-w-6xl flex-col gap-4">
@@ -31,7 +49,7 @@ export default function LearnSheetMusicPage() {
         </header>
 
         <nav className="flex flex-col gap-3 self-start lg:sticky lg:top-4 lg:col-span-4 lg:col-start-1 lg:row-span-2 lg:row-start-1">
-          {THEORY_CHAPTERS.map((chap, idx) => {
+          {chapters.map((chap, idx) => {
             const isActive = idx === activeChapterIdx;
             return (
               <button
@@ -45,7 +63,7 @@ export default function LearnSheetMusicPage() {
                 }`}
               >
                 <div className={`text-[10px] font-bold uppercase tracking-[0.18em] ${isActive ? "text-rose-950/70" : "text-rose-400"}`}>
-                  Paso {chap.stepNumber} de {THEORY_CHAPTERS.length}
+                  Paso {chap.stepNumber} de {chapters.length}
                 </div>
                 <div className="mt-1 font-display text-2xl leading-tight">{chap.title}</div>
               </button>
@@ -82,7 +100,7 @@ export default function LearnSheetMusicPage() {
               ← Lección Anterior
             </button>
 
-            {activeChapterIdx < THEORY_CHAPTERS.length - 1 ? (
+            {activeChapterIdx < chapters.length - 1 ? (
               <button
                 type="button"
                 onClick={() => setActiveChapterIdx((prev) => prev + 1)}

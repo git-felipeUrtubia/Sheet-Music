@@ -153,6 +153,17 @@ ipcMain.handle("db:get-score-xml", (_event, scoreId) => {
     return row ? row.musicxml_content : null;
 });
 
+ipcMain.handle("db:get-progress", () => {
+    if (!db) return [];
+    return db.prepare(`
+        SELECT exercise_id AS exerciseId,
+               completed,
+               best_bpm AS bestBpm,
+               updated_at AS updatedAt
+        FROM user_progress
+    `).all();
+});
+
 // 4. Crear ventana de Electron
 async function createWindow() {
 

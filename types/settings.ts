@@ -14,6 +14,9 @@ export const DEFAULT_SETTINGS: AppSettings = {
   metronomeVolume: 75,
 };
 
+const SETTINGS_KEY = "sheetmusic_settings";
+const LEGACY_SETTINGS_KEY = "sheet_music_settings";
+
 const SOLFEGE_MAP: Record<string, string> = {
   C: "Do", "C#": "Do#", Db: "Reb", D: "Re", "D#": "Re#", Eb: "Mib",
   E: "Mi", F: "Fa", "F#": "Fa#", Gb: "Solb", G: "Sol", "G#": "Sol#",
@@ -23,9 +26,13 @@ const SOLFEGE_MAP: Record<string, string> = {
 export function loadAppSettings(): AppSettings {
   if (typeof window === "undefined") return DEFAULT_SETTINGS;
   try {
-    const raw = localStorage.getItem("sheet_music_settings");
+    const raw = localStorage.getItem(SETTINGS_KEY) ?? localStorage.getItem(LEGACY_SETTINGS_KEY);
     if (!raw) return DEFAULT_SETTINGS;
-    return { ...DEFAULT_SETTINGS, ...JSON.parse(raw) };
+    const settings = { ...DEFAULT_SETTINGS, ...JSON.parse(raw) };
+    if (!localStorage.getItem(SETTINGS_KEY)) {
+      localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+    }
+    return settings;
   } catch {
     return DEFAULT_SETTINGS;
   }
@@ -33,7 +40,7 @@ export function loadAppSettings(): AppSettings {
 
 export function saveAppSettings(settings: AppSettings): void {
   if (typeof window === "undefined") return;
-  localStorage.setItem("sheet_music_settings", JSON.stringify(settings));
+  localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
   window.dispatchEvent(new Event("app-settings-updated"));
 }
 

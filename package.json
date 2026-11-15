@@ -11,7 +11,7 @@
     "db:seed": "npm rebuild better-sqlite3 && node database/init-seed.js && electron-builder install-app-deps",
     "electron:preview": "next build && electron .",
     "electron:build": "next build && electron-builder",
-    "postinstall": "electron-builder install-app-deps"
+    "postinstall": "node scripts/postinstall.js"
   },
   "build": {
     "appId": "com.sheetmusic.app",
