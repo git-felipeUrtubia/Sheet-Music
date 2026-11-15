@@ -16,6 +16,11 @@ const fraunces = Fraunces({
 export const metadata: Metadata = {
   title: "SheetMusic",
   description: "Estudio musical para leer, escuchar y practicar partituras.",
+  icons: {
+    icon: "/icon3.png",
+    shortcut: "/icon3.png",
+    apple: "/icon3.png",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
