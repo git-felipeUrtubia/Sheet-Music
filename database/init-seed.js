@@ -277,6 +277,88 @@ const seedTransaction = db.transaction(() => {
   });
 });
 
+function loadTheoryLessons() {
+  try {
+    const ts = require("typescript");
+    const Module = require("module");
+    const sourcePath = path.join(dbDir, "..", "data", "theoryLessons.ts");
+    const source = fs.readFileSync(sourcePath, "utf8");
+    const { outputText } = ts.transpileModule(source, {
+      compilerOptions: {
+        module: ts.ModuleKind.CommonJS,
+        target: ts.ScriptTarget.ES2020,
+        esModuleInterop: true,
+      },
+    });
+
+    const lessonModule = new Module(sourcePath);
+    lessonModule.filename = sourcePath;
+    lessonModule.paths = Module._nodeModulePaths(path.dirname(sourcePath));
+    lessonModule._compile(outputText, sourcePath);
+    return lessonModule.exports.THEORY_CHAPTERS || [];
+  } catch (error) {
+    console.warn("⚠️ No se pudieron incluir las lecciones en web-db.json:", error.message);
+    return [];
+  }
+}
+
+function mapExercise(row) {
+  return {
+    id: row.id,
+    title: row.title,
+    level: row.level,
+    clef: row.clef,
+    timeSignature: row.time_signature,
+    notes: JSON.parse(row.notes_json),
+  };
+}
+
+function mapScore(row) {
+  return {
+    id: row.id,
+    title: row.title,
+    composer: row.composer,
+    level: row.level,
+    genre: row.genre,
+    instrument: row.instrument,
+    clef: row.clef,
+    timeSignature: row.time_signature,
+    bpm: row.bpm,
+    measuresCount: row.measures_count,
+    scoreFile: row.score_file,
+  };
+}
+
+// El XML completo se queda en SQLite para Electron.
+// En la web los .musicxml / .pdf se leen desde /scores/...
+function exportWebDatabase() {
+  const exercises = db.prepare("SELECT * FROM exercises ORDER BY rowid").all().map(mapExercise);
+  const scores = db
+    .prepare(`
+      SELECT id, title, composer, level, genre, instrument, clef,
+             time_signature, bpm, measures_count, score_file
+      FROM scores
+      ORDER BY rowid
+    `)
+    .all()
+    .map(mapScore);
+  const lessons = loadTheoryLessons();
+
+  const payload = {
+    generatedAt: new Date().toISOString(),
+    scores,
+    exercises,
+    lessons,
+  };
+
+  const outPath = path.join(publicDir, "web-db.json");
+  fs.writeFileSync(outPath, JSON.stringify(payload, null, 2), "utf8");
+  console.log(
+    `✅ Catálogo web exportado en public/web-db.json (${scores.length} partituras, ${exercises.length} ejercicios, ${lessons.length} lecciones).`
+  );
+}
+
 seedTransaction();
+exportWebDatabase();
 db.close();
 console.log("✅ Base de datos database/seed.db creada con 90 ejercicios y las 9 partituras del catálogo.");

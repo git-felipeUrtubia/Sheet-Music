@@ -18,13 +18,24 @@ export interface Exercise {
   notes: NoteItem[];
 }
 
+export interface ElectronProgressRow {
+  exerciseId: string;
+  completed: number | boolean;
+  bestBpm: number;
+  updatedAt: string;
+}
+
+export interface ElectronDataBridge {
+  getExercisesByLevel: (level: DifficultyLevel) => Promise<Exercise[]>;
+  saveProgress: (exerciseId: string, bpm: number) => Promise<{ ok: boolean }>;
+  getCatalog: () => Promise<SheetMusicItem[]>;
+  getScoreXml: (scoreId: string) => Promise<string | null>;
+  getProgress?: () => Promise<ElectronProgressRow[]>;
+}
+
 declare global {
   interface Window {
-    electronDB?: {
-      getExercisesByLevel: (level: DifficultyLevel) => Promise<Exercise[]>;
-      saveProgress: (exerciseId: string, bpm: number) => Promise<{ ok: boolean }>;
-      getCatalog: () => Promise<SheetMusicItem[]>;
-      getScoreXml: (scoreId: string) => Promise<string | null>;
-    };
+    electronDB?: ElectronDataBridge;
+    electronAPI?: ElectronDataBridge;
   }
 }

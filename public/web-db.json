@@ -1,0 +1,6766 @@
+{
+  "generatedAt": "2026-11-15T02:04:48.135Z",
+  "scores": [
+    {
+      "id": "genshin-impact-main-theme",
+      "title": "Genshin Impact Main Theme OST",
+      "composer": "Yu-Peng Chen",
+      "level": "principiante",
+      "genre": "videojuegos",
+      "instrument": "piano",
+      "clef": "grand",
+      "timeSignature": "3/4",
+      "bpm": 80,
+      "measuresCount": 52,
+      "scoreFile": "/scores/Genshin Impact Main Theme.musicxml"
+    },
+    {
+      "id": "je-te-laisserai-des-mots",
+      "title": "Je Te Laisserai Des Mots",
+      "composer": "Patrick Watson",
+      "level": "principiante",
+      "genre": "clasica",
+      "instrument": "piano",
+      "clef": "grand",
+      "timeSignature": "3/4",
+      "bpm": 108,
+      "measuresCount": 92,
+      "scoreFile": "/scores/Je Te Laisserai Des Mots - Patrick Watson.musicxml"
+    },
+    {
+      "id": "if-i-am-with-you-jjk",
+      "title": "If I Am With You (Jujutsu Kaisen)",
+      "composer": "Yoshimasa Terui (Arr. Welder Dias)",
+      "level": "principiante",
+      "genre": "anime",
+      "instrument": "piano",
+      "clef": "grand",
+      "timeSignature": "3/4",
+      "bpm": 140,
+      "measuresCount": 48,
+      "scoreFile": "/scores/Jujutsu Kaisen -If i am with you- - Yoshimasa Terui.musicxml"
+    },
+    {
+      "id": "kamado-tanjiro-no-uta",
+      "title": "Kamado Tanjiro no Uta (Kimetsu no Yaiba)",
+      "composer": "Go Shiina",
+      "level": "principiante",
+      "genre": "anime",
+      "instrument": "piano",
+      "clef": "grand",
+      "timeSignature": "4/4",
+      "bpm": 150,
+      "measuresCount": 59,
+      "scoreFile": "/scores/Kamado Tanjiro no Uta - Demon Slayer Kimetsu no yaiba EASSY.musicxml"
+    },
+    {
+      "id": "nezukos-theme-easy",
+      "title": "Nezuko's Theme EASY (Demon Slayer)",
+      "composer": "Yuki Kajiura & Go Shiina (Arr. Maytas Dhamalongkrot)",
+      "level": "principiante",
+      "genre": "anime",
+      "instrument": "piano",
+      "clef": "grand",
+      "timeSignature": "4/4",
+      "bpm": 140,
+      "measuresCount": 114,
+      "scoreFile": "/scores/Nezuko-s Theme - Demon Slayer.musicxml"
+    },
+    {
+      "id": "minecraft-sweden",
+      "title": "Minecraft: Sweden",
+      "composer": "Daniel Rosenfeld (C418)",
+      "level": "principiante",
+      "genre": "videojuegos",
+      "instrument": "piano",
+      "clef": "grand",
+      "timeSignature": "4/4",
+      "bpm": 50,
+      "measuresCount": 10,
+      "scoreFile": "/scores/Sweden from Minecraft - C418.musicxml"
+    },
+    {
+      "id": "game-of-thrones-violin",
+      "title": "Game of Thrones (Main Theme)",
+      "composer": "Ramin Djawadi",
+      "level": "intermedio",
+      "genre": "clasica",
+      "instrument": "violin",
+      "clef": "treble",
+      "timeSignature": "3/4",
+      "bpm": 172,
+      "measuresCount": 88,
+      "scoreFile": "/scores/Game of Thrones.musicxml"
+    },
+    {
+      "id": "por-una-cabeza-violin",
+      "title": "Por una Cabeza",
+      "composer": "Carlos Gardel (Arr. Mateus Tonette)",
+      "level": "avanzado",
+      "genre": "folclore",
+      "instrument": "violin",
+      "clef": "treble",
+      "timeSignature": "2/4",
+      "bpm": 60,
+      "measuresCount": 34,
+      "scoreFile": "/scores/Por una Cabeza.musicxml"
+    },
+    {
+      "id": "frieren-time-flows-ever-onward-flute",
+      "title": "Time Flows Ever Onward (Frieren)",
+      "composer": "Evan Call (Arr. Jch)",
+      "level": "intermedio",
+      "genre": "anime",
+      "instrument": "flute",
+      "clef": "treble",
+      "timeSignature": "3/4",
+      "bpm": 112,
+      "measuresCount": 50,
+      "scoreFile": "/scores/Frieren Flows Ever Onwerd.musicxml"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "principiante-1",
+      "title": "Estudio #1 (Clave de Sol)",
+      "level": "principiante",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "f/4",
+          "duration": "q",
+          "midiNote": 65
+        },
+        {
+          "pitch": "g/4",
+          "duration": "q",
+          "midiNote": 67
+        },
+        {
+          "pitch": "g/4",
+          "duration": "h",
+          "midiNote": 67
+        },
+        {
+          "pitch": "a/4",
+          "duration": "h",
+          "midiNote": 69
+        },
+        {
+          "pitch": "a/4",
+          "duration": "q",
+          "midiNote": 69
+        },
+        {
+          "pitch": "g/4",
+          "duration": "q",
+          "midiNote": 67
+        }
+      ]
+    },
+    {
+      "id": "principiante-2",
+      "title": "Estudio #2 (Clave de Sol)",
+      "level": "principiante",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "c/4",
+          "duration": "h",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "d/4",
+          "duration": "q",
+          "midiNote": 62
+        }
+      ]
+    },
+    {
+      "id": "principiante-3",
+      "title": "Estudio #3 (Clave de Fa)",
+      "level": "principiante",
+      "clef": "bass",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "c/3",
+          "duration": "q",
+          "midiNote": 48
+        },
+        {
+          "pitch": "c/3",
+          "duration": "q",
+          "midiNote": 48
+        },
+        {
+          "pitch": "d/3",
+          "duration": "q",
+          "midiNote": 50
+        },
+        {
+          "pitch": "d/3",
+          "duration": "q",
+          "midiNote": 50
+        },
+        {
+          "pitch": "e/3",
+          "duration": "h",
+          "midiNote": 52
+        },
+        {
+          "pitch": "d/3",
+          "duration": "h",
+          "midiNote": 50
+        }
+      ]
+    },
+    {
+      "id": "principiante-4",
+      "title": "Estudio #4 (Clave de Sol)",
+      "level": "principiante",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "c/4",
+          "duration": "h",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "h",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "h",
+          "midiNote": 60
+        }
+      ]
+    },
+    {
+      "id": "principiante-5",
+      "title": "Estudio #5 (Clave de Sol)",
+      "level": "principiante",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "d/4",
+          "duration": "q",
+          "midiNote": 62
+        },
+        {
+          "pitch": "e/4",
+          "duration": "q",
+          "midiNote": 64
+        },
+        {
+          "pitch": "e/4",
+          "duration": "h",
+          "midiNote": 64
+        },
+        {
+          "pitch": "d/4",
+          "duration": "h",
+          "midiNote": 62
+        },
+        {
+          "pitch": "d/4",
+          "duration": "q",
+          "midiNote": 62
+        },
+        {
+          "pitch": "d/4",
+          "duration": "q",
+          "midiNote": 62
+        }
+      ]
+    },
+    {
+      "id": "principiante-6",
+      "title": "Estudio #6 (Clave de Fa)",
+      "level": "principiante",
+      "clef": "bass",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "f/3",
+          "duration": "h",
+          "midiNote": 53
+        },
+        {
+          "pitch": "e/3",
+          "duration": "q",
+          "midiNote": 52
+        },
+        {
+          "pitch": "f/3",
+          "duration": "q",
+          "midiNote": 53
+        },
+        {
+          "pitch": "e/3",
+          "duration": "q",
+          "midiNote": 52
+        },
+        {
+          "pitch": "d/3",
+          "duration": "q",
+          "midiNote": 50
+        },
+        {
+          "pitch": "e/3",
+          "duration": "q",
+          "midiNote": 52
+        },
+        {
+          "pitch": "e/3",
+          "duration": "q",
+          "midiNote": 52
+        }
+      ]
+    },
+    {
+      "id": "principiante-7",
+      "title": "Estudio #7 (Clave de Sol)",
+      "level": "principiante",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "d/4",
+          "duration": "q",
+          "midiNote": 62
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "h",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "h",
+          "midiNote": 60
+        }
+      ]
+    },
+    {
+      "id": "principiante-8",
+      "title": "Estudio #8 (Clave de Sol)",
+      "level": "principiante",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "c/4",
+          "duration": "h",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "h",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "d/4",
+          "duration": "q",
+          "midiNote": 62
+        },
+        {
+          "pitch": "d/4",
+          "duration": "h",
+          "midiNote": 62
+        }
+      ]
+    },
+    {
+      "id": "principiante-9",
+      "title": "Estudio #9 (Clave de Fa)",
+      "level": "principiante",
+      "clef": "bass",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "f/3",
+          "duration": "q",
+          "midiNote": 53
+        },
+        {
+          "pitch": "g/3",
+          "duration": "q",
+          "midiNote": 55
+        },
+        {
+          "pitch": "g/3",
+          "duration": "h",
+          "midiNote": 55
+        },
+        {
+          "pitch": "a/3",
+          "duration": "h",
+          "midiNote": 57
+        },
+        {
+          "pitch": "g/3",
+          "duration": "q",
+          "midiNote": 55
+        },
+        {
+          "pitch": "f/3",
+          "duration": "q",
+          "midiNote": 53
+        }
+      ]
+    },
+    {
+      "id": "principiante-10",
+      "title": "Estudio #10 (Clave de Sol)",
+      "level": "principiante",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "c/4",
+          "duration": "h",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "d/4",
+          "duration": "q",
+          "midiNote": 62
+        },
+        {
+          "pitch": "e/4",
+          "duration": "q",
+          "midiNote": 64
+        },
+        {
+          "pitch": "d/4",
+          "duration": "q",
+          "midiNote": 62
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        }
+      ]
+    },
+    {
+      "id": "principiante-11",
+      "title": "Estudio #11 (Clave de Sol)",
+      "level": "principiante",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "a/4",
+          "duration": "q",
+          "midiNote": 69
+        },
+        {
+          "pitch": "g/4",
+          "duration": "q",
+          "midiNote": 67
+        },
+        {
+          "pitch": "a/4",
+          "duration": "q",
+          "midiNote": 69
+        },
+        {
+          "pitch": "a/4",
+          "duration": "q",
+          "midiNote": 69
+        },
+        {
+          "pitch": "a/4",
+          "duration": "h",
+          "midiNote": 69
+        },
+        {
+          "pitch": "a/4",
+          "duration": "h",
+          "midiNote": 69
+        }
+      ]
+    },
+    {
+      "id": "principiante-12",
+      "title": "Estudio #12 (Clave de Fa)",
+      "level": "principiante",
+      "clef": "bass",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "g/3",
+          "duration": "h",
+          "midiNote": 55
+        },
+        {
+          "pitch": "g/3",
+          "duration": "h",
+          "midiNote": 55
+        },
+        {
+          "pitch": "a/3",
+          "duration": "q",
+          "midiNote": 57
+        },
+        {
+          "pitch": "a/3",
+          "duration": "q",
+          "midiNote": 57
+        },
+        {
+          "pitch": "a/3",
+          "duration": "h",
+          "midiNote": 57
+        }
+      ]
+    },
+    {
+      "id": "principiante-13",
+      "title": "Estudio #13 (Clave de Sol)",
+      "level": "principiante",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "e/4",
+          "duration": "q",
+          "midiNote": 64
+        },
+        {
+          "pitch": "e/4",
+          "duration": "q",
+          "midiNote": 64
+        },
+        {
+          "pitch": "d/4",
+          "duration": "h",
+          "midiNote": 62
+        },
+        {
+          "pitch": "c/4",
+          "duration": "h",
+          "midiNote": 60
+        },
+        {
+          "pitch": "d/4",
+          "duration": "q",
+          "midiNote": 62
+        },
+        {
+          "pitch": "e/4",
+          "duration": "q",
+          "midiNote": 64
+        }
+      ]
+    },
+    {
+      "id": "principiante-14",
+      "title": "Estudio #14 (Clave de Sol)",
+      "level": "principiante",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "f/4",
+          "duration": "h",
+          "midiNote": 65
+        },
+        {
+          "pitch": "f/4",
+          "duration": "q",
+          "midiNote": 65
+        },
+        {
+          "pitch": "f/4",
+          "duration": "q",
+          "midiNote": 65
+        },
+        {
+          "pitch": "e/4",
+          "duration": "q",
+          "midiNote": 64
+        },
+        {
+          "pitch": "f/4",
+          "duration": "q",
+          "midiNote": 65
+        },
+        {
+          "pitch": "g/4",
+          "duration": "q",
+          "midiNote": 67
+        },
+        {
+          "pitch": "a/4",
+          "duration": "q",
+          "midiNote": 69
+        }
+      ]
+    },
+    {
+      "id": "principiante-15",
+      "title": "Estudio #15 (Clave de Fa)",
+      "level": "principiante",
+      "clef": "bass",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "g/3",
+          "duration": "q",
+          "midiNote": 55
+        },
+        {
+          "pitch": "f/3",
+          "duration": "q",
+          "midiNote": 53
+        },
+        {
+          "pitch": "e/3",
+          "duration": "q",
+          "midiNote": 52
+        },
+        {
+          "pitch": "e/3",
+          "duration": "q",
+          "midiNote": 52
+        },
+        {
+          "pitch": "e/3",
+          "duration": "h",
+          "midiNote": 52
+        },
+        {
+          "pitch": "f/3",
+          "duration": "h",
+          "midiNote": 53
+        }
+      ]
+    },
+    {
+      "id": "principiante-16",
+      "title": "Estudio #16 (Clave de Sol)",
+      "level": "principiante",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "d/4",
+          "duration": "h",
+          "midiNote": 62
+        },
+        {
+          "pitch": "e/4",
+          "duration": "h",
+          "midiNote": 64
+        },
+        {
+          "pitch": "d/4",
+          "duration": "q",
+          "midiNote": 62
+        },
+        {
+          "pitch": "e/4",
+          "duration": "q",
+          "midiNote": 64
+        },
+        {
+          "pitch": "d/4",
+          "duration": "h",
+          "midiNote": 62
+        }
+      ]
+    },
+    {
+      "id": "principiante-17",
+      "title": "Estudio #17 (Clave de Sol)",
+      "level": "principiante",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "f/4",
+          "duration": "q",
+          "midiNote": 65
+        },
+        {
+          "pitch": "g/4",
+          "duration": "q",
+          "midiNote": 67
+        },
+        {
+          "pitch": "a/4",
+          "duration": "h",
+          "midiNote": 69
+        },
+        {
+          "pitch": "a/4",
+          "duration": "h",
+          "midiNote": 69
+        },
+        {
+          "pitch": "g/4",
+          "duration": "q",
+          "midiNote": 67
+        },
+        {
+          "pitch": "g/4",
+          "duration": "q",
+          "midiNote": 67
+        }
+      ]
+    },
+    {
+      "id": "principiante-18",
+      "title": "Estudio #18 (Clave de Fa)",
+      "level": "principiante",
+      "clef": "bass",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "a/3",
+          "duration": "h",
+          "midiNote": 57
+        },
+        {
+          "pitch": "a/3",
+          "duration": "q",
+          "midiNote": 57
+        },
+        {
+          "pitch": "a/3",
+          "duration": "q",
+          "midiNote": 57
+        },
+        {
+          "pitch": "a/3",
+          "duration": "q",
+          "midiNote": 57
+        },
+        {
+          "pitch": "a/3",
+          "duration": "q",
+          "midiNote": 57
+        },
+        {
+          "pitch": "g/3",
+          "duration": "q",
+          "midiNote": 55
+        },
+        {
+          "pitch": "g/3",
+          "duration": "q",
+          "midiNote": 55
+        }
+      ]
+    },
+    {
+      "id": "principiante-19",
+      "title": "Estudio #19 (Clave de Sol)",
+      "level": "principiante",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "d/4",
+          "duration": "q",
+          "midiNote": 62
+        },
+        {
+          "pitch": "d/4",
+          "duration": "q",
+          "midiNote": 62
+        },
+        {
+          "pitch": "c/4",
+          "duration": "h",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "h",
+          "midiNote": 60
+        }
+      ]
+    },
+    {
+      "id": "principiante-20",
+      "title": "Estudio #20 (Clave de Sol)",
+      "level": "principiante",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "e/4",
+          "duration": "h",
+          "midiNote": 64
+        },
+        {
+          "pitch": "f/4",
+          "duration": "h",
+          "midiNote": 65
+        },
+        {
+          "pitch": "f/4",
+          "duration": "q",
+          "midiNote": 65
+        },
+        {
+          "pitch": "g/4",
+          "duration": "q",
+          "midiNote": 67
+        },
+        {
+          "pitch": "f/4",
+          "duration": "h",
+          "midiNote": 65
+        }
+      ]
+    },
+    {
+      "id": "principiante-21",
+      "title": "Estudio #21 (Clave de Fa)",
+      "level": "principiante",
+      "clef": "bass",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "d/3",
+          "duration": "q",
+          "midiNote": 50
+        },
+        {
+          "pitch": "c/3",
+          "duration": "q",
+          "midiNote": 48
+        },
+        {
+          "pitch": "d/3",
+          "duration": "h",
+          "midiNote": 50
+        },
+        {
+          "pitch": "c/3",
+          "duration": "h",
+          "midiNote": 48
+        },
+        {
+          "pitch": "c/3",
+          "duration": "q",
+          "midiNote": 48
+        },
+        {
+          "pitch": "d/3",
+          "duration": "q",
+          "midiNote": 50
+        }
+      ]
+    },
+    {
+      "id": "principiante-22",
+      "title": "Estudio #22 (Clave de Sol)",
+      "level": "principiante",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "c/4",
+          "duration": "h",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "d/4",
+          "duration": "q",
+          "midiNote": 62
+        },
+        {
+          "pitch": "e/4",
+          "duration": "q",
+          "midiNote": 64
+        }
+      ]
+    },
+    {
+      "id": "principiante-23",
+      "title": "Estudio #23 (Clave de Sol)",
+      "level": "principiante",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "h",
+          "midiNote": 60
+        },
+        {
+          "pitch": "d/4",
+          "duration": "h",
+          "midiNote": 62
+        }
+      ]
+    },
+    {
+      "id": "principiante-24",
+      "title": "Estudio #24 (Clave de Fa)",
+      "level": "principiante",
+      "clef": "bass",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "g/3",
+          "duration": "h",
+          "midiNote": 55
+        },
+        {
+          "pitch": "g/3",
+          "duration": "h",
+          "midiNote": 55
+        },
+        {
+          "pitch": "f/3",
+          "duration": "q",
+          "midiNote": 53
+        },
+        {
+          "pitch": "g/3",
+          "duration": "q",
+          "midiNote": 55
+        },
+        {
+          "pitch": "g/3",
+          "duration": "h",
+          "midiNote": 55
+        }
+      ]
+    },
+    {
+      "id": "principiante-25",
+      "title": "Estudio #25 (Clave de Sol)",
+      "level": "principiante",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "h",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "h",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        }
+      ]
+    },
+    {
+      "id": "principiante-26",
+      "title": "Estudio #26 (Clave de Sol)",
+      "level": "principiante",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "f/4",
+          "duration": "h",
+          "midiNote": 65
+        },
+        {
+          "pitch": "e/4",
+          "duration": "q",
+          "midiNote": 64
+        },
+        {
+          "pitch": "d/4",
+          "duration": "q",
+          "midiNote": 62
+        },
+        {
+          "pitch": "e/4",
+          "duration": "q",
+          "midiNote": 64
+        },
+        {
+          "pitch": "f/4",
+          "duration": "q",
+          "midiNote": 65
+        },
+        {
+          "pitch": "f/4",
+          "duration": "q",
+          "midiNote": 65
+        },
+        {
+          "pitch": "g/4",
+          "duration": "q",
+          "midiNote": 67
+        }
+      ]
+    },
+    {
+      "id": "principiante-27",
+      "title": "Estudio #27 (Clave de Fa)",
+      "level": "principiante",
+      "clef": "bass",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "e/3",
+          "duration": "q",
+          "midiNote": 52
+        },
+        {
+          "pitch": "d/3",
+          "duration": "q",
+          "midiNote": 50
+        },
+        {
+          "pitch": "c/3",
+          "duration": "q",
+          "midiNote": 48
+        },
+        {
+          "pitch": "c/3",
+          "duration": "q",
+          "midiNote": 48
+        },
+        {
+          "pitch": "c/3",
+          "duration": "h",
+          "midiNote": 48
+        },
+        {
+          "pitch": "c/3",
+          "duration": "h",
+          "midiNote": 48
+        }
+      ]
+    },
+    {
+      "id": "principiante-28",
+      "title": "Estudio #28 (Clave de Sol)",
+      "level": "principiante",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "e/4",
+          "duration": "h",
+          "midiNote": 64
+        },
+        {
+          "pitch": "e/4",
+          "duration": "h",
+          "midiNote": 64
+        },
+        {
+          "pitch": "e/4",
+          "duration": "q",
+          "midiNote": 64
+        },
+        {
+          "pitch": "d/4",
+          "duration": "q",
+          "midiNote": 62
+        },
+        {
+          "pitch": "d/4",
+          "duration": "h",
+          "midiNote": 62
+        }
+      ]
+    },
+    {
+      "id": "principiante-29",
+      "title": "Estudio #29 (Clave de Sol)",
+      "level": "principiante",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "e/4",
+          "duration": "q",
+          "midiNote": 64
+        },
+        {
+          "pitch": "e/4",
+          "duration": "q",
+          "midiNote": 64
+        },
+        {
+          "pitch": "d/4",
+          "duration": "h",
+          "midiNote": 62
+        },
+        {
+          "pitch": "d/4",
+          "duration": "h",
+          "midiNote": 62
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        }
+      ]
+    },
+    {
+      "id": "principiante-30",
+      "title": "Estudio #30 (Clave de Fa)",
+      "level": "principiante",
+      "clef": "bass",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "e/3",
+          "duration": "h",
+          "midiNote": 52
+        },
+        {
+          "pitch": "e/3",
+          "duration": "q",
+          "midiNote": 52
+        },
+        {
+          "pitch": "e/3",
+          "duration": "q",
+          "midiNote": 52
+        },
+        {
+          "pitch": "e/3",
+          "duration": "q",
+          "midiNote": 52
+        },
+        {
+          "pitch": "d/3",
+          "duration": "q",
+          "midiNote": 50
+        },
+        {
+          "pitch": "c/3",
+          "duration": "q",
+          "midiNote": 48
+        },
+        {
+          "pitch": "c/3",
+          "duration": "q",
+          "midiNote": 48
+        }
+      ]
+    },
+    {
+      "id": "intermedio-1",
+      "title": "Estudio #1 (Clave de Sol)",
+      "level": "intermedio",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "g/4",
+          "duration": "q",
+          "midiNote": 67
+        },
+        {
+          "pitch": "a/4",
+          "duration": "q",
+          "midiNote": 69
+        },
+        {
+          "pitch": "a/4",
+          "duration": "8",
+          "midiNote": 69
+        },
+        {
+          "pitch": "f#/4",
+          "duration": "8",
+          "midiNote": 66
+        },
+        {
+          "pitch": "g/4",
+          "duration": "q",
+          "midiNote": 67
+        },
+        {
+          "pitch": "b/4",
+          "duration": "8",
+          "midiNote": 71
+        },
+        {
+          "pitch": "b/4",
+          "duration": "8",
+          "midiNote": 71
+        },
+        {
+          "pitch": "a/4",
+          "duration": "q",
+          "midiNote": 69
+        },
+        {
+          "pitch": "f#/4",
+          "duration": "8",
+          "midiNote": 66
+        },
+        {
+          "pitch": "g/4",
+          "duration": "8",
+          "midiNote": 67
+        },
+        {
+          "pitch": "b/4",
+          "duration": "q",
+          "midiNote": 71
+        }
+      ]
+    },
+    {
+      "id": "intermedio-2",
+      "title": "Estudio #2 (Clave de Sol)",
+      "level": "intermedio",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "d/4",
+          "duration": "8",
+          "midiNote": 62
+        },
+        {
+          "pitch": "d/4",
+          "duration": "q",
+          "midiNote": 62
+        },
+        {
+          "pitch": "c/4",
+          "duration": "h",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "e/4",
+          "duration": "q",
+          "midiNote": 64
+        }
+      ]
+    },
+    {
+      "id": "intermedio-3",
+      "title": "Estudio #3 (Clave de Fa)",
+      "level": "intermedio",
+      "clef": "bass",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "g/2",
+          "duration": "h",
+          "midiNote": 43
+        },
+        {
+          "pitch": "g/2",
+          "duration": "8",
+          "midiNote": 43
+        },
+        {
+          "pitch": "a/2",
+          "duration": "8",
+          "midiNote": 45
+        },
+        {
+          "pitch": "a/2",
+          "duration": "q",
+          "midiNote": 45
+        },
+        {
+          "pitch": "c/3",
+          "duration": "q",
+          "midiNote": 48
+        },
+        {
+          "pitch": "a/2",
+          "duration": "8",
+          "midiNote": 45
+        },
+        {
+          "pitch": "c/3",
+          "duration": "8",
+          "midiNote": 48
+        },
+        {
+          "pitch": "c/3",
+          "duration": "q",
+          "midiNote": 48
+        },
+        {
+          "pitch": "b/2",
+          "duration": "q",
+          "midiNote": 47
+        }
+      ]
+    },
+    {
+      "id": "intermedio-4",
+      "title": "Estudio #4 (Clave de Sol)",
+      "level": "intermedio",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "d/4",
+          "duration": "q",
+          "midiNote": 62
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "f/4",
+          "duration": "q",
+          "midiNote": 65
+        }
+      ]
+    },
+    {
+      "id": "intermedio-5",
+      "title": "Estudio #5 (Clave de Sol)",
+      "level": "intermedio",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "d/4",
+          "duration": "q",
+          "midiNote": 62
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "d/4",
+          "duration": "8",
+          "midiNote": 62
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "d/4",
+          "duration": "8",
+          "midiNote": 62
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "e/4",
+          "duration": "q",
+          "midiNote": 64
+        }
+      ]
+    },
+    {
+      "id": "intermedio-6",
+      "title": "Estudio #6 (Clave de Fa)",
+      "level": "intermedio",
+      "clef": "bass",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "e/3",
+          "duration": "8",
+          "midiNote": 52
+        },
+        {
+          "pitch": "d/3",
+          "duration": "8",
+          "midiNote": 50
+        },
+        {
+          "pitch": "f#/3",
+          "duration": "q",
+          "midiNote": 54
+        },
+        {
+          "pitch": "a/3",
+          "duration": "8",
+          "midiNote": 57
+        },
+        {
+          "pitch": "a/3",
+          "duration": "8",
+          "midiNote": 57
+        },
+        {
+          "pitch": "a/3",
+          "duration": "q",
+          "midiNote": 57
+        },
+        {
+          "pitch": "g/3",
+          "duration": "h",
+          "midiNote": 55
+        },
+        {
+          "pitch": "e/3",
+          "duration": "8",
+          "midiNote": 52
+        },
+        {
+          "pitch": "f#/3",
+          "duration": "8",
+          "midiNote": 54
+        },
+        {
+          "pitch": "f#/3",
+          "duration": "q",
+          "midiNote": 54
+        }
+      ]
+    },
+    {
+      "id": "intermedio-7",
+      "title": "Estudio #7 (Clave de Sol)",
+      "level": "intermedio",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "c/4",
+          "duration": "h",
+          "midiNote": 60
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "d/4",
+          "duration": "8",
+          "midiNote": 62
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        }
+      ]
+    },
+    {
+      "id": "intermedio-8",
+      "title": "Estudio #8 (Clave de Sol)",
+      "level": "intermedio",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "d/4",
+          "duration": "q",
+          "midiNote": 62
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "d/4",
+          "duration": "q",
+          "midiNote": 62
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "e/4",
+          "duration": "q",
+          "midiNote": 64
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "f/4",
+          "duration": "8",
+          "midiNote": 65
+        },
+        {
+          "pitch": "g/4",
+          "duration": "q",
+          "midiNote": 67
+        }
+      ]
+    },
+    {
+      "id": "intermedio-9",
+      "title": "Estudio #9 (Clave de Fa)",
+      "level": "intermedio",
+      "clef": "bass",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "d/3",
+          "duration": "q",
+          "midiNote": 50
+        },
+        {
+          "pitch": "f#/3",
+          "duration": "q",
+          "midiNote": 54
+        },
+        {
+          "pitch": "e/3",
+          "duration": "8",
+          "midiNote": 52
+        },
+        {
+          "pitch": "g/3",
+          "duration": "8",
+          "midiNote": 55
+        },
+        {
+          "pitch": "e/3",
+          "duration": "q",
+          "midiNote": 52
+        },
+        {
+          "pitch": "f#/3",
+          "duration": "8",
+          "midiNote": 54
+        },
+        {
+          "pitch": "d/3",
+          "duration": "8",
+          "midiNote": 50
+        },
+        {
+          "pitch": "b/2",
+          "duration": "q",
+          "midiNote": 47
+        },
+        {
+          "pitch": "g/2",
+          "duration": "8",
+          "midiNote": 43
+        },
+        {
+          "pitch": "b/2",
+          "duration": "8",
+          "midiNote": 47
+        },
+        {
+          "pitch": "c/3",
+          "duration": "q",
+          "midiNote": 48
+        }
+      ]
+    },
+    {
+      "id": "intermedio-10",
+      "title": "Estudio #10 (Clave de Sol)",
+      "level": "intermedio",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "e/4",
+          "duration": "h",
+          "midiNote": 64
+        },
+        {
+          "pitch": "f#/4",
+          "duration": "8",
+          "midiNote": 66
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "d/4",
+          "duration": "q",
+          "midiNote": 62
+        }
+      ]
+    },
+    {
+      "id": "intermedio-11",
+      "title": "Estudio #11 (Clave de Sol)",
+      "level": "intermedio",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "c/5",
+          "duration": "h",
+          "midiNote": 72
+        },
+        {
+          "pitch": "a/4",
+          "duration": "8",
+          "midiNote": 69
+        },
+        {
+          "pitch": "c/5",
+          "duration": "8",
+          "midiNote": 72
+        },
+        {
+          "pitch": "c/5",
+          "duration": "q",
+          "midiNote": 72
+        },
+        {
+          "pitch": "c/5",
+          "duration": "q",
+          "midiNote": 72
+        },
+        {
+          "pitch": "c/5",
+          "duration": "8",
+          "midiNote": 72
+        },
+        {
+          "pitch": "c/5",
+          "duration": "8",
+          "midiNote": 72
+        },
+        {
+          "pitch": "c/5",
+          "duration": "q",
+          "midiNote": 72
+        },
+        {
+          "pitch": "c/5",
+          "duration": "q",
+          "midiNote": 72
+        }
+      ]
+    },
+    {
+      "id": "intermedio-12",
+      "title": "Estudio #12 (Clave de Fa)",
+      "level": "intermedio",
+      "clef": "bass",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "g/3",
+          "duration": "q",
+          "midiNote": 55
+        },
+        {
+          "pitch": "g/3",
+          "duration": "8",
+          "midiNote": 55
+        },
+        {
+          "pitch": "g/3",
+          "duration": "8",
+          "midiNote": 55
+        },
+        {
+          "pitch": "f#/3",
+          "duration": "q",
+          "midiNote": 54
+        },
+        {
+          "pitch": "f#/3",
+          "duration": "q",
+          "midiNote": 54
+        },
+        {
+          "pitch": "a/3",
+          "duration": "q",
+          "midiNote": 57
+        },
+        {
+          "pitch": "a/3",
+          "duration": "q",
+          "midiNote": 57
+        },
+        {
+          "pitch": "a/3",
+          "duration": "8",
+          "midiNote": 57
+        },
+        {
+          "pitch": "a/3",
+          "duration": "8",
+          "midiNote": 57
+        },
+        {
+          "pitch": "a/3",
+          "duration": "q",
+          "midiNote": 57
+        }
+      ]
+    },
+    {
+      "id": "intermedio-13",
+      "title": "Estudio #13 (Clave de Sol)",
+      "level": "intermedio",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "f#/4",
+          "duration": "q",
+          "midiNote": 66
+        },
+        {
+          "pitch": "f/4",
+          "duration": "q",
+          "midiNote": 65
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "d/4",
+          "duration": "8",
+          "midiNote": 62
+        },
+        {
+          "pitch": "f/4",
+          "duration": "q",
+          "midiNote": 65
+        },
+        {
+          "pitch": "f#/4",
+          "duration": "8",
+          "midiNote": 66
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        }
+      ]
+    },
+    {
+      "id": "intermedio-14",
+      "title": "Estudio #14 (Clave de Sol)",
+      "level": "intermedio",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "a/4",
+          "duration": "8",
+          "midiNote": 69
+        },
+        {
+          "pitch": "a/4",
+          "duration": "8",
+          "midiNote": 69
+        },
+        {
+          "pitch": "b/4",
+          "duration": "q",
+          "midiNote": 71
+        },
+        {
+          "pitch": "c/5",
+          "duration": "8",
+          "midiNote": 72
+        },
+        {
+          "pitch": "c/5",
+          "duration": "8",
+          "midiNote": 72
+        },
+        {
+          "pitch": "c/5",
+          "duration": "q",
+          "midiNote": 72
+        },
+        {
+          "pitch": "b/4",
+          "duration": "h",
+          "midiNote": 71
+        },
+        {
+          "pitch": "c/5",
+          "duration": "8",
+          "midiNote": 72
+        },
+        {
+          "pitch": "c/5",
+          "duration": "8",
+          "midiNote": 72
+        },
+        {
+          "pitch": "c/5",
+          "duration": "q",
+          "midiNote": 72
+        }
+      ]
+    },
+    {
+      "id": "intermedio-15",
+      "title": "Estudio #15 (Clave de Fa)",
+      "level": "intermedio",
+      "clef": "bass",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "f#/3",
+          "duration": "h",
+          "midiNote": 54
+        },
+        {
+          "pitch": "d/3",
+          "duration": "8",
+          "midiNote": 50
+        },
+        {
+          "pitch": "b/2",
+          "duration": "8",
+          "midiNote": 47
+        },
+        {
+          "pitch": "b/2",
+          "duration": "q",
+          "midiNote": 47
+        },
+        {
+          "pitch": "a/2",
+          "duration": "q",
+          "midiNote": 45
+        },
+        {
+          "pitch": "c/3",
+          "duration": "8",
+          "midiNote": 48
+        },
+        {
+          "pitch": "c/3",
+          "duration": "8",
+          "midiNote": 48
+        },
+        {
+          "pitch": "c/3",
+          "duration": "q",
+          "midiNote": 48
+        },
+        {
+          "pitch": "c/3",
+          "duration": "q",
+          "midiNote": 48
+        }
+      ]
+    },
+    {
+      "id": "intermedio-16",
+      "title": "Estudio #16 (Clave de Sol)",
+      "level": "intermedio",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "d/4",
+          "duration": "q",
+          "midiNote": 62
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "d/4",
+          "duration": "8",
+          "midiNote": 62
+        },
+        {
+          "pitch": "f/4",
+          "duration": "q",
+          "midiNote": 65
+        },
+        {
+          "pitch": "f#/4",
+          "duration": "q",
+          "midiNote": 66
+        },
+        {
+          "pitch": "e/4",
+          "duration": "q",
+          "midiNote": 64
+        },
+        {
+          "pitch": "f/4",
+          "duration": "q",
+          "midiNote": 65
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "d/4",
+          "duration": "q",
+          "midiNote": 62
+        }
+      ]
+    },
+    {
+      "id": "intermedio-17",
+      "title": "Estudio #17 (Clave de Sol)",
+      "level": "intermedio",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "g/4",
+          "duration": "q",
+          "midiNote": 67
+        },
+        {
+          "pitch": "b/4",
+          "duration": "q",
+          "midiNote": 71
+        },
+        {
+          "pitch": "c/5",
+          "duration": "8",
+          "midiNote": 72
+        },
+        {
+          "pitch": "b/4",
+          "duration": "8",
+          "midiNote": 71
+        },
+        {
+          "pitch": "c/5",
+          "duration": "q",
+          "midiNote": 72
+        },
+        {
+          "pitch": "c/5",
+          "duration": "8",
+          "midiNote": 72
+        },
+        {
+          "pitch": "a/4",
+          "duration": "8",
+          "midiNote": 69
+        },
+        {
+          "pitch": "b/4",
+          "duration": "q",
+          "midiNote": 71
+        },
+        {
+          "pitch": "g/4",
+          "duration": "8",
+          "midiNote": 67
+        },
+        {
+          "pitch": "b/4",
+          "duration": "8",
+          "midiNote": 71
+        },
+        {
+          "pitch": "c/5",
+          "duration": "q",
+          "midiNote": 72
+        }
+      ]
+    },
+    {
+      "id": "intermedio-18",
+      "title": "Estudio #18 (Clave de Fa)",
+      "level": "intermedio",
+      "clef": "bass",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "g/3",
+          "duration": "8",
+          "midiNote": 55
+        },
+        {
+          "pitch": "a/3",
+          "duration": "8",
+          "midiNote": 57
+        },
+        {
+          "pitch": "a/3",
+          "duration": "q",
+          "midiNote": 57
+        },
+        {
+          "pitch": "a/3",
+          "duration": "8",
+          "midiNote": 57
+        },
+        {
+          "pitch": "g/3",
+          "duration": "8",
+          "midiNote": 55
+        },
+        {
+          "pitch": "g/3",
+          "duration": "q",
+          "midiNote": 55
+        },
+        {
+          "pitch": "a/3",
+          "duration": "h",
+          "midiNote": 57
+        },
+        {
+          "pitch": "a/3",
+          "duration": "8",
+          "midiNote": 57
+        },
+        {
+          "pitch": "f#/3",
+          "duration": "8",
+          "midiNote": 54
+        },
+        {
+          "pitch": "f#/3",
+          "duration": "q",
+          "midiNote": 54
+        }
+      ]
+    },
+    {
+      "id": "intermedio-19",
+      "title": "Estudio #19 (Clave de Sol)",
+      "level": "intermedio",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "c/4",
+          "duration": "h",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "d/4",
+          "duration": "q",
+          "midiNote": 62
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "e/4",
+          "duration": "q",
+          "midiNote": 64
+        },
+        {
+          "pitch": "f/4",
+          "duration": "q",
+          "midiNote": 65
+        }
+      ]
+    },
+    {
+      "id": "intermedio-20",
+      "title": "Estudio #20 (Clave de Sol)",
+      "level": "intermedio",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "f#/4",
+          "duration": "q",
+          "midiNote": 66
+        },
+        {
+          "pitch": "g/4",
+          "duration": "8",
+          "midiNote": 67
+        },
+        {
+          "pitch": "f#/4",
+          "duration": "8",
+          "midiNote": 66
+        },
+        {
+          "pitch": "e/4",
+          "duration": "q",
+          "midiNote": 64
+        },
+        {
+          "pitch": "f/4",
+          "duration": "q",
+          "midiNote": 65
+        },
+        {
+          "pitch": "f/4",
+          "duration": "q",
+          "midiNote": 65
+        },
+        {
+          "pitch": "g/4",
+          "duration": "q",
+          "midiNote": 67
+        },
+        {
+          "pitch": "f#/4",
+          "duration": "8",
+          "midiNote": 66
+        },
+        {
+          "pitch": "g/4",
+          "duration": "8",
+          "midiNote": 67
+        },
+        {
+          "pitch": "f/4",
+          "duration": "q",
+          "midiNote": 65
+        }
+      ]
+    },
+    {
+      "id": "intermedio-21",
+      "title": "Estudio #21 (Clave de Fa)",
+      "level": "intermedio",
+      "clef": "bass",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "c/3",
+          "duration": "q",
+          "midiNote": 48
+        },
+        {
+          "pitch": "a/2",
+          "duration": "q",
+          "midiNote": 45
+        },
+        {
+          "pitch": "b/2",
+          "duration": "8",
+          "midiNote": 47
+        },
+        {
+          "pitch": "b/2",
+          "duration": "8",
+          "midiNote": 47
+        },
+        {
+          "pitch": "g/2",
+          "duration": "q",
+          "midiNote": 43
+        },
+        {
+          "pitch": "g/2",
+          "duration": "8",
+          "midiNote": 43
+        },
+        {
+          "pitch": "g/2",
+          "duration": "8",
+          "midiNote": 43
+        },
+        {
+          "pitch": "b/2",
+          "duration": "q",
+          "midiNote": 47
+        },
+        {
+          "pitch": "b/2",
+          "duration": "8",
+          "midiNote": 47
+        },
+        {
+          "pitch": "b/2",
+          "duration": "8",
+          "midiNote": 47
+        },
+        {
+          "pitch": "d/3",
+          "duration": "q",
+          "midiNote": 50
+        }
+      ]
+    },
+    {
+      "id": "intermedio-22",
+      "title": "Estudio #22 (Clave de Sol)",
+      "level": "intermedio",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "e/4",
+          "duration": "q",
+          "midiNote": 64
+        },
+        {
+          "pitch": "d/4",
+          "duration": "h",
+          "midiNote": 62
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "f#/4",
+          "duration": "q",
+          "midiNote": 66
+        }
+      ]
+    },
+    {
+      "id": "intermedio-23",
+      "title": "Estudio #23 (Clave de Sol)",
+      "level": "intermedio",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "c/4",
+          "duration": "h",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "f#/4",
+          "duration": "8",
+          "midiNote": 66
+        },
+        {
+          "pitch": "a/4",
+          "duration": "q",
+          "midiNote": 69
+        },
+        {
+          "pitch": "b/4",
+          "duration": "q",
+          "midiNote": 71
+        }
+      ]
+    },
+    {
+      "id": "intermedio-24",
+      "title": "Estudio #24 (Clave de Fa)",
+      "level": "intermedio",
+      "clef": "bass",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "f#/3",
+          "duration": "q",
+          "midiNote": 54
+        },
+        {
+          "pitch": "g/3",
+          "duration": "8",
+          "midiNote": 55
+        },
+        {
+          "pitch": "f#/3",
+          "duration": "8",
+          "midiNote": 54
+        },
+        {
+          "pitch": "e/3",
+          "duration": "q",
+          "midiNote": 52
+        },
+        {
+          "pitch": "g/3",
+          "duration": "q",
+          "midiNote": 55
+        },
+        {
+          "pitch": "e/3",
+          "duration": "q",
+          "midiNote": 52
+        },
+        {
+          "pitch": "g/3",
+          "duration": "q",
+          "midiNote": 55
+        },
+        {
+          "pitch": "g/3",
+          "duration": "8",
+          "midiNote": 55
+        },
+        {
+          "pitch": "g/3",
+          "duration": "8",
+          "midiNote": 55
+        },
+        {
+          "pitch": "f#/3",
+          "duration": "q",
+          "midiNote": 54
+        }
+      ]
+    },
+    {
+      "id": "intermedio-25",
+      "title": "Estudio #25 (Clave de Sol)",
+      "level": "intermedio",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "d/4",
+          "duration": "8",
+          "midiNote": 62
+        },
+        {
+          "pitch": "f/4",
+          "duration": "8",
+          "midiNote": 65
+        },
+        {
+          "pitch": "f#/4",
+          "duration": "q",
+          "midiNote": 66
+        },
+        {
+          "pitch": "f#/4",
+          "duration": "8",
+          "midiNote": 66
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "f/4",
+          "duration": "q",
+          "midiNote": 65
+        },
+        {
+          "pitch": "d/4",
+          "duration": "8",
+          "midiNote": 62
+        },
+        {
+          "pitch": "d/4",
+          "duration": "8",
+          "midiNote": 62
+        },
+        {
+          "pitch": "f/4",
+          "duration": "q",
+          "midiNote": 65
+        }
+      ]
+    },
+    {
+      "id": "intermedio-26",
+      "title": "Estudio #26 (Clave de Sol)",
+      "level": "intermedio",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "g/4",
+          "duration": "8",
+          "midiNote": 67
+        },
+        {
+          "pitch": "f#/4",
+          "duration": "8",
+          "midiNote": 66
+        },
+        {
+          "pitch": "e/4",
+          "duration": "q",
+          "midiNote": 64
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "e/4",
+          "duration": "h",
+          "midiNote": 64
+        },
+        {
+          "pitch": "f#/4",
+          "duration": "8",
+          "midiNote": 66
+        },
+        {
+          "pitch": "f/4",
+          "duration": "8",
+          "midiNote": 65
+        },
+        {
+          "pitch": "g/4",
+          "duration": "q",
+          "midiNote": 67
+        }
+      ]
+    },
+    {
+      "id": "intermedio-27",
+      "title": "Estudio #27 (Clave de Fa)",
+      "level": "intermedio",
+      "clef": "bass",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "c/3",
+          "duration": "h",
+          "midiNote": 48
+        },
+        {
+          "pitch": "b/2",
+          "duration": "8",
+          "midiNote": 47
+        },
+        {
+          "pitch": "a/2",
+          "duration": "8",
+          "midiNote": 45
+        },
+        {
+          "pitch": "g/2",
+          "duration": "q",
+          "midiNote": 43
+        },
+        {
+          "pitch": "g/2",
+          "duration": "q",
+          "midiNote": 43
+        },
+        {
+          "pitch": "g/2",
+          "duration": "8",
+          "midiNote": 43
+        },
+        {
+          "pitch": "g/2",
+          "duration": "8",
+          "midiNote": 43
+        },
+        {
+          "pitch": "b/2",
+          "duration": "q",
+          "midiNote": 47
+        },
+        {
+          "pitch": "a/2",
+          "duration": "q",
+          "midiNote": 45
+        }
+      ]
+    },
+    {
+      "id": "intermedio-28",
+      "title": "Estudio #28 (Clave de Sol)",
+      "level": "intermedio",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "e/4",
+          "duration": "q",
+          "midiNote": 64
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "e/4",
+          "duration": "q",
+          "midiNote": 64
+        },
+        {
+          "pitch": "f#/4",
+          "duration": "q",
+          "midiNote": 66
+        },
+        {
+          "pitch": "f#/4",
+          "duration": "q",
+          "midiNote": 66
+        },
+        {
+          "pitch": "f/4",
+          "duration": "q",
+          "midiNote": 65
+        },
+        {
+          "pitch": "f/4",
+          "duration": "8",
+          "midiNote": 65
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "f/4",
+          "duration": "q",
+          "midiNote": 65
+        }
+      ]
+    },
+    {
+      "id": "intermedio-29",
+      "title": "Estudio #29 (Clave de Sol)",
+      "level": "intermedio",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "f/4",
+          "duration": "q",
+          "midiNote": 65
+        },
+        {
+          "pitch": "f/4",
+          "duration": "q",
+          "midiNote": 65
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "e/4",
+          "duration": "q",
+          "midiNote": 64
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "d/4",
+          "duration": "8",
+          "midiNote": 62
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        }
+      ]
+    },
+    {
+      "id": "intermedio-30",
+      "title": "Estudio #30 (Clave de Fa)",
+      "level": "intermedio",
+      "clef": "bass",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "b/2",
+          "duration": "8",
+          "midiNote": 47
+        },
+        {
+          "pitch": "b/2",
+          "duration": "8",
+          "midiNote": 47
+        },
+        {
+          "pitch": "c/3",
+          "duration": "q",
+          "midiNote": 48
+        },
+        {
+          "pitch": "b/2",
+          "duration": "8",
+          "midiNote": 47
+        },
+        {
+          "pitch": "b/2",
+          "duration": "8",
+          "midiNote": 47
+        },
+        {
+          "pitch": "d/3",
+          "duration": "q",
+          "midiNote": 50
+        },
+        {
+          "pitch": "d/3",
+          "duration": "h",
+          "midiNote": 50
+        },
+        {
+          "pitch": "c/3",
+          "duration": "8",
+          "midiNote": 48
+        },
+        {
+          "pitch": "b/2",
+          "duration": "8",
+          "midiNote": 47
+        },
+        {
+          "pitch": "b/2",
+          "duration": "q",
+          "midiNote": 47
+        }
+      ]
+    },
+    {
+      "id": "avanzado-1",
+      "title": "Estudio #1 (Clave de Sol)",
+      "level": "avanzado",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "g#/4",
+          "duration": "q",
+          "midiNote": 68
+        },
+        {
+          "pitch": "a/4",
+          "duration": "8",
+          "midiNote": 69
+        },
+        {
+          "pitch": "a/4",
+          "duration": "8",
+          "midiNote": 69
+        },
+        {
+          "pitch": "f#/4",
+          "duration": "8",
+          "midiNote": 66
+        },
+        {
+          "pitch": "g#/4",
+          "duration": "8",
+          "midiNote": 68
+        },
+        {
+          "pitch": "g#/4",
+          "duration": "q",
+          "midiNote": 68
+        },
+        {
+          "pitch": "c/5",
+          "duration": "8",
+          "midiNote": 72
+        },
+        {
+          "pitch": "c/5",
+          "duration": "8",
+          "midiNote": 72
+        },
+        {
+          "pitch": "b/4",
+          "duration": "q",
+          "midiNote": 71
+        },
+        {
+          "pitch": "g/4",
+          "duration": "8",
+          "midiNote": 67
+        },
+        {
+          "pitch": "a/4",
+          "duration": "8",
+          "midiNote": 69
+        },
+        {
+          "pitch": "d/5",
+          "duration": "8",
+          "midiNote": 74
+        },
+        {
+          "pitch": "c/5",
+          "duration": "8",
+          "midiNote": 72
+        },
+        {
+          "pitch": "a/4",
+          "duration": "8",
+          "midiNote": 69
+        },
+        {
+          "pitch": "a/4",
+          "duration": "8",
+          "midiNote": 69
+        },
+        {
+          "pitch": "c/5",
+          "duration": "8",
+          "midiNote": 72
+        },
+        {
+          "pitch": "c/5",
+          "duration": "8",
+          "midiNote": 72
+        },
+        {
+          "pitch": "c/5",
+          "duration": "8",
+          "midiNote": 72
+        },
+        {
+          "pitch": "e/5",
+          "duration": "8",
+          "midiNote": 76
+        },
+        {
+          "pitch": "e/5",
+          "duration": "q",
+          "midiNote": 76
+        }
+      ]
+    },
+    {
+      "id": "avanzado-2",
+      "title": "Estudio #2 (Clave de Sol)",
+      "level": "avanzado",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "c#/4",
+          "duration": "8",
+          "midiNote": 61
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c#/4",
+          "duration": "8",
+          "midiNote": 61
+        },
+        {
+          "pitch": "c#/4",
+          "duration": "8",
+          "midiNote": 61
+        },
+        {
+          "pitch": "d/4",
+          "duration": "8",
+          "midiNote": 62
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "f#/4",
+          "duration": "8",
+          "midiNote": 66
+        },
+        {
+          "pitch": "f#/4",
+          "duration": "q",
+          "midiNote": 66
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "f/4",
+          "duration": "8",
+          "midiNote": 65
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "d/4",
+          "duration": "q",
+          "midiNote": 62
+        },
+        {
+          "pitch": "f/4",
+          "duration": "q",
+          "midiNote": 65
+        }
+      ]
+    },
+    {
+      "id": "avanzado-3",
+      "title": "Estudio #3 (Clave de Fa)",
+      "level": "avanzado",
+      "clef": "bass",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "g/2",
+          "duration": "8",
+          "midiNote": 43
+        },
+        {
+          "pitch": "g/2",
+          "duration": "8",
+          "midiNote": 43
+        },
+        {
+          "pitch": "b/2",
+          "duration": "8",
+          "midiNote": 47
+        },
+        {
+          "pitch": "b/2",
+          "duration": "8",
+          "midiNote": 47
+        },
+        {
+          "pitch": "b/2",
+          "duration": "8",
+          "midiNote": 47
+        },
+        {
+          "pitch": "g/2",
+          "duration": "8",
+          "midiNote": 43
+        },
+        {
+          "pitch": "c/3",
+          "duration": "q",
+          "midiNote": 48
+        },
+        {
+          "pitch": "e/3",
+          "duration": "8",
+          "midiNote": 52
+        },
+        {
+          "pitch": "c/3",
+          "duration": "8",
+          "midiNote": 48
+        },
+        {
+          "pitch": "e/3",
+          "duration": "8",
+          "midiNote": 52
+        },
+        {
+          "pitch": "f/3",
+          "duration": "8",
+          "midiNote": 53
+        },
+        {
+          "pitch": "e/3",
+          "duration": "q",
+          "midiNote": 52
+        },
+        {
+          "pitch": "f/3",
+          "duration": "q",
+          "midiNote": 53
+        },
+        {
+          "pitch": "f/3",
+          "duration": "q",
+          "midiNote": 53
+        },
+        {
+          "pitch": "a/3",
+          "duration": "8",
+          "midiNote": 57
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        }
+      ]
+    },
+    {
+      "id": "avanzado-4",
+      "title": "Estudio #4 (Clave de Sol)",
+      "level": "avanzado",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "d/4",
+          "duration": "8",
+          "midiNote": 62
+        },
+        {
+          "pitch": "c#/4",
+          "duration": "q",
+          "midiNote": 61
+        },
+        {
+          "pitch": "c#/4",
+          "duration": "q",
+          "midiNote": 61
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "f/4",
+          "duration": "8",
+          "midiNote": 65
+        },
+        {
+          "pitch": "f#/4",
+          "duration": "q",
+          "midiNote": 66
+        },
+        {
+          "pitch": "a/4",
+          "duration": "8",
+          "midiNote": 69
+        },
+        {
+          "pitch": "f#/4",
+          "duration": "8",
+          "midiNote": 66
+        },
+        {
+          "pitch": "g#/4",
+          "duration": "q",
+          "midiNote": 68
+        },
+        {
+          "pitch": "a/4",
+          "duration": "8",
+          "midiNote": 69
+        },
+        {
+          "pitch": "f#/4",
+          "duration": "8",
+          "midiNote": 66
+        },
+        {
+          "pitch": "f/4",
+          "duration": "8",
+          "midiNote": 65
+        },
+        {
+          "pitch": "f/4",
+          "duration": "8",
+          "midiNote": 65
+        }
+      ]
+    },
+    {
+      "id": "avanzado-5",
+      "title": "Estudio #5 (Clave de Sol)",
+      "level": "avanzado",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "c#/4",
+          "duration": "q",
+          "midiNote": 61
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "d/4",
+          "duration": "8",
+          "midiNote": 62
+        },
+        {
+          "pitch": "d/4",
+          "duration": "8",
+          "midiNote": 62
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "g/4",
+          "duration": "q",
+          "midiNote": 67
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "f/4",
+          "duration": "8",
+          "midiNote": 65
+        },
+        {
+          "pitch": "e/4",
+          "duration": "q",
+          "midiNote": 64
+        },
+        {
+          "pitch": "f#/4",
+          "duration": "8",
+          "midiNote": 66
+        },
+        {
+          "pitch": "g#/4",
+          "duration": "8",
+          "midiNote": 68
+        },
+        {
+          "pitch": "g#/4",
+          "duration": "8",
+          "midiNote": 68
+        },
+        {
+          "pitch": "c/5",
+          "duration": "8",
+          "midiNote": 72
+        },
+        {
+          "pitch": "d/5",
+          "duration": "8",
+          "midiNote": 74
+        },
+        {
+          "pitch": "d/5",
+          "duration": "8",
+          "midiNote": 74
+        },
+        {
+          "pitch": "c/5",
+          "duration": "8",
+          "midiNote": 72
+        },
+        {
+          "pitch": "b/4",
+          "duration": "8",
+          "midiNote": 71
+        },
+        {
+          "pitch": "e/5",
+          "duration": "8",
+          "midiNote": 76
+        },
+        {
+          "pitch": "e/5",
+          "duration": "8",
+          "midiNote": 76
+        },
+        {
+          "pitch": "e/5",
+          "duration": "q",
+          "midiNote": 76
+        }
+      ]
+    },
+    {
+      "id": "avanzado-6",
+      "title": "Estudio #6 (Clave de Fa)",
+      "level": "avanzado",
+      "clef": "bass",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "f/3",
+          "duration": "8",
+          "midiNote": 53
+        },
+        {
+          "pitch": "d/3",
+          "duration": "8",
+          "midiNote": 50
+        },
+        {
+          "pitch": "f#/3",
+          "duration": "q",
+          "midiNote": 54
+        },
+        {
+          "pitch": "a/3",
+          "duration": "8",
+          "midiNote": 57
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "b/3",
+          "duration": "8",
+          "midiNote": 59
+        },
+        {
+          "pitch": "f#/3",
+          "duration": "8",
+          "midiNote": 54
+        },
+        {
+          "pitch": "g/3",
+          "duration": "8",
+          "midiNote": 55
+        },
+        {
+          "pitch": "a/3",
+          "duration": "8",
+          "midiNote": 57
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "a/3",
+          "duration": "8",
+          "midiNote": 57
+        },
+        {
+          "pitch": "a/3",
+          "duration": "q",
+          "midiNote": 57
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "b/3",
+          "duration": "8",
+          "midiNote": 59
+        },
+        {
+          "pitch": "g/3",
+          "duration": "8",
+          "midiNote": 55
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        }
+      ]
+    },
+    {
+      "id": "avanzado-7",
+      "title": "Estudio #7 (Clave de Sol)",
+      "level": "avanzado",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "d/4",
+          "duration": "8",
+          "midiNote": 62
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c#/4",
+          "duration": "8",
+          "midiNote": 61
+        },
+        {
+          "pitch": "f/4",
+          "duration": "q",
+          "midiNote": 65
+        },
+        {
+          "pitch": "c#/4",
+          "duration": "8",
+          "midiNote": 61
+        },
+        {
+          "pitch": "c#/4",
+          "duration": "8",
+          "midiNote": 61
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "e/4",
+          "duration": "q",
+          "midiNote": 64
+        },
+        {
+          "pitch": "c#/4",
+          "duration": "q",
+          "midiNote": 61
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "d/4",
+          "duration": "8",
+          "midiNote": 62
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        }
+      ]
+    },
+    {
+      "id": "avanzado-8",
+      "title": "Estudio #8 (Clave de Sol)",
+      "level": "avanzado",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "d/4",
+          "duration": "8",
+          "midiNote": 62
+        },
+        {
+          "pitch": "c#/4",
+          "duration": "8",
+          "midiNote": 61
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "c#/4",
+          "duration": "8",
+          "midiNote": 61
+        },
+        {
+          "pitch": "d/4",
+          "duration": "q",
+          "midiNote": 62
+        },
+        {
+          "pitch": "f/4",
+          "duration": "q",
+          "midiNote": 65
+        },
+        {
+          "pitch": "d/4",
+          "duration": "q",
+          "midiNote": 62
+        },
+        {
+          "pitch": "f#/4",
+          "duration": "8",
+          "midiNote": 66
+        },
+        {
+          "pitch": "f#/4",
+          "duration": "8",
+          "midiNote": 66
+        },
+        {
+          "pitch": "g/4",
+          "duration": "8",
+          "midiNote": 67
+        },
+        {
+          "pitch": "b/4",
+          "duration": "8",
+          "midiNote": 71
+        },
+        {
+          "pitch": "e/5",
+          "duration": "q",
+          "midiNote": 76
+        },
+        {
+          "pitch": "b/4",
+          "duration": "8",
+          "midiNote": 71
+        },
+        {
+          "pitch": "g#/4",
+          "duration": "8",
+          "midiNote": 68
+        },
+        {
+          "pitch": "b/4",
+          "duration": "q",
+          "midiNote": 71
+        },
+        {
+          "pitch": "g#/4",
+          "duration": "8",
+          "midiNote": 68
+        },
+        {
+          "pitch": "f/4",
+          "duration": "8",
+          "midiNote": 65
+        },
+        {
+          "pitch": "f#/4",
+          "duration": "8",
+          "midiNote": 66
+        },
+        {
+          "pitch": "f#/4",
+          "duration": "8",
+          "midiNote": 66
+        }
+      ]
+    },
+    {
+      "id": "avanzado-9",
+      "title": "Estudio #9 (Clave de Fa)",
+      "level": "avanzado",
+      "clef": "bass",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "f/3",
+          "duration": "q",
+          "midiNote": 53
+        },
+        {
+          "pitch": "a/3",
+          "duration": "8",
+          "midiNote": 57
+        },
+        {
+          "pitch": "g/3",
+          "duration": "8",
+          "midiNote": 55
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "a/3",
+          "duration": "8",
+          "midiNote": 57
+        },
+        {
+          "pitch": "g/3",
+          "duration": "q",
+          "midiNote": 55
+        },
+        {
+          "pitch": "b/3",
+          "duration": "8",
+          "midiNote": 59
+        },
+        {
+          "pitch": "g/3",
+          "duration": "8",
+          "midiNote": 55
+        },
+        {
+          "pitch": "e/3",
+          "duration": "q",
+          "midiNote": 52
+        },
+        {
+          "pitch": "c#/3",
+          "duration": "8",
+          "midiNote": 49
+        },
+        {
+          "pitch": "e/3",
+          "duration": "8",
+          "midiNote": 52
+        },
+        {
+          "pitch": "f/3",
+          "duration": "8",
+          "midiNote": 53
+        },
+        {
+          "pitch": "d/3",
+          "duration": "8",
+          "midiNote": 50
+        },
+        {
+          "pitch": "f/3",
+          "duration": "8",
+          "midiNote": 53
+        },
+        {
+          "pitch": "d/3",
+          "duration": "8",
+          "midiNote": 50
+        },
+        {
+          "pitch": "c#/3",
+          "duration": "8",
+          "midiNote": 49
+        },
+        {
+          "pitch": "b/2",
+          "duration": "8",
+          "midiNote": 47
+        },
+        {
+          "pitch": "c#/3",
+          "duration": "8",
+          "midiNote": 49
+        },
+        {
+          "pitch": "a/2",
+          "duration": "8",
+          "midiNote": 45
+        },
+        {
+          "pitch": "g/2",
+          "duration": "q",
+          "midiNote": 43
+        }
+      ]
+    },
+    {
+      "id": "avanzado-10",
+      "title": "Estudio #10 (Clave de Sol)",
+      "level": "avanzado",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c#/4",
+          "duration": "8",
+          "midiNote": 61
+        },
+        {
+          "pitch": "f/4",
+          "duration": "8",
+          "midiNote": 65
+        },
+        {
+          "pitch": "g#/4",
+          "duration": "8",
+          "midiNote": 68
+        },
+        {
+          "pitch": "f/4",
+          "duration": "8",
+          "midiNote": 65
+        },
+        {
+          "pitch": "d/4",
+          "duration": "8",
+          "midiNote": 62
+        },
+        {
+          "pitch": "f#/4",
+          "duration": "8",
+          "midiNote": 66
+        },
+        {
+          "pitch": "g/4",
+          "duration": "8",
+          "midiNote": 67
+        },
+        {
+          "pitch": "e/4",
+          "duration": "q",
+          "midiNote": 64
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "d/4",
+          "duration": "8",
+          "midiNote": 62
+        },
+        {
+          "pitch": "d/4",
+          "duration": "8",
+          "midiNote": 62
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c#/4",
+          "duration": "q",
+          "midiNote": 61
+        }
+      ]
+    },
+    {
+      "id": "avanzado-11",
+      "title": "Estudio #11 (Clave de Sol)",
+      "level": "avanzado",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "e/5",
+          "duration": "8",
+          "midiNote": 76
+        },
+        {
+          "pitch": "c/5",
+          "duration": "8",
+          "midiNote": 72
+        },
+        {
+          "pitch": "e/5",
+          "duration": "8",
+          "midiNote": 76
+        },
+        {
+          "pitch": "e/5",
+          "duration": "8",
+          "midiNote": 76
+        },
+        {
+          "pitch": "e/5",
+          "duration": "8",
+          "midiNote": 76
+        },
+        {
+          "pitch": "d/5",
+          "duration": "8",
+          "midiNote": 74
+        },
+        {
+          "pitch": "b/4",
+          "duration": "q",
+          "midiNote": 71
+        },
+        {
+          "pitch": "c/5",
+          "duration": "8",
+          "midiNote": 72
+        },
+        {
+          "pitch": "e/5",
+          "duration": "8",
+          "midiNote": 76
+        },
+        {
+          "pitch": "e/5",
+          "duration": "8",
+          "midiNote": 76
+        },
+        {
+          "pitch": "e/5",
+          "duration": "8",
+          "midiNote": 76
+        },
+        {
+          "pitch": "e/5",
+          "duration": "q",
+          "midiNote": 76
+        },
+        {
+          "pitch": "e/5",
+          "duration": "q",
+          "midiNote": 76
+        },
+        {
+          "pitch": "e/5",
+          "duration": "q",
+          "midiNote": 76
+        },
+        {
+          "pitch": "d/5",
+          "duration": "8",
+          "midiNote": 74
+        },
+        {
+          "pitch": "c/5",
+          "duration": "8",
+          "midiNote": 72
+        },
+        {
+          "pitch": "d/5",
+          "duration": "8",
+          "midiNote": 74
+        },
+        {
+          "pitch": "b/4",
+          "duration": "8",
+          "midiNote": 71
+        },
+        {
+          "pitch": "e/5",
+          "duration": "q",
+          "midiNote": 76
+        }
+      ]
+    },
+    {
+      "id": "avanzado-12",
+      "title": "Estudio #12 (Clave de Fa)",
+      "level": "avanzado",
+      "clef": "bass",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "a/3",
+          "duration": "8",
+          "midiNote": 57
+        },
+        {
+          "pitch": "a/3",
+          "duration": "8",
+          "midiNote": 57
+        },
+        {
+          "pitch": "a/3",
+          "duration": "8",
+          "midiNote": 57
+        },
+        {
+          "pitch": "f#/3",
+          "duration": "8",
+          "midiNote": 54
+        },
+        {
+          "pitch": "f#/3",
+          "duration": "q",
+          "midiNote": 54
+        },
+        {
+          "pitch": "a/3",
+          "duration": "q",
+          "midiNote": 57
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "b/3",
+          "duration": "8",
+          "midiNote": 59
+        },
+        {
+          "pitch": "b/3",
+          "duration": "8",
+          "midiNote": 59
+        },
+        {
+          "pitch": "a/3",
+          "duration": "8",
+          "midiNote": 57
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "b/3",
+          "duration": "8",
+          "midiNote": 59
+        },
+        {
+          "pitch": "g/3",
+          "duration": "8",
+          "midiNote": 55
+        },
+        {
+          "pitch": "g/3",
+          "duration": "q",
+          "midiNote": 55
+        },
+        {
+          "pitch": "g/3",
+          "duration": "8",
+          "midiNote": 55
+        },
+        {
+          "pitch": "a/3",
+          "duration": "8",
+          "midiNote": 57
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "g/3",
+          "duration": "8",
+          "midiNote": 55
+        }
+      ]
+    },
+    {
+      "id": "avanzado-13",
+      "title": "Estudio #13 (Clave de Sol)",
+      "level": "avanzado",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "f#/4",
+          "duration": "q",
+          "midiNote": 66
+        },
+        {
+          "pitch": "f/4",
+          "duration": "8",
+          "midiNote": 65
+        },
+        {
+          "pitch": "d/4",
+          "duration": "8",
+          "midiNote": 62
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c#/4",
+          "duration": "8",
+          "midiNote": 61
+        },
+        {
+          "pitch": "f/4",
+          "duration": "q",
+          "midiNote": 65
+        },
+        {
+          "pitch": "g/4",
+          "duration": "8",
+          "midiNote": 67
+        },
+        {
+          "pitch": "f/4",
+          "duration": "8",
+          "midiNote": 65
+        },
+        {
+          "pitch": "c#/4",
+          "duration": "8",
+          "midiNote": 61
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "d/4",
+          "duration": "8",
+          "midiNote": 62
+        },
+        {
+          "pitch": "c#/4",
+          "duration": "8",
+          "midiNote": 61
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        }
+      ]
+    },
+    {
+      "id": "avanzado-14",
+      "title": "Estudio #14 (Clave de Sol)",
+      "level": "avanzado",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "b/4",
+          "duration": "8",
+          "midiNote": 71
+        },
+        {
+          "pitch": "a/4",
+          "duration": "8",
+          "midiNote": 69
+        },
+        {
+          "pitch": "b/4",
+          "duration": "q",
+          "midiNote": 71
+        },
+        {
+          "pitch": "c/5",
+          "duration": "8",
+          "midiNote": 72
+        },
+        {
+          "pitch": "e/5",
+          "duration": "8",
+          "midiNote": 76
+        },
+        {
+          "pitch": "e/5",
+          "duration": "8",
+          "midiNote": 76
+        },
+        {
+          "pitch": "d/5",
+          "duration": "8",
+          "midiNote": 74
+        },
+        {
+          "pitch": "c/5",
+          "duration": "8",
+          "midiNote": 72
+        },
+        {
+          "pitch": "e/5",
+          "duration": "8",
+          "midiNote": 76
+        },
+        {
+          "pitch": "e/5",
+          "duration": "8",
+          "midiNote": 76
+        },
+        {
+          "pitch": "e/5",
+          "duration": "8",
+          "midiNote": 76
+        },
+        {
+          "pitch": "c/5",
+          "duration": "8",
+          "midiNote": 72
+        },
+        {
+          "pitch": "e/5",
+          "duration": "8",
+          "midiNote": 76
+        },
+        {
+          "pitch": "e/5",
+          "duration": "q",
+          "midiNote": 76
+        },
+        {
+          "pitch": "e/5",
+          "duration": "8",
+          "midiNote": 76
+        },
+        {
+          "pitch": "d/5",
+          "duration": "8",
+          "midiNote": 74
+        },
+        {
+          "pitch": "e/5",
+          "duration": "8",
+          "midiNote": 76
+        },
+        {
+          "pitch": "b/4",
+          "duration": "8",
+          "midiNote": 71
+        },
+        {
+          "pitch": "g#/4",
+          "duration": "q",
+          "midiNote": 68
+        },
+        {
+          "pitch": "c/5",
+          "duration": "q",
+          "midiNote": 72
+        }
+      ]
+    },
+    {
+      "id": "avanzado-15",
+      "title": "Estudio #15 (Clave de Fa)",
+      "level": "avanzado",
+      "clef": "bass",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "f#/3",
+          "duration": "8",
+          "midiNote": 54
+        },
+        {
+          "pitch": "d/3",
+          "duration": "8",
+          "midiNote": 50
+        },
+        {
+          "pitch": "b/2",
+          "duration": "8",
+          "midiNote": 47
+        },
+        {
+          "pitch": "b/2",
+          "duration": "8",
+          "midiNote": 47
+        },
+        {
+          "pitch": "g/2",
+          "duration": "8",
+          "midiNote": 43
+        },
+        {
+          "pitch": "g/2",
+          "duration": "8",
+          "midiNote": 43
+        },
+        {
+          "pitch": "c/3",
+          "duration": "q",
+          "midiNote": 48
+        },
+        {
+          "pitch": "b/2",
+          "duration": "8",
+          "midiNote": 47
+        },
+        {
+          "pitch": "d/3",
+          "duration": "8",
+          "midiNote": 50
+        },
+        {
+          "pitch": "d/3",
+          "duration": "8",
+          "midiNote": 50
+        },
+        {
+          "pitch": "c#/3",
+          "duration": "8",
+          "midiNote": 49
+        },
+        {
+          "pitch": "c#/3",
+          "duration": "q",
+          "midiNote": 49
+        },
+        {
+          "pitch": "d/3",
+          "duration": "q",
+          "midiNote": 50
+        },
+        {
+          "pitch": "d/3",
+          "duration": "q",
+          "midiNote": 50
+        },
+        {
+          "pitch": "b/2",
+          "duration": "8",
+          "midiNote": 47
+        },
+        {
+          "pitch": "c/3",
+          "duration": "8",
+          "midiNote": 48
+        },
+        {
+          "pitch": "b/2",
+          "duration": "8",
+          "midiNote": 47
+        },
+        {
+          "pitch": "g/2",
+          "duration": "8",
+          "midiNote": 43
+        },
+        {
+          "pitch": "g/2",
+          "duration": "q",
+          "midiNote": 43
+        }
+      ]
+    },
+    {
+      "id": "avanzado-16",
+      "title": "Estudio #16 (Clave de Sol)",
+      "level": "avanzado",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "f/4",
+          "duration": "8",
+          "midiNote": 65
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "g/4",
+          "duration": "8",
+          "midiNote": 67
+        },
+        {
+          "pitch": "g#/4",
+          "duration": "q",
+          "midiNote": 68
+        },
+        {
+          "pitch": "f/4",
+          "duration": "q",
+          "midiNote": 65
+        },
+        {
+          "pitch": "d/4",
+          "duration": "q",
+          "midiNote": 62
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "c#/4",
+          "duration": "8",
+          "midiNote": 61
+        },
+        {
+          "pitch": "d/4",
+          "duration": "8",
+          "midiNote": 62
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c#/4",
+          "duration": "q",
+          "midiNote": 61
+        },
+        {
+          "pitch": "c#/4",
+          "duration": "8",
+          "midiNote": 61
+        },
+        {
+          "pitch": "c#/4",
+          "duration": "8",
+          "midiNote": 61
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c#/4",
+          "duration": "8",
+          "midiNote": 61
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        }
+      ]
+    },
+    {
+      "id": "avanzado-17",
+      "title": "Estudio #17 (Clave de Sol)",
+      "level": "avanzado",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "g/4",
+          "duration": "q",
+          "midiNote": 67
+        },
+        {
+          "pitch": "a/4",
+          "duration": "8",
+          "midiNote": 69
+        },
+        {
+          "pitch": "d/5",
+          "duration": "8",
+          "midiNote": 74
+        },
+        {
+          "pitch": "b/4",
+          "duration": "8",
+          "midiNote": 71
+        },
+        {
+          "pitch": "c/5",
+          "duration": "8",
+          "midiNote": 72
+        },
+        {
+          "pitch": "a/4",
+          "duration": "q",
+          "midiNote": 69
+        },
+        {
+          "pitch": "a/4",
+          "duration": "8",
+          "midiNote": 69
+        },
+        {
+          "pitch": "g/4",
+          "duration": "8",
+          "midiNote": 67
+        },
+        {
+          "pitch": "g#/4",
+          "duration": "q",
+          "midiNote": 68
+        },
+        {
+          "pitch": "f/4",
+          "duration": "8",
+          "midiNote": 65
+        },
+        {
+          "pitch": "g#/4",
+          "duration": "8",
+          "midiNote": 68
+        },
+        {
+          "pitch": "a/4",
+          "duration": "8",
+          "midiNote": 69
+        },
+        {
+          "pitch": "d/5",
+          "duration": "8",
+          "midiNote": 74
+        },
+        {
+          "pitch": "a/4",
+          "duration": "8",
+          "midiNote": 69
+        },
+        {
+          "pitch": "g/4",
+          "duration": "8",
+          "midiNote": 67
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c#/4",
+          "duration": "8",
+          "midiNote": 61
+        },
+        {
+          "pitch": "d/4",
+          "duration": "q",
+          "midiNote": 62
+        }
+      ]
+    },
+    {
+      "id": "avanzado-18",
+      "title": "Estudio #18 (Clave de Fa)",
+      "level": "avanzado",
+      "clef": "bass",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "b/3",
+          "duration": "8",
+          "midiNote": 59
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "a/3",
+          "duration": "8",
+          "midiNote": 57
+        },
+        {
+          "pitch": "a/3",
+          "duration": "8",
+          "midiNote": 57
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "b/3",
+          "duration": "8",
+          "midiNote": 59
+        },
+        {
+          "pitch": "f#/3",
+          "duration": "8",
+          "midiNote": 54
+        },
+        {
+          "pitch": "f#/3",
+          "duration": "8",
+          "midiNote": 54
+        },
+        {
+          "pitch": "b/3",
+          "duration": "8",
+          "midiNote": 59
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "a/3",
+          "duration": "q",
+          "midiNote": 57
+        },
+        {
+          "pitch": "a/3",
+          "duration": "8",
+          "midiNote": 57
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "a/3",
+          "duration": "8",
+          "midiNote": 57
+        },
+        {
+          "pitch": "b/3",
+          "duration": "8",
+          "midiNote": 59
+        },
+        {
+          "pitch": "f#/3",
+          "duration": "q",
+          "midiNote": 54
+        },
+        {
+          "pitch": "a/3",
+          "duration": "q",
+          "midiNote": 57
+        }
+      ]
+    },
+    {
+      "id": "avanzado-19",
+      "title": "Estudio #19 (Clave de Sol)",
+      "level": "avanzado",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "d/4",
+          "duration": "8",
+          "midiNote": 62
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "d/4",
+          "duration": "q",
+          "midiNote": 62
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "f/4",
+          "duration": "q",
+          "midiNote": 65
+        },
+        {
+          "pitch": "c#/4",
+          "duration": "q",
+          "midiNote": 61
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "g/4",
+          "duration": "8",
+          "midiNote": 67
+        },
+        {
+          "pitch": "a/4",
+          "duration": "8",
+          "midiNote": 69
+        },
+        {
+          "pitch": "d/5",
+          "duration": "q",
+          "midiNote": 74
+        }
+      ]
+    },
+    {
+      "id": "avanzado-20",
+      "title": "Estudio #20 (Clave de Sol)",
+      "level": "avanzado",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "f#/4",
+          "duration": "8",
+          "midiNote": 66
+        },
+        {
+          "pitch": "g#/4",
+          "duration": "8",
+          "midiNote": 68
+        },
+        {
+          "pitch": "g/4",
+          "duration": "8",
+          "midiNote": 67
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "f#/4",
+          "duration": "q",
+          "midiNote": 66
+        },
+        {
+          "pitch": "a/4",
+          "duration": "q",
+          "midiNote": 69
+        },
+        {
+          "pitch": "b/4",
+          "duration": "q",
+          "midiNote": 71
+        },
+        {
+          "pitch": "e/5",
+          "duration": "8",
+          "midiNote": 76
+        },
+        {
+          "pitch": "d/5",
+          "duration": "8",
+          "midiNote": 74
+        },
+        {
+          "pitch": "e/5",
+          "duration": "8",
+          "midiNote": 76
+        },
+        {
+          "pitch": "b/4",
+          "duration": "8",
+          "midiNote": 71
+        },
+        {
+          "pitch": "d/5",
+          "duration": "q",
+          "midiNote": 74
+        },
+        {
+          "pitch": "a/4",
+          "duration": "8",
+          "midiNote": 69
+        },
+        {
+          "pitch": "g/4",
+          "duration": "8",
+          "midiNote": 67
+        },
+        {
+          "pitch": "e/4",
+          "duration": "q",
+          "midiNote": 64
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c#/4",
+          "duration": "8",
+          "midiNote": 61
+        }
+      ]
+    },
+    {
+      "id": "avanzado-21",
+      "title": "Estudio #21 (Clave de Fa)",
+      "level": "avanzado",
+      "clef": "bass",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "c#/3",
+          "duration": "q",
+          "midiNote": 49
+        },
+        {
+          "pitch": "a/2",
+          "duration": "8",
+          "midiNote": 45
+        },
+        {
+          "pitch": "c/3",
+          "duration": "8",
+          "midiNote": 48
+        },
+        {
+          "pitch": "c/3",
+          "duration": "8",
+          "midiNote": 48
+        },
+        {
+          "pitch": "a/2",
+          "duration": "8",
+          "midiNote": 45
+        },
+        {
+          "pitch": "c#/3",
+          "duration": "q",
+          "midiNote": 49
+        },
+        {
+          "pitch": "c/3",
+          "duration": "8",
+          "midiNote": 48
+        },
+        {
+          "pitch": "a/2",
+          "duration": "8",
+          "midiNote": 45
+        },
+        {
+          "pitch": "c#/3",
+          "duration": "q",
+          "midiNote": 49
+        },
+        {
+          "pitch": "c#/3",
+          "duration": "8",
+          "midiNote": 49
+        },
+        {
+          "pitch": "c#/3",
+          "duration": "8",
+          "midiNote": 49
+        },
+        {
+          "pitch": "f/3",
+          "duration": "8",
+          "midiNote": 53
+        },
+        {
+          "pitch": "e/3",
+          "duration": "8",
+          "midiNote": 52
+        },
+        {
+          "pitch": "c/3",
+          "duration": "8",
+          "midiNote": 48
+        },
+        {
+          "pitch": "c/3",
+          "duration": "8",
+          "midiNote": 48
+        },
+        {
+          "pitch": "g/2",
+          "duration": "8",
+          "midiNote": 43
+        },
+        {
+          "pitch": "b/2",
+          "duration": "8",
+          "midiNote": 47
+        },
+        {
+          "pitch": "g/2",
+          "duration": "8",
+          "midiNote": 43
+        },
+        {
+          "pitch": "b/2",
+          "duration": "8",
+          "midiNote": 47
+        },
+        {
+          "pitch": "g/2",
+          "duration": "q",
+          "midiNote": 43
+        }
+      ]
+    },
+    {
+      "id": "avanzado-22",
+      "title": "Estudio #22 (Clave de Sol)",
+      "level": "avanzado",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "f#/4",
+          "duration": "8",
+          "midiNote": 66
+        },
+        {
+          "pitch": "f/4",
+          "duration": "8",
+          "midiNote": 65
+        },
+        {
+          "pitch": "c#/4",
+          "duration": "8",
+          "midiNote": 61
+        },
+        {
+          "pitch": "f/4",
+          "duration": "8",
+          "midiNote": 65
+        },
+        {
+          "pitch": "g#/4",
+          "duration": "8",
+          "midiNote": 68
+        },
+        {
+          "pitch": "g#/4",
+          "duration": "8",
+          "midiNote": 68
+        },
+        {
+          "pitch": "g/4",
+          "duration": "8",
+          "midiNote": 67
+        },
+        {
+          "pitch": "b/4",
+          "duration": "q",
+          "midiNote": 71
+        },
+        {
+          "pitch": "b/4",
+          "duration": "8",
+          "midiNote": 71
+        },
+        {
+          "pitch": "c/5",
+          "duration": "8",
+          "midiNote": 72
+        },
+        {
+          "pitch": "c/5",
+          "duration": "8",
+          "midiNote": 72
+        },
+        {
+          "pitch": "c/5",
+          "duration": "8",
+          "midiNote": 72
+        },
+        {
+          "pitch": "c/5",
+          "duration": "q",
+          "midiNote": 72
+        },
+        {
+          "pitch": "g#/4",
+          "duration": "q",
+          "midiNote": 68
+        }
+      ]
+    },
+    {
+      "id": "avanzado-23",
+      "title": "Estudio #23 (Clave de Sol)",
+      "level": "avanzado",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "d/4",
+          "duration": "8",
+          "midiNote": 62
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "g/4",
+          "duration": "8",
+          "midiNote": 67
+        },
+        {
+          "pitch": "b/4",
+          "duration": "8",
+          "midiNote": 71
+        },
+        {
+          "pitch": "d/5",
+          "duration": "q",
+          "midiNote": 74
+        },
+        {
+          "pitch": "a/4",
+          "duration": "q",
+          "midiNote": 69
+        },
+        {
+          "pitch": "g#/4",
+          "duration": "q",
+          "midiNote": 68
+        },
+        {
+          "pitch": "a/4",
+          "duration": "8",
+          "midiNote": 69
+        },
+        {
+          "pitch": "b/4",
+          "duration": "8",
+          "midiNote": 71
+        },
+        {
+          "pitch": "a/4",
+          "duration": "8",
+          "midiNote": 69
+        },
+        {
+          "pitch": "d/5",
+          "duration": "8",
+          "midiNote": 74
+        },
+        {
+          "pitch": "e/5",
+          "duration": "q",
+          "midiNote": 76
+        }
+      ]
+    },
+    {
+      "id": "avanzado-24",
+      "title": "Estudio #24 (Clave de Fa)",
+      "level": "avanzado",
+      "clef": "bass",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "g/3",
+          "duration": "8",
+          "midiNote": 55
+        },
+        {
+          "pitch": "a/3",
+          "duration": "8",
+          "midiNote": 57
+        },
+        {
+          "pitch": "g/3",
+          "duration": "8",
+          "midiNote": 55
+        },
+        {
+          "pitch": "f#/3",
+          "duration": "8",
+          "midiNote": 54
+        },
+        {
+          "pitch": "b/3",
+          "duration": "q",
+          "midiNote": 59
+        },
+        {
+          "pitch": "b/3",
+          "duration": "q",
+          "midiNote": 59
+        },
+        {
+          "pitch": "g/3",
+          "duration": "q",
+          "midiNote": 55
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "b/3",
+          "duration": "8",
+          "midiNote": 59
+        },
+        {
+          "pitch": "a/3",
+          "duration": "8",
+          "midiNote": 57
+        },
+        {
+          "pitch": "f#/3",
+          "duration": "q",
+          "midiNote": 54
+        },
+        {
+          "pitch": "f/3",
+          "duration": "8",
+          "midiNote": 53
+        },
+        {
+          "pitch": "e/3",
+          "duration": "8",
+          "midiNote": 52
+        },
+        {
+          "pitch": "f#/3",
+          "duration": "q",
+          "midiNote": 54
+        },
+        {
+          "pitch": "b/3",
+          "duration": "8",
+          "midiNote": 59
+        },
+        {
+          "pitch": "g/3",
+          "duration": "8",
+          "midiNote": 55
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        }
+      ]
+    },
+    {
+      "id": "avanzado-25",
+      "title": "Estudio #25 (Clave de Sol)",
+      "level": "avanzado",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "c/4",
+          "duration": "q",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c#/4",
+          "duration": "8",
+          "midiNote": 61
+        },
+        {
+          "pitch": "f/4",
+          "duration": "8",
+          "midiNote": 65
+        },
+        {
+          "pitch": "f#/4",
+          "duration": "8",
+          "midiNote": 66
+        },
+        {
+          "pitch": "d/4",
+          "duration": "q",
+          "midiNote": 62
+        },
+        {
+          "pitch": "d/4",
+          "duration": "8",
+          "midiNote": 62
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c#/4",
+          "duration": "q",
+          "midiNote": 61
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "f/4",
+          "duration": "8",
+          "midiNote": 65
+        },
+        {
+          "pitch": "d/4",
+          "duration": "8",
+          "midiNote": 62
+        },
+        {
+          "pitch": "f/4",
+          "duration": "8",
+          "midiNote": 65
+        },
+        {
+          "pitch": "f#/4",
+          "duration": "8",
+          "midiNote": 66
+        },
+        {
+          "pitch": "d/4",
+          "duration": "8",
+          "midiNote": 62
+        },
+        {
+          "pitch": "f/4",
+          "duration": "8",
+          "midiNote": 65
+        },
+        {
+          "pitch": "g/4",
+          "duration": "8",
+          "midiNote": 67
+        },
+        {
+          "pitch": "g#/4",
+          "duration": "q",
+          "midiNote": 68
+        }
+      ]
+    },
+    {
+      "id": "avanzado-26",
+      "title": "Estudio #26 (Clave de Sol)",
+      "level": "avanzado",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "a/4",
+          "duration": "8",
+          "midiNote": 69
+        },
+        {
+          "pitch": "g#/4",
+          "duration": "8",
+          "midiNote": 68
+        },
+        {
+          "pitch": "f#/4",
+          "duration": "q",
+          "midiNote": 66
+        },
+        {
+          "pitch": "d/4",
+          "duration": "8",
+          "midiNote": 62
+        },
+        {
+          "pitch": "f/4",
+          "duration": "8",
+          "midiNote": 65
+        },
+        {
+          "pitch": "c#/4",
+          "duration": "8",
+          "midiNote": 61
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "d/4",
+          "duration": "8",
+          "midiNote": 62
+        },
+        {
+          "pitch": "f#/4",
+          "duration": "8",
+          "midiNote": 66
+        },
+        {
+          "pitch": "f/4",
+          "duration": "8",
+          "midiNote": 65
+        },
+        {
+          "pitch": "g#/4",
+          "duration": "8",
+          "midiNote": 68
+        },
+        {
+          "pitch": "f/4",
+          "duration": "8",
+          "midiNote": 65
+        },
+        {
+          "pitch": "f#/4",
+          "duration": "8",
+          "midiNote": 66
+        },
+        {
+          "pitch": "d/4",
+          "duration": "q",
+          "midiNote": 62
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "e/4",
+          "duration": "q",
+          "midiNote": 64
+        },
+        {
+          "pitch": "g/4",
+          "duration": "q",
+          "midiNote": 67
+        }
+      ]
+    },
+    {
+      "id": "avanzado-27",
+      "title": "Estudio #27 (Clave de Fa)",
+      "level": "avanzado",
+      "clef": "bass",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "c#/3",
+          "duration": "8",
+          "midiNote": 49
+        },
+        {
+          "pitch": "c/3",
+          "duration": "8",
+          "midiNote": 48
+        },
+        {
+          "pitch": "a/2",
+          "duration": "8",
+          "midiNote": 45
+        },
+        {
+          "pitch": "g/2",
+          "duration": "8",
+          "midiNote": 43
+        },
+        {
+          "pitch": "g/2",
+          "duration": "8",
+          "midiNote": 43
+        },
+        {
+          "pitch": "g/2",
+          "duration": "8",
+          "midiNote": 43
+        },
+        {
+          "pitch": "g/2",
+          "duration": "q",
+          "midiNote": 43
+        },
+        {
+          "pitch": "g/2",
+          "duration": "8",
+          "midiNote": 43
+        },
+        {
+          "pitch": "g/2",
+          "duration": "8",
+          "midiNote": 43
+        },
+        {
+          "pitch": "g/2",
+          "duration": "8",
+          "midiNote": 43
+        },
+        {
+          "pitch": "b/2",
+          "duration": "8",
+          "midiNote": 47
+        },
+        {
+          "pitch": "a/2",
+          "duration": "q",
+          "midiNote": 45
+        },
+        {
+          "pitch": "b/2",
+          "duration": "q",
+          "midiNote": 47
+        },
+        {
+          "pitch": "c#/3",
+          "duration": "q",
+          "midiNote": 49
+        },
+        {
+          "pitch": "c/3",
+          "duration": "8",
+          "midiNote": 48
+        },
+        {
+          "pitch": "a/2",
+          "duration": "8",
+          "midiNote": 45
+        },
+        {
+          "pitch": "b/2",
+          "duration": "8",
+          "midiNote": 47
+        },
+        {
+          "pitch": "b/2",
+          "duration": "8",
+          "midiNote": 47
+        },
+        {
+          "pitch": "g/2",
+          "duration": "q",
+          "midiNote": 43
+        }
+      ]
+    },
+    {
+      "id": "avanzado-28",
+      "title": "Estudio #28 (Clave de Sol)",
+      "level": "avanzado",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "g/4",
+          "duration": "q",
+          "midiNote": 67
+        },
+        {
+          "pitch": "f#/4",
+          "duration": "q",
+          "midiNote": 66
+        },
+        {
+          "pitch": "g/4",
+          "duration": "q",
+          "midiNote": 67
+        },
+        {
+          "pitch": "f/4",
+          "duration": "8",
+          "midiNote": 65
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "d/4",
+          "duration": "8",
+          "midiNote": 62
+        },
+        {
+          "pitch": "f/4",
+          "duration": "8",
+          "midiNote": 65
+        },
+        {
+          "pitch": "f/4",
+          "duration": "q",
+          "midiNote": 65
+        },
+        {
+          "pitch": "d/4",
+          "duration": "8",
+          "midiNote": 62
+        },
+        {
+          "pitch": "f#/4",
+          "duration": "8",
+          "midiNote": 66
+        },
+        {
+          "pitch": "a/4",
+          "duration": "q",
+          "midiNote": 69
+        },
+        {
+          "pitch": "a/4",
+          "duration": "8",
+          "midiNote": 69
+        },
+        {
+          "pitch": "g/4",
+          "duration": "8",
+          "midiNote": 67
+        },
+        {
+          "pitch": "b/4",
+          "duration": "8",
+          "midiNote": 71
+        },
+        {
+          "pitch": "d/5",
+          "duration": "8",
+          "midiNote": 74
+        }
+      ]
+    },
+    {
+      "id": "avanzado-29",
+      "title": "Estudio #29 (Clave de Sol)",
+      "level": "avanzado",
+      "clef": "treble",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "f/4",
+          "duration": "q",
+          "midiNote": 65
+        },
+        {
+          "pitch": "f/4",
+          "duration": "8",
+          "midiNote": 65
+        },
+        {
+          "pitch": "d/4",
+          "duration": "8",
+          "midiNote": 62
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "f/4",
+          "duration": "q",
+          "midiNote": 65
+        },
+        {
+          "pitch": "f/4",
+          "duration": "8",
+          "midiNote": 65
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "d/4",
+          "duration": "q",
+          "midiNote": 62
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "d/4",
+          "duration": "8",
+          "midiNote": 62
+        },
+        {
+          "pitch": "c/4",
+          "duration": "8",
+          "midiNote": 60
+        },
+        {
+          "pitch": "e/4",
+          "duration": "8",
+          "midiNote": 64
+        },
+        {
+          "pitch": "f#/4",
+          "duration": "8",
+          "midiNote": 66
+        },
+        {
+          "pitch": "f/4",
+          "duration": "8",
+          "midiNote": 65
+        },
+        {
+          "pitch": "g#/4",
+          "duration": "8",
+          "midiNote": 68
+        },
+        {
+          "pitch": "a/4",
+          "duration": "8",
+          "midiNote": 69
+        },
+        {
+          "pitch": "b/4",
+          "duration": "q",
+          "midiNote": 71
+        }
+      ]
+    },
+    {
+      "id": "avanzado-30",
+      "title": "Estudio #30 (Clave de Fa)",
+      "level": "avanzado",
+      "clef": "bass",
+      "timeSignature": "4/4",
+      "notes": [
+        {
+          "pitch": "c#/3",
+          "duration": "8",
+          "midiNote": 49
+        },
+        {
+          "pitch": "d/3",
+          "duration": "8",
+          "midiNote": 50
+        },
+        {
+          "pitch": "e/3",
+          "duration": "q",
+          "midiNote": 52
+        },
+        {
+          "pitch": "d/3",
+          "duration": "8",
+          "midiNote": 50
+        },
+        {
+          "pitch": "d/3",
+          "duration": "8",
+          "midiNote": 50
+        },
+        {
+          "pitch": "f/3",
+          "duration": "8",
+          "midiNote": 53
+        },
+        {
+          "pitch": "e/3",
+          "duration": "8",
+          "midiNote": 52
+        },
+        {
+          "pitch": "e/3",
+          "duration": "8",
+          "midiNote": 52
+        },
+        {
+          "pitch": "c#/3",
+          "duration": "8",
+          "midiNote": 49
+        },
+        {
+          "pitch": "c/3",
+          "duration": "8",
+          "midiNote": 48
+        },
+        {
+          "pitch": "c/3",
+          "duration": "8",
+          "midiNote": 48
+        },
+        {
+          "pitch": "c/3",
+          "duration": "8",
+          "midiNote": 48
+        },
+        {
+          "pitch": "c/3",
+          "duration": "8",
+          "midiNote": 48
+        },
+        {
+          "pitch": "d/3",
+          "duration": "q",
+          "midiNote": 50
+        },
+        {
+          "pitch": "d/3",
+          "duration": "8",
+          "midiNote": 50
+        },
+        {
+          "pitch": "b/2",
+          "duration": "8",
+          "midiNote": 47
+        },
+        {
+          "pitch": "b/2",
+          "duration": "8",
+          "midiNote": 47
+        },
+        {
+          "pitch": "a/2",
+          "duration": "8",
+          "midiNote": 45
+        },
+        {
+          "pitch": "g/2",
+          "duration": "q",
+          "midiNote": 43
+        },
+        {
+          "pitch": "g/2",
+          "duration": "q",
+          "midiNote": 43
+        }
+      ]
+    }
+  ],
+  "lessons": [
+    {
+      "id": "staff-and-clefs",
+      "stepNumber": 1,
+      "title": "El Pentagrama y las Claves",
+      "subtitle": "El mapa donde se ubican las alturas de los sonidos",
+      "intro": "El pentagrama tiene 5 líneas y 4 espacios (se cuentan de abajo hacia arriba). La Clave al inicio nos indica qué nota corresponde a cada línea: la Clave de Sol se usa para registros agudos (mano derecha en piano, flauta, violín) y la Clave de Fa para registros graves (mano izquierda en piano).",
+      "items": [
+        {
+          "id": "treble-landmarks",
+          "name": "Clave de Sol y Notas Guía (Do4 - Sol4)",
+          "symbolDesc": "La espiral nace en la 2ª línea (Sol4)",
+          "beatsText": "Registro Medio / Agudo",
+          "explanation": "El Do Central (C4) se escribe con una pequeña línea adicional debajo del pentagrama. La 2ª línea donde nace la espiral de la clave es siempre la nota Sol (G4).",
+          "clef": "treble",
+          "timeSignature": "4/4",
+          "vexNotes": [
+            {
+              "keys": [
+                "c/4"
+              ],
+              "duration": "h"
+            },
+            {
+              "keys": [
+                "g/4"
+              ],
+              "duration": "h"
+            }
+          ],
+          "audioPulses": [
+            {
+              "freq": 261.63,
+              "beats": 2
+            },
+            {
+              "freq": 392,
+              "beats": 2
+            }
+          ]
+        },
+        {
+          "id": "bass-landmarks",
+          "name": "Clave de Fa y Notas Guía (Fa3 - Do4)",
+          "symbolDesc": "Los dos puntos rodean la 4ª línea (Fa3)",
+          "beatsText": "Registro Grave",
+          "explanation": "En Clave de Fa, la 4ª línea (entre los dos puntitos) es siempre la nota Fa (F3). Si subes hasta la línea adicional por encima del pentagrama, llegas al mismo Do Central (C4).",
+          "clef": "bass",
+          "timeSignature": "4/4",
+          "vexNotes": [
+            {
+              "keys": [
+                "c/3"
+              ],
+              "duration": "q"
+            },
+            {
+              "keys": [
+                "f/3"
+              ],
+              "duration": "q"
+            },
+            {
+              "keys": [
+                "c/4"
+              ],
+              "duration": "h"
+            }
+          ],
+          "audioPulses": [
+            {
+              "freq": 130.81,
+              "beats": 1
+            },
+            {
+              "freq": 174.61,
+              "beats": 1
+            },
+            {
+              "freq": 261.63,
+              "beats": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "note-durations",
+      "stepNumber": 2,
+      "title": "Los Tiempos y Figuras Musicales",
+      "subtitle": "¿Cuánto tiempo debemos mantener presionada cada nota?",
+      "intro": "La música se divide en pulsos constantes (como el tic-tac de un reloj o el metrónomo). En un compás estándar de 4/4 caben 4 pulsos de Negra por compás. La forma de la nota nos dice cuántos pulsos dura:",
+      "items": [
+        {
+          "id": "whole-note",
+          "name": "Redonda (Whole Note)",
+          "symbolDesc": "Óvalo blanco sin plica (palito)",
+          "beatsText": "4 Tiempos completos",
+          "explanation": "Es la figura más larga habitual: tocas la nota en el tiempo 1 y la mantienes sonando durante los 4 clics del compás (1 - 2 - 3 - 4).",
+          "clef": "treble",
+          "timeSignature": "4/4",
+          "vexNotes": [
+            {
+              "keys": [
+                "g/4"
+              ],
+              "duration": "w"
+            }
+          ],
+          "audioPulses": [
+            {
+              "freq": 392,
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "id": "half-note",
+          "name": "Blanca (Half Note)",
+          "symbolDesc": "Óvalo blanco con plica",
+          "beatsText": "2 Tiempos cada una",
+          "explanation": "Dura la mitad de una redonda (2 pulsos). En un compás de 4/4 caben exactamente dos blancas (tiempos 1-2 y tiempos 3-4).",
+          "clef": "treble",
+          "timeSignature": "4/4",
+          "vexNotes": [
+            {
+              "keys": [
+                "e/4"
+              ],
+              "duration": "h"
+            },
+            {
+              "keys": [
+                "g/4"
+              ],
+              "duration": "h"
+            }
+          ],
+          "audioPulses": [
+            {
+              "freq": 329.63,
+              "beats": 2
+            },
+            {
+              "freq": 392,
+              "beats": 2
+            }
+          ]
+        },
+        {
+          "id": "quarter-note",
+          "name": "Negra (Quarter Note)",
+          "symbolDesc": "Óvalo negro relleno con plica",
+          "beatsText": "1 Tiempo cada una",
+          "explanation": "Es la unidad base del pulso: cada negra coincide exactamente con 1 clic del metrónomo. Cuatro negras llenan un compás de 4/4.",
+          "clef": "treble",
+          "timeSignature": "4/4",
+          "vexNotes": [
+            {
+              "keys": [
+                "c/4"
+              ],
+              "duration": "q"
+            },
+            {
+              "keys": [
+                "d/4"
+              ],
+              "duration": "q"
+            },
+            {
+              "keys": [
+                "e/4"
+              ],
+              "duration": "q"
+            },
+            {
+              "keys": [
+                "f/4"
+              ],
+              "duration": "q"
+            }
+          ],
+          "audioPulses": [
+            {
+              "freq": 261.63,
+              "beats": 1
+            },
+            {
+              "freq": 293.66,
+              "beats": 1
+            },
+            {
+              "freq": 329.63,
+              "beats": 1
+            },
+            {
+              "freq": 349.23,
+              "beats": 1
+            }
+          ]
+        },
+        {
+          "id": "eighth-note",
+          "name": "Corcheas (Eighth Notes)",
+          "symbolDesc": "Óvalo negro con corchete o barra superior",
+          "beatsText": "1/2 Tiempo (2 por cada clic)",
+          "explanation": "Valen medio pulso. Se tocan dos corcheas dentro de un solo clic del metrónomo (una cae con el clic y la otra en la mitad: '1-y, 2-y').",
+          "clef": "treble",
+          "timeSignature": "4/4",
+          "vexNotes": [
+            {
+              "keys": [
+                "g/4"
+              ],
+              "duration": "8"
+            },
+            {
+              "keys": [
+                "a/4"
+              ],
+              "duration": "8"
+            },
+            {
+              "keys": [
+                "g/4"
+              ],
+              "duration": "8"
+            },
+            {
+              "keys": [
+                "e/4"
+              ],
+              "duration": "8"
+            },
+            {
+              "keys": [
+                "c/4"
+              ],
+              "duration": "h"
+            }
+          ],
+          "audioPulses": [
+            {
+              "freq": 392,
+              "beats": 0.5
+            },
+            {
+              "freq": 440,
+              "beats": 0.5
+            },
+            {
+              "freq": 392,
+              "beats": 0.5
+            },
+            {
+              "freq": 329.63,
+              "beats": 0.5
+            },
+            {
+              "freq": 261.63,
+              "beats": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "musical-rests",
+      "stepNumber": 3,
+      "title": "Las Pausas (Silencios)",
+      "subtitle": "Cuando el silencio también forma parte del ritmo",
+      "intro": "En una partitura no todo el tiempo suena el instrumento. Los silencios ordenan dejar de tocar durante una cantidad exacta de pulsos mientras el reloj del compás sigue avanzando:",
+      "items": [
+        {
+          "id": "whole-and-half-rest",
+          "name": "Silencio de Blanca (2 tiempos) vs. Redonda (4 tiempos)",
+          "symbolDesc": "Sombrero sobre la 3ª línea (2t) / Colgando de la 4ª línea (4t)",
+          "beatsText": "2 Tiempos de pausa",
+          "explanation": "El rectángulo apoyado sobre la 3ª línea (como un sombrero puesto) indica 2 tiempos de silencio. Si cuelga debajo de la 4ª línea, dura 4 tiempos (o todo el compás).",
+          "clef": "treble",
+          "timeSignature": "4/4",
+          "vexNotes": [
+            {
+              "keys": [
+                "g/4"
+              ],
+              "duration": "h"
+            },
+            {
+              "keys": [
+                "b/4"
+              ],
+              "duration": "hr"
+            }
+          ],
+          "audioPulses": [
+            {
+              "freq": 392,
+              "beats": 2
+            },
+            {
+              "freq": 0,
+              "beats": 2
+            }
+          ]
+        },
+        {
+          "id": "quarter-and-eighth-rest",
+          "name": "Silencio de Negra (1 tiempo) y de Corchea (1/2 tiempo)",
+          "symbolDesc": "Zigzag vertical (1t) y bastón con gancho (1/2t)",
+          "beatsText": "1 Tiempo y 1/2 Tiempo de pausa",
+          "explanation": "El rayo/zigzag en el centro del pentagrama equivale a 1 pulso completo en silencio. Escucha cómo suena tocar en el pulso 1, callar en el 2 y volver en el 3:",
+          "clef": "treble",
+          "timeSignature": "4/4",
+          "vexNotes": [
+            {
+              "keys": [
+                "c/4"
+              ],
+              "duration": "q"
+            },
+            {
+              "keys": [
+                "b/4"
+              ],
+              "duration": "qr"
+            },
+            {
+              "keys": [
+                "e/4"
+              ],
+              "duration": "q"
+            },
+            {
+              "keys": [
+                "g/4"
+              ],
+              "duration": "q"
+            }
+          ],
+          "audioPulses": [
+            {
+              "freq": 261.63,
+              "beats": 1
+            },
+            {
+              "freq": 0,
+              "beats": 1
+            },
+            {
+              "freq": 329.63,
+              "beats": 1
+            },
+            {
+              "freq": 392,
+              "beats": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "intermediate-symbols",
+      "stepNumber": 4,
+      "title": "Símbolos de Nivel Básico - Intermedio",
+      "subtitle": "Puntillos, ligaduras y alteraciones que verás en las canciones",
+      "intro": "Para leer partituras reales (como temas de anime o música clásica en compás de 3/4 o 4/4) encontrarás estos tres modificadores esenciales:",
+      "items": [
+        {
+          "id": "dotted-note",
+          "name": "El Puntillo (ej. Blanca con Puntillo = 3 tiempos)",
+          "symbolDesc": "Un punto pequeño a la derecha de la nota",
+          "beatsText": "Suma +50% de duración a la nota",
+          "explanation": "El puntillo le añade a una figura la mitad de su valor original. Como la Blanca vale 2 tiempos, una Blanca con puntillo dura 2 + 1 = 3 tiempos completos (muy común en valses de 3/4).",
+          "clef": "treble",
+          "timeSignature": "4/4",
+          "vexNotes": [
+            {
+              "keys": [
+                "f/4"
+              ],
+              "duration": "hd"
+            },
+            {
+              "keys": [
+                "g/4"
+              ],
+              "duration": "q"
+            }
+          ],
+          "audioPulses": [
+            {
+              "freq": 349.23,
+              "beats": 3
+            },
+            {
+              "freq": 392,
+              "beats": 1
+            }
+          ]
+        },
+        {
+          "id": "tied-notes",
+          "name": "Ligadura de Prolongación (Tie)",
+          "symbolDesc": "Arco curvo que une dos notas del mismo nombre",
+          "beatsText": "Une y suma ambas duraciones sin volver a golpear",
+          "explanation": "Cuando un arco une dos notas iguales, NO debes volver a tocar la segunda nota: simplemente mantienes presionada la primera sumando el tiempo de ambas.",
+          "clef": "treble",
+          "timeSignature": "4/4",
+          "vexNotes": [
+            {
+              "keys": [
+                "a/4"
+              ],
+              "duration": "h"
+            },
+            {
+              "keys": [
+                "a/4"
+              ],
+              "duration": "q"
+            },
+            {
+              "keys": [
+                "e/4"
+              ],
+              "duration": "q"
+            }
+          ],
+          "tieIndices": [
+            0,
+            1
+          ],
+          "audioPulses": [
+            {
+              "freq": 440,
+              "beats": 3
+            },
+            {
+              "freq": 329.63,
+              "beats": 1
+            }
+          ]
+        },
+        {
+          "id": "accidentals",
+          "name": "Alteraciones: Sostenido (#) y Bemol (b)",
+          "symbolDesc": "# sube medio tono (tecla negra der.) | b baja medio tono",
+          "beatsText": "Modifican la altura por 1 compás",
+          "explanation": "El Sostenido (#) sube la nota medio tono (hacia la tecla negra inmediata a la derecha en el piano) y el Bemol (b) la baja medio tono. Si están al inicio junto a la clave (Armadura), afectan a toda la obra.",
+          "clef": "treble",
+          "timeSignature": "4/4",
+          "vexNotes": [
+            {
+              "keys": [
+                "f/4"
+              ],
+              "duration": "q"
+            },
+            {
+              "keys": [
+                "f/4"
+              ],
+              "duration": "q",
+              "accidental": "#"
+            },
+            {
+              "keys": [
+                "g/4"
+              ],
+              "duration": "h"
+            }
+          ],
+          "audioPulses": [
+            {
+              "freq": 349.23,
+              "beats": 1
+            },
+            {
+              "freq": 369.99,
+              "beats": 1
+            },
+            {
+              "freq": 392,
+              "beats": 2
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -74,7 +74,7 @@ export function useMidiInput() {
                     return;
                 }
 
-                const midiAccess = await navigator.requestMIDIAccess();
+                const midiAccess = (await navigator.requestMIDIAccess()) as MIDIAccess;
                 if (!mounted) return;
 
                 midiAccessRef.current = midiAccess;

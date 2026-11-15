@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { SHEET_MUSIC_CATALOG } from "@/data/catalog";
 import { DifficultyLevel } from "@/types/exercise";
 import { InstrumentType, MusicGenre } from "@/types/catalog";
 import SheetMusicCard from "@/components/catalog/SheetMusicCard";
 import ScoreViewer from "@/components/catalog/ScoreViewer";
+import { useCatalog } from "@/hooks/useCatalog";
+import { useFavorites } from "@/hooks/useFavorites";
+import { filterScores } from "@/lib/sheetData";
 
 const INSTRUMENT_OPTIONS: { value: "todos" | InstrumentType; label: string }[] = [
   { value: "todos", label: "Todos" },
@@ -42,29 +44,34 @@ const pillClass = (active: boolean) =>
   }`;
 
 export default function SheetMusicPage() {
+  const catalog = useCatalog();
+  const { isFavorite, toggleFavorite } = useFavorites();
   const [selectedInstrument, setSelectedInstrument] = useState<"todos" | InstrumentType>("todos");
   const [selectedLevel, setSelectedLevel] = useState<"todos" | DifficultyLevel>("todos");
   const [selectedGenre, setSelectedGenre] = useState<"todos" | MusicGenre>("todos");
+  const [query, setQuery] = useState("");
   const [selectedScoreId, setSelectedScoreId] = useState<string | null>(null);
 
-  const filteredCatalog = SHEET_MUSIC_CATALOG.filter((item) => {
-    const matchesInstrument =
-      selectedInstrument === "todos" || item.instrument === selectedInstrument;
-    const matchesLevel = selectedLevel === "todos" || item.level === selectedLevel;
-    const matchesGenre = selectedGenre === "todos" || item.genre === selectedGenre;
-
-    return matchesInstrument && matchesLevel && matchesGenre;
+  const filteredCatalog = filterScores(catalog, {
+    instrument: selectedInstrument,
+    level: selectedLevel,
+    genre: selectedGenre,
+    query,
   });
 
   const handleResetFilters = () => {
     setSelectedInstrument("todos");
     setSelectedLevel("todos");
     setSelectedGenre("todos");
+    setQuery("");
   };
 
-  const selectedScore = SHEET_MUSIC_CATALOG.find((item) => item.id === selectedScoreId);
+  const selectedScore = catalog.find((item) => item.id === selectedScoreId);
   const filtersActive =
-    selectedInstrument !== "todos" || selectedLevel !== "todos" || selectedGenre !== "todos";
+    selectedInstrument !== "todos" ||
+    selectedLevel !== "todos" ||
+    selectedGenre !== "todos" ||
+    query.trim().length > 0;
 
   if (selectedScore) {
     return <ScoreViewer score={selectedScore} onBack={() => setSelectedScoreId(null)} />;
@@ -83,6 +90,17 @@ export default function SheetMusicPage() {
           <p className="mt-3 max-w-xl text-sm leading-relaxed text-rose-900/65 dark:text-pink-100/60 md:text-base">
             Explora el catálogo offline filtrando por instrumento, nivel de dificultad y género musical.
           </p>
+          <label className="mt-5 flex items-center gap-2 rounded-full border border-pink-200/80 bg-white/70 px-4 py-2 text-sm text-rose-950 dark:border-pink-500/20 dark:bg-slate-950/40 dark:text-pink-50">
+            <span className="text-rose-400" aria-hidden>
+              ⌕
+            </span>
+            <input
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="Buscar por título, compositor o instrumento"
+              className="w-full bg-transparent text-sm outline-none placeholder:text-rose-900/40 dark:placeholder:text-pink-100/35"
+            />
+          </label>
         </header>
 
         <aside className="studio-rise flex flex-col justify-between rounded-[1.6rem_2.2rem_2.4rem_1.4rem] border border-pink-200/80 bg-[#FDF2F8]/90 p-6 shadow-xl shadow-pink-200/25 backdrop-blur-xl dark:border-pink-500/20 dark:bg-slate-900/75 lg:col-span-4">
@@ -91,11 +109,11 @@ export default function SheetMusicPage() {
           </p>
           <p className="font-display text-6xl leading-none text-rose-950 dark:text-pink-50">
             {filteredCatalog.length}
-            <span className="ml-2 text-2xl text-rose-400">/ {SHEET_MUSIC_CATALOG.length}</span>
+            <span className="ml-2 text-2xl text-rose-400">/ {catalog.length}</span>
           </p>
           <div className="flex items-end justify-between gap-3">
             <p className="text-xs text-rose-900/60 dark:text-pink-100/55">
-              Mostrando {filteredCatalog.length} de {SHEET_MUSIC_CATALOG.length} partituras disponibles
+              Mostrando {filteredCatalog.length} de {catalog.length} partituras disponibles
             </p>
             {filtersActive && (
               <button
@@ -181,6 +199,8 @@ export default function SheetMusicPage() {
                 <SheetMusicCard
                   {...score}
                   emphasis={emphasis}
+                  favorite={isFavorite(score.id)}
+                  onToggleFavorite={toggleFavorite}
                   onSelect={(id) => setSelectedScoreId(id)}
                 />
               </div>

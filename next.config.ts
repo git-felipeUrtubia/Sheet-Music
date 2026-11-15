@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Export estático a `out/`: lo sirve Electron y también Vercel, sin funciones de servidor.
   output: "export",
   images: { unoptimized: true },
   typescript: {

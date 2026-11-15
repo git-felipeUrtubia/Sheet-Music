@@ -14,6 +14,8 @@ export interface SheetMusicCardProps {
   measuresCount: number;
   scoreFile: string;
   emphasis?: boolean;
+  favorite?: boolean;
+  onToggleFavorite?: (id: string) => void;
   onSelect?: (id: string) => void;
 }
 
@@ -50,6 +52,8 @@ export default function SheetMusicCard({
   bpm,
   measuresCount,
   emphasis = false,
+  favorite = false,
+  onToggleFavorite,
   onSelect,
 }: SheetMusicCardProps) {
   return (
@@ -74,6 +78,19 @@ export default function SheetMusicCard({
             <span className="rounded-full border border-rose-200/80 bg-white/80 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-rose-700 dark:border-pink-500/20 dark:bg-slate-950/40 dark:text-pink-100">
               {genre}
             </span>
+            {onToggleFavorite && (
+              <button
+                type="button"
+                onClick={() => onToggleFavorite(id)}
+                className={`cursor-pointer rounded-full border px-3 py-1 text-[11px] font-semibold ${
+                  favorite
+                    ? "border-transparent bg-gradient-to-r from-pink-400 to-rose-400 text-rose-950"
+                    : "border-pink-200 bg-white/80 text-rose-700 dark:border-pink-500/25 dark:bg-slate-950/40 dark:text-pink-100"
+                }`}
+              >
+                {favorite ? "♥ Favorita" : "♡ Favorita"}
+              </button>
+            )}
           </div>
 
           <h2 className="font-display text-3xl leading-tight text-rose-950 dark:text-pink-50">

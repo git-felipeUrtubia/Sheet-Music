@@ -5,6 +5,7 @@ import React, { useEffect, useRef, useState, useCallback } from "react";
 import { OpenSheetMusicDisplay } from "opensheetmusicdisplay";
 import { SplendidGrandPiano, Soundfont } from "smplr";
 import { SheetMusicItem } from "@/types/catalog";
+import { isPdfAsset, loadScoreMarkup, publicAssetUrl } from "@/lib/sheetData";
 
 interface ScoreViewerProps {
     score: SheetMusicItem;
@@ -31,6 +32,7 @@ export default function ScoreViewer({ score, onBack }: ScoreViewerProps) {
     isPlayingRef.current = isPlaying;
     const bpmRef = useRef<number>(bpm);
     bpmRef.current = bpm;
+    const isPdf = isPdfAsset(score.scoreFile);
 
     // Inicialización del motor de audio realista (Smplr)
     useEffect(() => {
@@ -69,9 +71,17 @@ export default function ScoreViewer({ score, onBack }: ScoreViewerProps) {
         };
     }, [score.instrument]);
 
-    // Inicialización y renderizado de la partitura desde SQLite (o respaldo estático)
+    // Inicialización y renderizado de la partitura (IPC en escritorio, archivo público en web)
     useEffect(() => {
         let isMounted = true;
+        if (isPdf) {
+            setIsLoadingScore(false);
+            setLoadError(null);
+            setTotalMeasures(score.measuresCount);
+            setCurrentMeasure(1);
+            return;
+        }
+
         const container = osmdContainerRef.current;
         if (!container) return;
 
@@ -89,17 +99,7 @@ export default function ScoreViewer({ score, onBack }: ScoreViewerProps) {
                     followCursor: true,
                 });
 
-                // 1. Obtener XML directamente desde SQLite usando el puente IPC de Electron
-                let xmlDataOrUrl: string | null = null;
-                if (typeof window !== "undefined" && window.electronDB) {
-                    xmlDataOrUrl = await window.electronDB.getScoreXml(score.id);
-                }
-
-                // 2. Respaldo a archivo físico si no se encuentra en la base de datos
-                if (!xmlDataOrUrl) {
-                    xmlDataOrUrl = score.scoreFile;
-                }
-
+                const xmlDataOrUrl = await loadScoreMarkup(score);
                 await osmd.load(xmlDataOrUrl);
                 if (!isMounted) return;
 
@@ -116,9 +116,7 @@ export default function ScoreViewer({ score, onBack }: ScoreViewerProps) {
             } catch (err) {
                 console.error("Error al renderizar MusicXML:", err);
                 if (isMounted) {
-                    setLoadError(
-                        `No se pudo cargar la partitura "${score.title}" desde la base de datos.`
-                    );
+                    setLoadError(`No se pudo cargar la partitura "${score.title}".`);
                     setIsLoadingScore(false);
                 }
             }
@@ -128,7 +126,7 @@ export default function ScoreViewer({ score, onBack }: ScoreViewerProps) {
         return () => {
             isMounted = false;
         };
-    }, [score.id, score.scoreFile, score.measuresCount, score.title]);
+    }, [isPdf, score]);
 
     const handleZoomChange = (newZoom: number) => {
         const clampedZoom = Math.min(1.6, Math.max(0.6, Number(newZoom.toFixed(1))));
@@ -344,11 +342,19 @@ export default function ScoreViewer({ score, onBack }: ScoreViewerProps) {
                         <div className="mx-auto my-12 max-w-lg rounded-3xl border border-rose-200 bg-rose-50 px-6 py-8 text-center">
                             <p className="text-sm font-bold text-rose-700">{loadError}</p>
                             <p className="mt-1 text-xs text-rose-900/60">
-                                Verifica que la partitura esté correctamente almacenada en la base de datos.
+                                Verifica que el archivo esté disponible en el catálogo.
                             </p>
                         </div>
                     )}
-                    <div ref={osmdContainerRef} className="w-full" />
+                    {isPdf ? (
+                        <iframe
+                            title={score.title}
+                            src={publicAssetUrl(score.scoreFile)}
+                            className="h-[70vh] w-full rounded-2xl bg-white"
+                        />
+                    ) : (
+                        <div ref={osmdContainerRef} className="w-full" />
+                    )}
                     <div className="h-28" />
                 </div>
 
@@ -367,7 +373,7 @@ export default function ScoreViewer({ score, onBack }: ScoreViewerProps) {
                             <button
                                 type="button"
                                 onClick={handleTogglePlay}
-                                disabled={isLoadingScore || isLoadingAudio || !!loadError}
+                                disabled={isPdf || isLoadingScore || isLoadingAudio || !!loadError}
                                 className={`flex cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold shadow-lg transition active:scale-95 disabled:pointer-events-none disabled:opacity-40 ${
                                     isPlaying
                                         ? "bg-gradient-to-r from-amber-200 to-orange-200 text-rose-950"
