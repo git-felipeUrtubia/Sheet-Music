@@ -83,54 +83,71 @@ export default function ScoreRequestModal({ isOpen, onClose }: ScoreRequestModal
     }
   };
 
+  const fieldClass =
+    "mt-1 w-full rounded-2xl border border-pink-200/80 bg-white/80 px-3.5 py-2.5 text-sm text-rose-950 placeholder:text-rose-300 focus:border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-200 dark:border-pink-500/25 dark:bg-slate-950/60 dark:text-pink-50 dark:placeholder:text-slate-500 dark:focus:ring-pink-500/20";
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-sm p-4">
-      <div className="w-full max-w-md rounded-2xl border border-slate-800 bg-slate-900 p-6 text-white shadow-2xl">
-        <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-xl font-bold text-cyan-400">Sugerir Partitura</h2>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-rose-950/25 p-4 backdrop-blur-md dark:bg-black/70">
+      <div className="studio-fade max-h-[92vh] w-full max-w-md overflow-y-auto rounded-[1.8rem_2.3rem_1.6rem_2rem] border border-pink-200/80 bg-white/92 p-6 text-slate-800 shadow-2xl shadow-pink-200/40 backdrop-blur-xl dark:border-pink-500/20 dark:bg-slate-900/92 dark:text-slate-100 dark:shadow-black/50">
+        <div className="mb-4 flex items-start justify-between gap-3">
+          <div>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-rose-400">
+              Catálogo
+            </p>
+            <h2 className="mt-1 font-display text-3xl text-rose-950 dark:text-pink-50">
+              Sugerir Partitura
+            </h2>
+          </div>
           <button
+            type="button"
             onClick={onClose}
-            className="rounded-lg p-1 text-slate-400 hover:bg-slate-800 hover:text-white"
+            className="grid h-9 w-9 cursor-pointer place-items-center rounded-full border border-pink-200/80 bg-pink-50 text-sm font-bold text-rose-800 transition hover:bg-pink-100 dark:border-pink-500/25 dark:bg-slate-800 dark:text-pink-50"
           >
             ✕
           </button>
         </div>
 
-        <p className="mb-4 text-xs text-slate-400">
+        <p className="mb-4 text-xs leading-relaxed text-rose-900/60 dark:text-pink-100/55">
           Adjunta tu partitura en formato <strong>MusicXML (.xml / .mxl)</strong> o <strong>PDF</strong> para que podamos incluirla en futuras actualizaciones del catálogo.
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-medium text-slate-300">Nombre de la obra *</label>
+            <label className="block text-[11px] font-semibold uppercase tracking-[0.14em] text-rose-400">
+              Nombre de la obra *
+            </label>
             <input
               type="text"
               required
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Ej: Gurenge / Sadness and Sorrow"
-              className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-white focus:border-cyan-500 focus:outline-none"
+              className={fieldClass}
             />
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-medium text-slate-300">Autor / Anime / Obra</label>
+              <label className="block text-[11px] font-semibold uppercase tracking-[0.14em] text-rose-400">
+                Autor / Anime / Obra
+              </label>
               <input
                 type="text"
                 value={composer}
                 onChange={(e) => setComposer(e.target.value)}
                 placeholder="Ej: Kimetsu no Yaiba"
-                className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-white focus:border-cyan-500 focus:outline-none"
+                className={fieldClass}
               />
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-slate-300">Instrumento</label>
+              <label className="block text-[11px] font-semibold uppercase tracking-[0.14em] text-rose-400">
+                Instrumento
+              </label>
               <select
                 value={instrument}
                 onChange={(e) => setInstrument(e.target.value)}
-                className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-white focus:border-cyan-500 focus:outline-none"
+                className={fieldClass}
               >
                 <option value="Piano">Piano</option>
                 <option value="Violin">Violín</option>
@@ -140,11 +157,13 @@ export default function ScoreRequestModal({ isOpen, onClose }: ScoreRequestModal
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-slate-300">Nivel estimado</label>
+            <label className="block text-[11px] font-semibold uppercase tracking-[0.14em] text-rose-400">
+              Nivel estimado
+            </label>
             <select
               value={level}
               onChange={(e) => setLevel(e.target.value)}
-              className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-white focus:border-cyan-500 focus:outline-none"
+              className={fieldClass}
             >
               <option value="Principiante">Principiante</option>
               <option value="Intermedio">Intermedio</option>
@@ -153,7 +172,7 @@ export default function ScoreRequestModal({ isOpen, onClose }: ScoreRequestModal
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-slate-300">
+            <label className="block text-[11px] font-semibold uppercase tracking-[0.14em] text-rose-400">
               Archivo (.musicxml, .xml, .mxl, .pdf) *
             </label>
             <input
@@ -161,24 +180,26 @@ export default function ScoreRequestModal({ isOpen, onClose }: ScoreRequestModal
               required
               accept=".xml,.musicxml,.mxl,.pdf"
               onChange={(e) => setFile(e.target.files?.[0] || null)}
-              className="mt-1 w-full text-xs text-slate-300 file:mr-3 file:cursor-pointer file:rounded-lg file:border-0 file:bg-cyan-600 file:px-3 file:py-2 file:text-xs file:font-semibold file:text-white hover:file:bg-cyan-500"
+              className="mt-1 w-full rounded-2xl border border-dashed border-pink-300 bg-pink-50/70 px-3 py-3 text-xs text-rose-800 file:mr-3 file:cursor-pointer file:rounded-full file:border-0 file:bg-gradient-to-r file:from-pink-400 file:to-rose-400 file:px-3 file:py-2 file:text-xs file:font-semibold file:text-rose-950 dark:border-pink-500/30 dark:bg-slate-950/40 dark:text-pink-100"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-slate-300">Comentarios (opcional)</label>
+            <label className="block text-[11px] font-semibold uppercase tracking-[0.14em] text-rose-400">
+              Comentarios (opcional)
+            </label>
             <textarea
               rows={2}
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               placeholder="Ej: Arreglo en clave de sol y fa..."
-              className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-white focus:border-cyan-500 focus:outline-none"
+              className={fieldClass}
             />
           </div>
 
-          {status === "error" && <p className="text-xs text-red-400">{errorMsg}</p>}
+          {status === "error" && <p className="text-xs text-rose-600 dark:text-rose-300">{errorMsg}</p>}
           {status === "success" && (
-            <p className="text-xs font-medium text-emerald-400">
+            <p className="text-xs font-medium text-emerald-700 dark:text-emerald-300">
               ¡Solicitud enviada! Revisaremos tu partitura para la próxima actualización.
             </p>
           )}
@@ -187,14 +208,14 @@ export default function ScoreRequestModal({ isOpen, onClose }: ScoreRequestModal
             <button
               type="button"
               onClick={onClose}
-              className="rounded-lg px-4 py-2 text-sm text-slate-400 hover:bg-slate-800"
+              className="cursor-pointer rounded-full px-4 py-2 text-sm text-rose-700 hover:bg-pink-50 dark:text-pink-100 dark:hover:bg-white/5"
             >
               Cancelar
             </button>
             <button
               type="submit"
               disabled={status === "sending"}
-              className="rounded-lg bg-gradient-to-r from-blue-600 to-cyan-500 px-5 py-2 text-sm font-semibold text-white shadow-lg hover:opacity-90 disabled:opacity-50"
+              className="cursor-pointer rounded-full bg-gradient-to-r from-pink-400 to-rose-400 px-5 py-2 text-sm font-semibold text-rose-950 shadow-lg shadow-pink-300/40 disabled:opacity-50"
             >
               {status === "sending" ? "Enviando..." : "Enviar Partitura"}
             </button>

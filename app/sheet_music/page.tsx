@@ -1,274 +1,209 @@
-// app/sheet_music/page.tsx
 "use client";
 
-import React, { useState } from "react";
-import Link from "next/link";
+import { useState } from "react";
 import { SHEET_MUSIC_CATALOG } from "@/data/catalog";
 import { DifficultyLevel } from "@/types/exercise";
 import { InstrumentType, MusicGenre } from "@/types/catalog";
 import SheetMusicCard from "@/components/catalog/SheetMusicCard";
 import ScoreViewer from "@/components/catalog/ScoreViewer";
-import ScoreRequestModal from "@/components/email/ScoreRequestModal";
 
-// Opciones tipadas para renderizar los botones de filtro limpiamente
 const INSTRUMENT_OPTIONS: { value: "todos" | InstrumentType; label: string }[] = [
-    { value: "todos", label: "Todos" },
-    { value: "piano", label: "🎹 Piano" },
-    { value: "violin", label: "🎻 Violín" },
-    { value: "flute", label: "🪈 Flauta" },
+  { value: "todos", label: "Todos" },
+  { value: "piano", label: "🎹 Piano" },
+  { value: "violin", label: "🎻 Violín" },
+  { value: "flute", label: "🪈 Flauta" },
 ];
 
 const LEVEL_OPTIONS: {
-    value: "todos" | DifficultyLevel;
-    label: string;
-    inactiveClass: string;
+  value: "todos" | DifficultyLevel;
+  label: string;
+  dot: string;
 }[] = [
-        {
-            value: "todos",
-            label: "Todos",
-            inactiveClass: "text-[#E2E8F0] border-blue-900/50",
-        },
-        {
-            value: "principiante",
-            label: "Principiante",
-            inactiveClass: "text-emerald-400 border-emerald-500/30",
-        },
-        {
-            value: "intermedio",
-            label: "Intermedio",
-            inactiveClass: "text-blue-400 border-blue-500/30",
-        },
-        {
-            value: "avanzado",
-            label: "Avanzado",
-            inactiveClass: "text-purple-400 border-purple-500/30",
-        },
-    ];
-
-const GENRE_OPTIONS: { value: "todos" | MusicGenre; label: string }[] = [
-    { value: "todos", label: "Todos" },
-    { value: "anime", label: "Anime" },
-    { value: "clasica", label: "Clásica" },
-    { value: "rock", label: "Rock" },
-    { value: "videojuegos", label: "Videojuegos" },
-    { value: "folclore", label: "Folclore" },
+  { value: "todos", label: "Todos", dot: "bg-rose-300" },
+  { value: "principiante", label: "Principiante", dot: "bg-emerald-400" },
+  { value: "intermedio", label: "Intermedio", dot: "bg-sky-400" },
+  { value: "avanzado", label: "Avanzado", dot: "bg-violet-400" },
 ];
 
+const GENRE_OPTIONS: { value: "todos" | MusicGenre; label: string }[] = [
+  { value: "todos", label: "Todos" },
+  { value: "anime", label: "Anime" },
+  { value: "clasica", label: "Clásica" },
+  { value: "rock", label: "Rock" },
+  { value: "videojuegos", label: "Videojuegos" },
+  { value: "folclore", label: "Folclore" },
+];
+
+const pillClass = (active: boolean) =>
+  `inline-flex cursor-pointer items-center rounded-full px-3.5 py-1.5 text-xs transition ${
+    active
+      ? "bg-gradient-to-r from-pink-400 to-rose-400 font-bold text-rose-950 shadow-md shadow-pink-300/40"
+      : "border border-pink-200/80 bg-white/70 font-medium text-rose-950 hover:bg-pink-50 dark:border-pink-500/20 dark:bg-slate-950/40 dark:text-pink-50 dark:hover:bg-white/5"
+  }`;
+
 export default function SheetMusicPage() {
-    // 1. Estados de los 3 filtros
-    const [selectedInstrument, setSelectedInstrument] = useState<"todos" | InstrumentType>("todos");
-    const [selectedLevel, setSelectedLevel] = useState<"todos" | DifficultyLevel>("todos");
-    const [selectedGenre, setSelectedGenre] = useState<"todos" | MusicGenre>("todos");
-    const [isRequestModalOpen, setIsRequestModalOpen] = useState(false);
+  const [selectedInstrument, setSelectedInstrument] = useState<"todos" | InstrumentType>("todos");
+  const [selectedLevel, setSelectedLevel] = useState<"todos" | DifficultyLevel>("todos");
+  const [selectedGenre, setSelectedGenre] = useState<"todos" | MusicGenre>("todos");
+  const [selectedScoreId, setSelectedScoreId] = useState<string | null>(null);
 
-    // Estado preparado para cuando conectemos el visor de partituras
-    const [selectedScoreId, setSelectedScoreId] = useState<string | null>(null);
+  const filteredCatalog = SHEET_MUSIC_CATALOG.filter((item) => {
+    const matchesInstrument =
+      selectedInstrument === "todos" || item.instrument === selectedInstrument;
+    const matchesLevel = selectedLevel === "todos" || item.level === selectedLevel;
+    const matchesGenre = selectedGenre === "todos" || item.genre === selectedGenre;
 
-    // 2. Lógica de filtrado triple combinada
-    const filteredCatalog = SHEET_MUSIC_CATALOG.filter((item) => {
-        const matchesInstrument =
-            selectedInstrument === "todos" || item.instrument === selectedInstrument;
-        const matchesLevel =
-            selectedLevel === "todos" || item.level === selectedLevel;
-        const matchesGenre =
-            selectedGenre === "todos" || item.genre === selectedGenre;
+    return matchesInstrument && matchesLevel && matchesGenre;
+  });
 
-        return matchesInstrument && matchesLevel && matchesGenre;
-    });
+  const handleResetFilters = () => {
+    setSelectedInstrument("todos");
+    setSelectedLevel("todos");
+    setSelectedGenre("todos");
+  };
 
-    // Función rápida para limpiar todos los filtros
-    const handleResetFilters = () => {
-        setSelectedInstrument("todos");
-        setSelectedLevel("todos");
-        setSelectedGenre("todos");
-    };
+  const selectedScore = SHEET_MUSIC_CATALOG.find((item) => item.id === selectedScoreId);
+  const filtersActive =
+    selectedInstrument !== "todos" || selectedLevel !== "todos" || selectedGenre !== "todos";
 
-    // 2. Dentro de SheetMusicPage(), justo antes del return principal, busca la partitura seleccionada:
-    const selectedScore = SHEET_MUSIC_CATALOG.find(
-        (item) => item.id === selectedScoreId
-    );
+  if (selectedScore) {
+    return <ScoreViewer score={selectedScore} onBack={() => setSelectedScoreId(null)} />;
+  }
 
-    // Si el usuario seleccionó una partitura, renderizamos el Visor Interactivo
-    if (selectedScore) {
-        return (
-            <main className="min-h-screen bg-[#0A1128] text-[#E2E8F0] p-6 md:p-12 flex flex-col select-none">
-                <ScoreViewer
-                    score={selectedScore}
-                    onBack={() => setSelectedScoreId(null)}
+  return (
+    <div className="mx-auto flex w-full max-w-6xl flex-col gap-4">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-12">
+        <header className="studio-rise rounded-[2rem_2.6rem_1.6rem_2rem] border border-pink-200/80 bg-white/85 p-7 shadow-xl shadow-pink-200/30 backdrop-blur-xl dark:border-pink-500/20 dark:bg-slate-900/80 dark:shadow-black/40 lg:col-span-8 md:p-9">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-rose-400">
+            Repertorio offline
+          </p>
+          <h1 className="mt-3 font-display text-4xl text-rose-950 dark:text-pink-50 md:text-5xl">
+            Biblioteca de Partituras
+          </h1>
+          <p className="mt-3 max-w-xl text-sm leading-relaxed text-rose-900/65 dark:text-pink-100/60 md:text-base">
+            Explora el catálogo offline filtrando por instrumento, nivel de dificultad y género musical.
+          </p>
+        </header>
+
+        <aside className="studio-rise flex flex-col justify-between rounded-[1.6rem_2.2rem_2.4rem_1.4rem] border border-pink-200/80 bg-[#FDF2F8]/90 p-6 shadow-xl shadow-pink-200/25 backdrop-blur-xl dark:border-pink-500/20 dark:bg-slate-900/75 lg:col-span-4">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-rose-400">
+            En el atril
+          </p>
+          <p className="font-display text-6xl leading-none text-rose-950 dark:text-pink-50">
+            {filteredCatalog.length}
+            <span className="ml-2 text-2xl text-rose-400">/ {SHEET_MUSIC_CATALOG.length}</span>
+          </p>
+          <div className="flex items-end justify-between gap-3">
+            <p className="text-xs text-rose-900/60 dark:text-pink-100/55">
+              Mostrando {filteredCatalog.length} de {SHEET_MUSIC_CATALOG.length} partituras disponibles
+            </p>
+            {filtersActive && (
+              <button
+                type="button"
+                onClick={handleResetFilters}
+                className="shrink-0 cursor-pointer text-xs font-semibold text-rose-600 underline decoration-rose-300 underline-offset-4 dark:text-pink-300"
+              >
+                Limpiar filtros
+              </button>
+            )}
+          </div>
+        </aside>
+
+        <section className="rounded-[1.6rem] border border-pink-200/80 bg-white/80 p-5 shadow-lg shadow-pink-200/20 backdrop-blur-xl dark:border-pink-500/20 dark:bg-slate-900/75 dark:shadow-black/30 lg:col-span-5">
+          <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.18em] text-rose-400">
+            Instrumento:
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {INSTRUMENT_OPTIONS.map((option) => (
+              <button
+                key={option.value}
+                type="button"
+                onClick={() => setSelectedInstrument(option.value)}
+                className={pillClass(selectedInstrument === option.value)}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+        </section>
+
+        <section className="rounded-[1.6rem] border border-pink-200/80 bg-white/80 p-5 shadow-lg shadow-pink-200/20 backdrop-blur-xl dark:border-pink-500/20 dark:bg-slate-900/75 dark:shadow-black/30 lg:col-span-7">
+          <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.18em] text-rose-400">
+            Nivel de Dificultad:
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {LEVEL_OPTIONS.map((option) => {
+              const isActive = selectedLevel === option.value;
+              return (
+                <button
+                  key={option.value}
+                  type="button"
+                  onClick={() => setSelectedLevel(option.value)}
+                  className={pillClass(isActive)}
+                >
+                  <span className={`mr-2 h-1.5 w-1.5 rounded-full ${option.dot}`} />
+                  {option.label}
+                </button>
+              );
+            })}
+          </div>
+        </section>
+
+        <section className="rounded-[1.8rem] border border-pink-200/80 bg-white/80 p-5 shadow-lg shadow-pink-200/20 backdrop-blur-xl dark:border-pink-500/20 dark:bg-slate-900/75 dark:shadow-black/30 lg:col-span-12">
+          <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.18em] text-rose-400">
+            Género Musical:
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {GENRE_OPTIONS.map((option) => (
+              <button
+                key={option.value}
+                type="button"
+                onClick={() => setSelectedGenre(option.value)}
+                className={pillClass(selectedGenre === option.value)}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+        </section>
+      </div>
+
+      {filteredCatalog.length > 0 ? (
+        <section className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {filteredCatalog.map((score, index) => {
+            const emphasis = index % 5 === 0;
+            return (
+              <div
+                key={score.id}
+                className={`studio-rise ${emphasis ? "md:col-span-2" : ""}`}
+                style={{ animationDelay: `${(index % 8) * 45}ms` }}
+              >
+                <SheetMusicCard
+                  {...score}
+                  emphasis={emphasis}
+                  onSelect={(id) => setSelectedScoreId(id)}
                 />
-            </main>
-        );
-    }
-
-    return (
-        <main className="min-h-screen bg-[#0A1128] text-[#E2E8F0] p-6 md:p-12 flex flex-col select-none">
-            <div className="max-w-6xl mx-auto w-full">
-
-
-
-                {/* Navegación superior */}
-                <div className="mb-6">
-                    <Link
-                        href="/"
-                        className="inline-flex items-center gap-2 text-sm text-blue-400 hover:text-blue-300 cursor-pointer transition-colors"
-                    >
-                        <span>←</span>
-                        <span>Volver al menú</span>
-                    </Link>
-                </div>
-
-                {/* Encabezado de la sección */}
-                <header className="mb-8">
-                    <h1 className="text-3xl md:text-4xl font-extrabold text-[#F1F5F9] mb-2">
-                        Biblioteca de Partituras
-                    </h1>
-                    <p className="text-sm md:text-base text-[#94A3B8]">
-                        Explora el catálogo offline filtrando por instrumento, nivel de dificultad y género musical.
-                    </p>
-
-                    <button
-                        onClick={() => setIsRequestModalOpen(true)}
-                        className="flex items-center gap-2 rounded-xl border border-cyan-500/40 bg-cyan-500/10 px-4 py-2 text-sm font-semibold text-cyan-300 transition hover:bg-cyan-500/20"
-                    >
-                        ➕ Sugerir Partitura
-                    </button>
-
-                    <ScoreRequestModal
-                        isOpen={isRequestModalOpen}
-                        onClose={() => setIsRequestModalOpen(false)}
-                    />
-
-                </header>
-
-
-                {/* Panel de Filtros (Instrumento + Nivel + Género) */}
-                <section className="bg-[#111C3D] border-2 border-blue-900/50 rounded-2xl p-5 mb-8 shadow-lg flex flex-col gap-5">
-
-
-                    {/* Fila 1: Filtro por Instrumento */}
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-blue-900/40">
-                        <span className="text-xs font-bold uppercase tracking-wider text-[#94A3B8]">
-                            Instrumento:
-                        </span>
-                        <div className="flex flex-wrap gap-2">
-                            {INSTRUMENT_OPTIONS.map((option) => {
-                                const isActive = selectedInstrument === option.value;
-                                return (
-                                    <button
-                                        key={option.value}
-                                        type="button"
-                                        onClick={() => setSelectedInstrument(option.value)}
-                                        className={`px-4 py-1.5 rounded-xl text-xs cursor-pointer transition-all ${isActive
-                                            ? "font-bold bg-blue-600 text-[#F1F5F9] shadow-md"
-                                            : "font-semibold bg-[#0A1128] hover:bg-[#162247] text-[#E2E8F0] border border-blue-900/50"
-                                            }`}
-                                    >
-                                        {option.label}
-                                    </button>
-                                );
-                            })}
-                        </div>
-                    </div>
-
-                    {/* Fila 2: Filtro por Dificultad */}
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-blue-900/40">
-                        <span className="text-xs font-bold uppercase tracking-wider text-[#94A3B8]">
-                            Nivel de Dificultad:
-                        </span>
-                        <div className="flex flex-wrap gap-2">
-                            {LEVEL_OPTIONS.map((option) => {
-                                const isActive = selectedLevel === option.value;
-                                return (
-                                    <button
-                                        key={option.value}
-                                        type="button"
-                                        onClick={() => setSelectedLevel(option.value)}
-                                        className={`px-4 py-1.5 rounded-xl text-xs cursor-pointer transition-all ${isActive
-                                            ? "font-bold bg-blue-600 text-[#F1F5F9] shadow-md"
-                                            : `font-semibold bg-[#0A1128] hover:bg-[#162247] border ${option.inactiveClass}`
-                                            }`}
-                                    >
-                                        {option.label}
-                                    </button>
-                                );
-                            })}
-                        </div>
-                    </div>
-
-                    {/* Fila 3: Filtro por Género Musical */}
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                        <span className="text-xs font-bold uppercase tracking-wider text-[#94A3B8]">
-                            Género Musical:
-                        </span>
-                        <div className="flex flex-wrap gap-2">
-                            {GENRE_OPTIONS.map((option) => {
-                                const isActive = selectedGenre === option.value;
-                                return (
-                                    <button
-                                        key={option.value}
-                                        type="button"
-                                        onClick={() => setSelectedGenre(option.value)}
-                                        className={`px-3.5 py-1.5 rounded-xl text-xs cursor-pointer transition-all ${isActive
-                                            ? "font-bold bg-blue-600 text-[#F1F5F9] shadow-md"
-                                            : "font-medium bg-[#0A1128] hover:bg-[#162247] text-[#E2E8F0] border border-blue-900/50"
-                                            }`}
-                                    >
-                                        {option.label}
-                                    </button>
-                                );
-                            })}
-                        </div>
-                    </div>
-                </section>
-
-                {/* Contador de resultados y botón de limpiar filtros */}
-                <div className="flex items-center justify-between mb-4 text-xs font-semibold text-[#94A3B8]">
-                    <span>
-                        Mostrando {filteredCatalog.length} de {SHEET_MUSIC_CATALOG.length} partituras disponibles
-                    </span>
-                    {(selectedInstrument !== "todos" ||
-                        selectedLevel !== "todos" ||
-                        selectedGenre !== "todos") && (
-                            <button
-                                type="button"
-                                onClick={handleResetFilters}
-                                className="text-blue-400 hover:text-blue-300 underline cursor-pointer transition-colors"
-                            >
-                                Limpiar filtros
-                            </button>
-                        )}
-                </div>
-
-                {/* Grid de Partituras o Estado Vacío */}
-                {filteredCatalog.length > 0 ? (
-                    <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {filteredCatalog.map((score) => (
-                            <SheetMusicCard
-                                key={score.id}
-                                {...score}
-                                onSelect={(id) => setSelectedScoreId(id)}
-                            />
-                        ))}
-                    </section>
-                ) : (
-                    <div className="w-full py-16 px-4 text-center bg-[#111C3D]/50 rounded-2xl border border-blue-900/40">
-                        <p className="text-base font-semibold text-[#E2E8F0] mb-1">
-                            No se encontraron partituras con esa combinación de filtros
-                        </p>
-                        <p className="text-xs text-[#94A3B8] mb-5">
-                            Prueba seleccionando otro instrumento, nivel de dificultad o género musical.
-                        </p>
-                        <button
-                            type="button"
-                            onClick={handleResetFilters}
-                            className="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-xs font-bold text-[#F1F5F9] cursor-pointer transition-all"
-                        >
-                            Ver todas las partituras
-                        </button>
-                    </div>
-                )}
-
-            </div>
-        </main>
-    );
+              </div>
+            );
+          })}
+        </section>
+      ) : (
+        <div className="rounded-[2rem] border border-pink-200/70 bg-white/70 px-6 py-16 text-center shadow-lg backdrop-blur-xl dark:border-pink-500/20 dark:bg-slate-900/60">
+          <p className="font-display text-2xl text-rose-950 dark:text-pink-50">
+            No se encontraron partituras con esa combinación de filtros
+          </p>
+          <p className="mx-auto mt-2 max-w-md text-sm text-rose-900/60 dark:text-pink-100/55">
+            Prueba seleccionando otro instrumento, nivel de dificultad o género musical.
+          </p>
+          <button
+            type="button"
+            onClick={handleResetFilters}
+            className="mt-6 cursor-pointer rounded-full bg-gradient-to-r from-pink-400 to-rose-400 px-5 py-2.5 text-xs font-bold text-rose-950 shadow-lg shadow-pink-300/40"
+          >
+            Ver todas las partituras
+          </button>
+        </div>
+      )}
+    </div>
+  );
 }
