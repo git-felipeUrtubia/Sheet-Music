@@ -350,13 +350,12 @@ export default function ExerciseArena({ onBack, level }: ExerciseArenaProps) {
     }, [currentExercise, currentNoteIndex, isPlaying]);
 
     return (
-        <section className="w-full max-w-5xl mx-auto flex flex-col justify-between select-none">
-            {/* Barra superior */}
-            <header className="w-full flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-blue-900/50">
-                <div className="flex items-center gap-4">
+        <section className="studio-fade mx-auto flex w-full max-w-5xl flex-col">
+            <header className="flex flex-wrap items-end justify-between gap-4">
+                <div className="flex flex-wrap items-center gap-3">
                     <button
                         type="button"
-                        className="px-3.5 py-2 rounded-lg bg-[#162247] hover:bg-[#1E2E5C] text-sm font-medium text-blue-300 cursor-pointer transition-colors"
+                        className="cursor-pointer rounded-full border border-pink-200/80 bg-white/80 px-4 py-2 text-sm font-medium text-rose-950 shadow-sm backdrop-blur-xl transition hover:-translate-y-0.5 dark:border-pink-500/20 dark:bg-slate-900/80 dark:text-pink-50"
                         onClick={() => {
                             setIsPlaying(false);
                             onBack(null);
@@ -365,49 +364,92 @@ export default function ExerciseArena({ onBack, level }: ExerciseArenaProps) {
                         ← Cambiar nivel
                     </button>
                     <div>
-                        <h1 className="text-xl font-bold text-[#F1F5F9]">
-                            {currentExercise.title} • Nivel{" "}
-                            {level[0].toLocaleUpperCase() + level.slice(1)}
-                        </h1>
-                        <p className="text-xs text-[#94A3B8]">
+                        <div className="flex flex-wrap items-center gap-2">
+                            <h1 className="font-display text-3xl leading-none text-rose-950 dark:text-pink-50">
+                                {currentExercise.title}
+                            </h1>
+                            <span className="rounded-full border border-pink-200 bg-pink-100 px-3 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-rose-800 dark:border-pink-500/30 dark:bg-pink-500/15 dark:text-pink-100">
+                                Nivel {level[0].toLocaleUpperCase() + level.slice(1)}
+                            </span>
+                        </div>
+                        <p className="mt-2 text-sm text-rose-900/60 dark:text-pink-100/55">
                             Toca cada nota en tu teclado MIDI al ritmo de la aguja
                         </p>
                     </div>
                 </div>
             </header>
 
-            {/* Alerta cuando no hay instrumento MIDI conectado */}
             {!isConnected && (
-                <div className="w-full mt-6 p-4 rounded-xl bg-rose-500/10 border border-rose-500/40 flex items-center justify-between gap-4 text-rose-300">
-                    <div className="flex items-center gap-3">
-                        <span className="text-lg">🎹</span>
-                        <div>
-                            <p className="text-xs md:text-sm font-bold text-rose-200">
-                                No se detectó un teclado MIDI
-                            </p>
-                            <p className="text-xs text-rose-300/90">
-                                Conecta tu instrumento por cable USB a la computadora para comenzar la práctica interactiva.
-                            </p>
-                        </div>
+                <div className="mt-5 flex items-center gap-3 rounded-[1.4rem] border border-rose-200 bg-rose-50/90 px-5 py-4 text-rose-800 dark:border-rose-400/30 dark:bg-rose-500/10 dark:text-rose-100">
+                    <span className="text-lg">🎹</span>
+                    <div>
+                        <p className="text-sm font-semibold">No se detectó un teclado MIDI</p>
+                        <p className="text-xs opacity-80">
+                            Conecta tu instrumento por cable USB a la computadora para comenzar la práctica interactiva.
+                        </p>
                     </div>
                 </div>
             )}
 
-            {/* Tarjeta Central */}
-            <div className="w-full bg-[#111C3D] border-2 border-blue-900/60 rounded-2xl p-6 md:p-8 shadow-2xl my-8">
+            <div className="relative mt-6 rounded-[2rem] border border-pink-200/70 bg-[radial-gradient(circle_at_top,rgba(255,228,236,0.95),rgba(255,248,250,0.4))] p-3 shadow-xl shadow-pink-200/30 dark:border-pink-500/20 dark:bg-[radial-gradient(circle_at_top,rgba(244,114,182,0.16),rgba(11,13,23,0.4))] dark:shadow-black/40 md:p-5">
+                <div className="mb-3 flex items-center justify-between px-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-rose-400">
+                    <span>Compás {currentExercise.timeSignature}</span>
+                    <span>
+                        Progreso: {currentNoteIndex} / {currentExercise.notes.length} Notas
+                    </span>
+                </div>
 
-                {/* Panel de Metrónomo y Botón Play */}
-                <div className="flex flex-wrap items-center justify-between gap-4 mb-6 p-4 rounded-xl bg-[#0A1128] border border-blue-900/60">
+                <div
+                    ref={scrollContainerRef}
+                    className="flex w-full items-center justify-start overflow-x-auto scroll-smooth rounded-[1.45rem] border border-white/80 bg-[#FFFDFB] px-4 py-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)]"
+                >
+                    <div
+                        style={{ width: `${staveWidth}px` }}
+                        className="relative mx-auto flex min-h-[180px] shrink-0 items-center justify-start"
+                    >
+                        <div
+                            style={{
+                                transform: `translateX(${cursorX}px)`,
+                                transition:
+                                    isPlaying && beatStep >= 0 && cursorTransitionMs > 0
+                                        ? `transform ${cursorTransitionMs}ms linear`
+                                        : "none",
+                            }}
+                            className={`pointer-events-none absolute bottom-5 left-0 top-5 z-10 w-[2.5px] rounded-full ${
+                                beatStep < 0 && isPlaying ? "bg-rose-300/70" : "bg-rose-500/80"
+                            }`}
+                        />
+
+                        <div
+                            ref={containerRef}
+                            style={{ width: `${staveWidth}px` }}
+                            className="h-[180px]"
+                        />
+                    </div>
+                </div>
+
+                <div className="mt-4 flex justify-center">
+                    <span className="rounded-full border border-pink-200 bg-white/85 px-4 py-1.5 text-xs font-bold text-rose-800 dark:border-pink-500/30 dark:bg-slate-950/60 dark:text-pink-100">
+                        {currentExercise.notes[currentNoteIndex]
+                            ? `Nota objetivo: ${formatNoteBySystem(
+                                currentExercise.notes[currentNoteIndex].pitch,
+                                appSettings.notation
+                            )}`
+                            : "¡Ejercicio completado!"}
+                    </span>
+                </div>
+
+                <div className="sticky bottom-24 z-20 mt-4 flex flex-wrap items-center justify-between gap-4 rounded-[1.4rem] border border-pink-200/80 bg-white/92 px-4 py-3 shadow-xl shadow-pink-200/30 backdrop-blur-xl dark:border-pink-500/25 dark:bg-slate-900/92 dark:shadow-black/40 md:bottom-4">
                     <div className="flex items-center gap-4">
                         <div className="flex flex-col">
-                            <span className="text-[10px] font-bold uppercase tracking-wider text-[#94A3B8]">
+                            <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-rose-400">
                                 Metrónomo
                             </span>
-                            <div className="flex items-center gap-1.5">
-                                <span className="text-xl font-extrabold font-mono text-[#F1F5F9]">
+                            <div className="flex items-baseline gap-1.5">
+                                <span className="font-display text-3xl leading-none text-rose-950 dark:text-pink-50">
                                     {bpm}
                                 </span>
-                                <span className="text-xs text-blue-400 font-semibold">BPM</span>
+                                <span className="text-xs font-semibold text-rose-400">BPM</span>
                             </div>
                         </div>
 
@@ -419,100 +461,48 @@ export default function ExerciseArena({ onBack, level }: ExerciseArenaProps) {
                             value={bpm}
                             disabled={isPlaying || !isConnected}
                             onChange={(e) => setBpm(Number(e.target.value))}
-                            className="w-32 md:w-44 accent-blue-500 cursor-pointer disabled:opacity-50"
+                            className="w-32 cursor-pointer accent-rose-400 disabled:opacity-50 md:w-44"
                         />
                     </div>
 
-                    <div className="flex items-center gap-2">
-                        <span
-                            className={`px-3.5 py-1.5 rounded-full text-xs font-bold border ${!isConnected
-                                ? "bg-rose-500/10 border-rose-500/40 text-rose-300"
+                    <span
+                        className={`rounded-full border px-3.5 py-1.5 text-xs font-bold ${
+                            !isConnected
+                                ? "border-rose-300 bg-rose-50 text-rose-700 dark:border-rose-400/40 dark:bg-rose-500/10 dark:text-rose-200"
                                 : beatStep < 0 && isPlaying
-                                    ? "bg-amber-500/10 border-amber-500/40 text-amber-300 animate-pulse"
+                                    ? "animate-pulse border-amber-300 bg-amber-50 text-amber-800 dark:border-amber-400/40 dark:bg-amber-500/10 dark:text-amber-200"
                                     : isExerciseFinished
-                                        ? "bg-emerald-500/10 border-emerald-500/40 text-emerald-300"
-                                        : "bg-blue-500/10 border-blue-500/30 text-blue-300"
-                                }`}
-                        >
-                            {statusMessage}
-                        </span>
-                    </div>
+                                        ? "border-emerald-300 bg-emerald-50 text-emerald-800 dark:border-emerald-400/40 dark:bg-emerald-500/10 dark:text-emerald-200"
+                                        : "border-pink-200 bg-pink-50 text-rose-800 dark:border-pink-500/30 dark:bg-pink-500/10 dark:text-pink-100"
+                        }`}
+                    >
+                        {statusMessage}
+                    </span>
 
                     <button
                         type="button"
                         disabled={!isConnected}
                         onClick={handleTogglePlay}
-                        className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold text-[#F1F5F9] shadow-lg transition-all ${!isConnected
-                            ? "bg-slate-700 text-slate-400 opacity-50 cursor-not-allowed shadow-none"
-                            : isPlaying
-                                ? "bg-rose-600 hover:bg-rose-500 cursor-pointer active:scale-95"
-                                : "bg-emerald-600 hover:bg-emerald-500 cursor-pointer active:scale-95"
-                            }`}
+                        className={`flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold shadow-lg transition ${
+                            !isConnected
+                                ? "cursor-not-allowed bg-slate-200 text-slate-400 opacity-60 shadow-none dark:bg-slate-800 dark:text-slate-500"
+                                : isPlaying
+                                    ? "cursor-pointer bg-rose-950 text-pink-50 active:scale-95"
+                                    : "cursor-pointer bg-gradient-to-r from-pink-400 to-rose-400 text-rose-950 shadow-pink-300/40 active:scale-95"
+                        }`}
                     >
                         <span>{isPlaying ? "■" : "▶"}</span>
                         <span>
-                            {!isConnected
-                                ? "Sin Conexión"
-                                : isPlaying
-                                    ? "Detener"
-                                    : "Play Metrónomo"}
+                            {!isConnected ? "Sin Conexión" : isPlaying ? "Detener" : "Play Metrónomo"}
                         </span>
                     </button>
                 </div>
 
-                <div className="flex justify-between items-center mb-4 text-xs font-semibold tracking-wider uppercase text-[#94A3B8]">
-                    <span>Compás {currentExercise.timeSignature}</span>
-                    <span>
-                        Progreso: {currentNoteIndex} / {currentExercise.notes.length} Notas
-                    </span>
-                </div>
-
-                <div
-                    ref={scrollContainerRef}
-                    className="w-full bg-[#E2E8F0] text-[#0A1128] rounded-xl p-4 flex items-center justify-start overflow-x-auto shadow-inner scroll-smooth"
-                >
-                    <div
-                        style={{ width: `${staveWidth}px` }}
-                        className="relative min-h-[180px] shrink-0 flex items-center justify-start mx-auto"
-                    >
-                        <div
-                            style={{
-                                transform: `translateX(${cursorX}px)`,
-                                transition:
-                                    isPlaying && beatStep >= 0 && cursorTransitionMs > 0
-                                        ? `transform ${cursorTransitionMs}ms linear`
-                                        : "none",
-                            }}
-                            className={`absolute left-0 top-5 bottom-5 w-[2.5px] rounded-sm z-10 pointer-events-none ${beatStep < 0 && isPlaying
-                                ? "bg-slate-500/50"
-                                : "bg-blue-600/65"
-                                }`}
-                        />
-
-                        <div
-                            ref={containerRef}
-                            style={{ width: `${staveWidth}px` }}
-                            className="h-[180px]"
-                        />
-                    </div>
-                </div>
-
-                <div className="mt-6 flex items-center justify-center gap-3">
-                    <span className="px-3 py-1 rounded-md bg-blue-500/20 border border-blue-400 text-xs font-bold text-blue-300">
-                        {currentExercise.notes[currentNoteIndex]
-                            ? `Nota objetivo: ${formatNoteBySystem(
-                                currentExercise.notes[currentNoteIndex].pitch,
-                                appSettings.notation
-                            )}`
-                            : "¡Ejercicio completado!"}
-                    </span>
-                </div>
-
-                <div className="mt-8 pt-6 border-t border-blue-900/40 flex flex-wrap items-center justify-between gap-4">
+                <div className="mt-4 flex flex-wrap items-center justify-between gap-4 border-t border-pink-200/70 pt-4 dark:border-pink-500/15">
                     <button
                         type="button"
                         disabled={!isConnected}
-                        className="px-4 py-2.5 rounded-xl bg-[#162247] hover:bg-[#1E2E5C] text-sm font-medium text-[#E2E8F0] cursor-pointer transition-colors disabled:opacity-40 disabled:pointer-events-none"
+                        className="cursor-pointer rounded-full border border-pink-200/80 bg-white/80 px-4 py-2.5 text-sm font-medium text-rose-950 transition disabled:pointer-events-none disabled:opacity-40 dark:border-pink-500/20 dark:bg-slate-950/40 dark:text-pink-50"
                         onClick={() => {
                             setIsPlaying(false);
                             setCurrentNoteIndex(0);
@@ -531,7 +521,7 @@ export default function ExerciseArena({ onBack, level }: ExerciseArenaProps) {
                         <button
                             type="button"
                             disabled={!canGoPrev}
-                            className="px-4 py-2.5 rounded-xl bg-[#162247] hover:bg-[#1E2E5C] text-sm font-medium text-blue-300 cursor-pointer transition-all disabled:opacity-40 disabled:pointer-events-none"
+                            className="cursor-pointer rounded-full border border-pink-200/80 bg-white/80 px-4 py-2.5 text-sm font-medium text-rose-800 transition disabled:pointer-events-none disabled:opacity-40 dark:border-pink-500/20 dark:bg-slate-950/40 dark:text-pink-100"
                             onClick={() => {
                                 if (canGoPrev) {
                                     setIsPlaying(false);
@@ -553,14 +543,14 @@ export default function ExerciseArena({ onBack, level }: ExerciseArenaProps) {
                             ← Anterior
                         </button>
 
-                        <span className="text-xs font-semibold text-[#94A3B8] px-2">
+                        <span className="px-2 text-xs font-semibold text-rose-900/50 dark:text-pink-100/50">
                             {exerciseInPlay + 1} / {exercisesDataFiltered.length}
                         </span>
 
                         <button
                             type="button"
                             disabled={!canGoNext}
-                            className="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-sm font-bold text-[#F1F5F9] shadow-lg cursor-pointer transition-all disabled:opacity-40 disabled:bg-slate-700 disabled:shadow-none disabled:pointer-events-none"
+                            className="cursor-pointer rounded-full bg-gradient-to-r from-pink-400 to-rose-400 px-6 py-2.5 text-sm font-bold text-rose-950 shadow-lg shadow-pink-300/40 transition disabled:pointer-events-none disabled:bg-slate-300 disabled:bg-none disabled:text-slate-500 disabled:opacity-50 disabled:shadow-none"
                             onClick={() => {
                                 if (!isLastExercise && canGoNext) {
                                     setIsPlaying(false);

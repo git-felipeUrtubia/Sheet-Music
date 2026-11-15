@@ -170,35 +170,37 @@ export default function TheoryInteractiveCard({ item }: TheoryInteractiveCardPro
     };
 
     return (
-        <div className="bg-[#0A1128] border border-blue-900/60 rounded-2xl p-5 flex flex-col justify-between gap-4 shadow-lg">
+        <div className="flex h-full flex-col justify-between gap-4 rounded-[1.5rem_2rem_1.4rem_1.8rem] border border-pink-200/80 bg-rose-50/50 p-5 shadow-lg shadow-pink-100/40 dark:border-pink-500/20 dark:bg-slate-950/40 dark:shadow-black/20">
             <div className="flex flex-wrap items-start justify-between gap-2">
                 <div>
-                    <h3 className="text-base font-extrabold text-[#F1F5F9]">{item.name}</h3>
-                    <p className="text-xs text-blue-300 font-medium mt-0.5">{item.symbolDesc}</p>
+                    <h3 className="font-display text-2xl text-rose-950 dark:text-pink-50">{item.name}</h3>
+                    <p className="mt-0.5 text-xs font-medium text-rose-500 dark:text-pink-300">{item.symbolDesc}</p>
                 </div>
-                <span className="px-2.5 py-1 rounded-lg bg-blue-500/15 border border-blue-400/30 text-[11px] font-bold text-blue-300">
+                <span className="rounded-full border border-pink-200 bg-white/80 px-3 py-1 text-[11px] font-bold text-rose-800 dark:border-pink-500/30 dark:bg-pink-500/10 dark:text-pink-100">
                     {item.beatsText}
                 </span>
             </div>
 
-            <p className="text-xs text-[#94A3B8] leading-relaxed">{item.explanation}</p>
+            <p className="text-xs leading-relaxed text-rose-900/65 dark:text-pink-100/60">{item.explanation}</p>
 
-            {/* Pentagrama de VexFlow */}
-            <div className="w-full bg-[#F8FAFC] rounded-xl p-2 flex items-center justify-center overflow-x-auto border-2 border-blue-900/30">
-                <div ref={containerRef} className="w-[440px] h-[140px]" />
+            <div className="mx-auto w-fit max-w-full overflow-hidden rounded-[1.2rem] border border-rose-100 bg-[#FFFDFB]">
+                <div
+                    ref={containerRef}
+                    className="[&_svg]:block [&_svg]:h-auto [&_svg]:max-w-full"
+                />
             </div>
 
-            {/* Barra inferior con contador de pulsos y botón de audio */}
-            <div className="flex items-center justify-between pt-2">
+            <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
                 <div className="flex items-center gap-1.5">
-                    <span className="text-[11px] font-semibold text-[#94A3B8] mr-1">Pulsos:</span>
+                    <span className="mr-1 text-[11px] font-semibold text-rose-400">Pulsos:</span>
                     {[1, 2, 3, 4].map((beatNum) => (
                         <span
                             key={beatNum}
-                            className={`w-6 h-6 rounded-full text-xs font-mono font-bold flex items-center justify-center transition-all ${activeBeat === beatNum
-                                    ? "bg-emerald-500 text-[#0A1128] scale-110 shadow-[0_0_10px_#10b981]"
-                                    : "bg-[#111C3D] text-[#94A3B8] border border-blue-900/50"
-                                }`}
+                            className={`flex h-7 w-7 items-center justify-center rounded-full font-mono text-xs font-bold transition-all ${
+                                activeBeat === beatNum
+                                    ? "scale-110 bg-gradient-to-br from-pink-400 to-rose-400 text-rose-950 shadow-lg shadow-pink-300/50"
+                                    : "border border-pink-200/80 bg-white text-rose-700 dark:border-pink-500/25 dark:bg-slate-900 dark:text-pink-100"
+                            }`}
                         >
                             {beatNum}
                         </span>
@@ -209,7 +211,7 @@ export default function TheoryInteractiveCard({ item }: TheoryInteractiveCardPro
                     type="button"
                     onClick={handlePlayDemo}
                     disabled={isPlayingDemo}
-                    className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 disabled:bg-amber-600 text-xs font-bold text-white cursor-pointer transition-all shadow-md"
+                    className="cursor-pointer rounded-full bg-gradient-to-r from-pink-400 to-rose-400 px-4 py-2 text-xs font-bold text-rose-950 shadow-md shadow-pink-300/40 transition disabled:from-amber-200 disabled:to-orange-200"
                 >
                     {isPlayingDemo ? "🔊 Escuchando..." : "▶ Escuchar ejemplo"}
                 </button>

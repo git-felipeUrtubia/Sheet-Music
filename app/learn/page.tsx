@@ -1,123 +1,106 @@
-// app/learn/page.tsx
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { THEORY_CHAPTERS } from "@/data/theoryLessons";
 import TheoryInteractiveCard from "@/components/learn/TheoryInteractiveCard";
 
 export default function LearnSheetMusicPage() {
-    const [activeChapterIdx, setActiveChapterIdx] = useState<number>(0);
-    const currentChapter = THEORY_CHAPTERS[activeChapterIdx];
+  const [activeChapterIdx, setActiveChapterIdx] = useState<number>(0);
+  const currentChapter = THEORY_CHAPTERS[activeChapterIdx];
 
-    return (
-        <main className="min-h-screen bg-[#0A1128] text-[#E2E8F0] p-6 md:p-12 flex flex-col select-none">
-            <div className="w-full max-w-6xl mx-auto flex flex-col gap-8">
+  return (
+    <div className="mx-auto flex w-full max-w-6xl flex-col gap-4">
+      <div className="grid grid-cols-1 items-start gap-4 lg:grid-cols-12">
+        <header className="studio-rise rounded-[2rem_2.5rem_1.6rem_2rem] border border-pink-200/80 bg-white/85 p-7 shadow-xl shadow-pink-200/30 backdrop-blur-xl dark:border-pink-500/20 dark:bg-slate-900/80 dark:shadow-black/40 md:p-9 lg:col-span-8 lg:col-start-5">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-rose-400">
+            Guía desde cero
+          </p>
+          <h1 className="mt-3 font-display text-4xl leading-tight text-rose-950 dark:text-pink-50 md:text-5xl">
+            Aprender a Leer Partituras desde Cero
+          </h1>
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-rose-900/65 dark:text-pink-100/60">
+            Guía interactiva de tiempos, silencios y símbolos antes de tu primera práctica.
+          </p>
+          <Link
+            href="/exercises"
+            className="mt-6 inline-flex rounded-full bg-gradient-to-r from-pink-400 to-rose-400 px-5 py-2.5 text-sm font-semibold text-rose-950 shadow-lg shadow-pink-300/40"
+          >
+            Ir a Ejercicios Prácticos →
+          </Link>
+        </header>
 
-                {/* Encabezado Superior */}
-                <header className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-blue-900/50">
-                    <div className="flex items-center gap-4">
-                        <Link
-                            href="/"
-                            className="px-4 py-2 rounded-xl bg-[#162247] hover:bg-[#1E2E5C] text-sm font-medium text-blue-300 transition-colors"
-                        >
-                            ← Menú Principal
-                        </Link>
-                        <div>
-                            <h1 className="text-2xl md:text-3xl font-extrabold text-[#F1F5F9]">
-                                Aprender a Leer Partituras desde Cero
-                            </h1>
-                            <p className="text-xs md:text-sm text-[#94A3B8]">
-                                Guía interactiva de tiempos, silencios y símbolos antes de tu primera práctica.
-                            </p>
-                        </div>
-                    </div>
+        <nav className="flex flex-col gap-3 self-start lg:sticky lg:top-4 lg:col-span-4 lg:col-start-1 lg:row-span-2 lg:row-start-1">
+          {THEORY_CHAPTERS.map((chap, idx) => {
+            const isActive = idx === activeChapterIdx;
+            return (
+              <button
+                key={chap.id}
+                type="button"
+                onClick={() => setActiveChapterIdx(idx)}
+                className={`flex min-h-[6.85rem] cursor-pointer flex-col justify-center rounded-[1.4rem_1.9rem_1.3rem_1.7rem] border px-4 py-3.5 text-left transition duration-200 ${
+                  isActive
+                    ? "border-transparent bg-gradient-to-br from-pink-400 to-rose-400 text-rose-950 shadow-lg shadow-pink-300/40"
+                    : "border-pink-200/80 bg-white/75 text-rose-950 dark:border-pink-500/20 dark:bg-slate-900/75 dark:text-pink-50"
+                }`}
+              >
+                <div className={`text-[10px] font-bold uppercase tracking-[0.18em] ${isActive ? "text-rose-950/70" : "text-rose-400"}`}>
+                  Paso {chap.stepNumber} de {THEORY_CHAPTERS.length}
+                </div>
+                <div className="mt-1 font-display text-2xl leading-tight">{chap.title}</div>
+              </button>
+            );
+          })}
+        </nav>
 
-                    <Link
-                        href="/exercises"
-                        className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-xs md:text-sm font-bold text-white shadow-lg transition-all"
-                    >
-                        Ir a Ejercicios Prácticos →
-                    </Link>
-                </header>
+        <section className="rounded-[2rem] border border-pink-200/80 bg-white/85 p-5 shadow-xl shadow-pink-200/30 backdrop-blur-xl dark:border-pink-500/20 dark:bg-slate-900/80 dark:shadow-black/40 md:p-7 lg:col-span-8 lg:col-start-5">
+          <div className="border-b border-pink-100 pb-5 dark:border-pink-500/15">
+            <span className="rounded-full bg-pink-100 px-3 py-1 text-xs font-bold text-rose-800 dark:bg-pink-500/15 dark:text-pink-100">
+              Lección {currentChapter.stepNumber}
+            </span>
+            <h2 className="mt-3 font-display text-3xl text-rose-950 dark:text-pink-50">
+              {currentChapter.title}
+            </h2>
+            <p className="mt-2 max-w-3xl text-sm leading-relaxed text-rose-900/65 dark:text-pink-100/60">
+              {currentChapter.intro}
+            </p>
+          </div>
 
-                {/* Selector de Pasos / Capítulos */}
-                <nav className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-                    {THEORY_CHAPTERS.map((chap, idx) => {
-                        const isActive = idx === activeChapterIdx;
-                        return (
-                            <button
-                                key={chap.id}
-                                type="button"
-                                onClick={() => setActiveChapterIdx(idx)}
-                                className={`p-4 rounded-2xl border-2 text-left cursor-pointer transition-all ${isActive
-                                        ? "bg-[#162247] border-blue-400 shadow-[0_0_20px_rgba(59,130,246,0.25)]"
-                                        : "bg-[#111C3D]/70 border-blue-900/50 hover:bg-[#162247]/60 text-[#94A3B8]"
-                                    }`}
-                            >
-                                <div className="text-[11px] font-bold uppercase tracking-wider text-blue-400">
-                                    Paso {chap.stepNumber} de {THEORY_CHAPTERS.length}
-                                </div>
-                                <div className="text-sm font-extrabold text-[#F1F5F9] mt-1">
-                                    {chap.title}
-                                </div>
-                            </button>
-                        );
-                    })}
-                </nav>
+          <div className="mt-5 grid grid-cols-1 gap-4">
+            {currentChapter.items.map((item) => (
+              <TheoryInteractiveCard key={item.id} item={item} />
+            ))}
+          </div>
 
-                {/* Contenedor del Capítulo Activo */}
-                <section className="bg-[#111C3D] border-2 border-blue-900/60 rounded-2xl p-6 md:p-8 shadow-2xl flex flex-col gap-6">
-                    <div className="border-b border-blue-900/50 pb-4">
-                        <span className="px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 text-xs font-bold">
-                            Lección {currentChapter.stepNumber}
-                        </span>
-                        <h2 className="text-xl md:text-2xl font-extrabold text-[#F1F5F9] mt-2">
-                            {currentChapter.title}
-                        </h2>
-                        <p className="text-sm text-[#94A3B8] mt-2 leading-relaxed max-w-4xl">
-                            {currentChapter.intro}
-                        </p>
-                    </div>
+          <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-pink-100 pt-5 dark:border-pink-500/15">
+            <button
+              type="button"
+              disabled={activeChapterIdx === 0}
+              onClick={() => setActiveChapterIdx((prev) => prev - 1)}
+              className="cursor-pointer rounded-full border border-pink-200/80 bg-white/80 px-5 py-2.5 text-xs font-bold text-rose-900 disabled:pointer-events-none disabled:opacity-40 dark:border-pink-500/20 dark:bg-slate-950/40 dark:text-pink-50"
+            >
+              ← Lección Anterior
+            </button>
 
-                    {/* Grilla de tarjetas interactivas con pentagrama y audio */}
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        {currentChapter.items.map((item) => (
-                            <TheoryInteractiveCard key={item.id} item={item} />
-                        ))}
-                    </div>
-
-                    {/* Botones de navegación entre capítulos */}
-                    <div className="pt-6 border-t border-blue-900/50 flex items-center justify-between">
-                        <button
-                            type="button"
-                            disabled={activeChapterIdx === 0}
-                            onClick={() => setActiveChapterIdx((prev) => prev - 1)}
-                            className="px-5 py-2.5 rounded-xl bg-[#162247] hover:bg-[#1E2E5C] text-xs font-bold text-blue-300 cursor-pointer disabled:opacity-40 disabled:pointer-events-none"
-                        >
-                            ← Lección Anterior
-                        </button>
-
-                        {activeChapterIdx < THEORY_CHAPTERS.length - 1 ? (
-                            <button
-                                type="button"
-                                onClick={() => setActiveChapterIdx((prev) => prev + 1)}
-                                className="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-xs font-bold text-white shadow-lg cursor-pointer"
-                            >
-                                Siguiente Lección →
-                            </button>
-                        ) : (
-                            <Link
-                                href="/exercises"
-                                className="px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-xs font-bold text-white shadow-lg"
-                            >
-                                ¡Listo! Comenzar Práctica Principiante →
-                            </Link>
-                        )}
-                    </div>
-                </section>
-
-            </div>
-        </main>
-    );
+            {activeChapterIdx < THEORY_CHAPTERS.length - 1 ? (
+              <button
+                type="button"
+                onClick={() => setActiveChapterIdx((prev) => prev + 1)}
+                className="cursor-pointer rounded-full bg-gradient-to-r from-pink-400 to-rose-400 px-6 py-2.5 text-xs font-bold text-rose-950 shadow-lg shadow-pink-300/40"
+              >
+                Siguiente Lección →
+              </button>
+            ) : (
+              <Link
+                href="/exercises"
+                className="rounded-full bg-gradient-to-r from-emerald-300 to-teal-300 px-6 py-2.5 text-xs font-bold text-emerald-950 shadow-lg"
+              >
+                ¡Listo! Comenzar Práctica Principiante →
+              </Link>
+            )}
+          </div>
+        </section>
+      </div>
+    </div>
+  );
 }

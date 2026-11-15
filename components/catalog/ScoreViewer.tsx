@@ -279,143 +279,152 @@ export default function ScoreViewer({ score, onBack }: ScoreViewerProps) {
     );
 
     return (
-        <section className="w-full max-w-6xl mx-auto flex flex-col select-none">
-            <header className="w-full flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-blue-900/50">
-                <div className="flex items-center gap-4">
+        <section className="studio-fade relative mx-auto flex w-full max-w-6xl flex-col">
+            <header className="mb-4 flex flex-wrap items-end justify-between gap-4">
+                <div className="flex flex-wrap items-center gap-3">
                     <button
                         type="button"
                         onClick={() => {
                             handleRestartScore();
                             onBack();
                         }}
-                        className="px-4 py-2 rounded-xl bg-[#162247] hover:bg-[#1E2E5C] text-sm font-medium text-blue-300 cursor-pointer transition-colors"
+                        className="cursor-pointer rounded-full border border-pink-200/80 bg-white/80 px-4 py-2 text-sm font-medium text-rose-950 shadow-sm backdrop-blur-xl transition hover:-translate-y-0.5 dark:border-pink-500/20 dark:bg-slate-900/80 dark:text-pink-50"
                     >
                         ← Volver al catálogo
                     </button>
                     <div>
-                        <div className="flex items-center gap-2.5">
-                            <h1 className="text-xl md:text-2xl font-extrabold text-[#F1F5F9]">
+                        <div className="flex flex-wrap items-center gap-2">
+                            <h1 className="font-display text-3xl leading-none text-rose-950 dark:text-pink-50 md:text-4xl">
                                 {score.title}
                             </h1>
-                            <span className="px-2.5 py-0.5 text-[11px] font-bold uppercase rounded-md bg-blue-500/20 text-blue-300 border border-blue-500/30">
+                            <span className="rounded-full border border-pink-200 bg-pink-100 px-3 py-0.5 text-[11px] font-bold uppercase tracking-wider text-rose-800 dark:border-pink-500/30 dark:bg-pink-500/15 dark:text-pink-100">
                                 {score.instrument}
                             </span>
+                            <span className="rounded-full border border-rose-200/80 bg-white/80 px-3 py-0.5 text-[11px] font-semibold capitalize text-rose-700 dark:border-pink-500/20 dark:bg-slate-950/50 dark:text-pink-100">
+                                {score.level}
+                            </span>
                         </div>
-                        <p className="text-xs text-[#94A3B8] mt-0.5">
+                        <p className="mt-1.5 text-sm text-rose-900/60 dark:text-pink-100/55">
                             {score.composer} • Compás {score.timeSignature} • Nivel {score.level}
                         </p>
                     </div>
                 </div>
-                <div className="flex items-center gap-2 bg-[#111C3D] px-3 py-1.5 rounded-xl border border-blue-900/60">
-                    <span className="text-xs font-semibold text-[#94A3B8] mr-1">Zoom:</span>
+                <div className="flex items-center gap-2 rounded-full border border-pink-200/80 bg-white/85 px-2 py-1.5 shadow-sm backdrop-blur-xl dark:border-pink-500/20 dark:bg-slate-900/80">
+                    <span className="pl-2 text-[10px] font-bold uppercase tracking-[0.16em] text-rose-400">Zoom:</span>
                     <button
                         type="button"
                         onClick={() => handleZoomChange(zoom - 0.1)}
-                        className="w-7 h-7 rounded-lg bg-[#0A1128] hover:bg-[#162247] text-sm font-bold text-[#E2E8F0] cursor-pointer"
+                        className="grid h-8 w-8 cursor-pointer place-items-center rounded-full bg-pink-50 text-sm font-bold text-rose-950 dark:bg-slate-800 dark:text-pink-50"
                     >
                         -
                     </button>
-                    <span className="text-xs font-mono font-bold text-blue-300 min-w-[42px] text-center">
+                    <span className="min-w-[46px] text-center font-mono text-xs font-bold text-rose-700 dark:text-pink-200">
                         {Math.round(zoom * 100)}%
                     </span>
                     <button
                         type="button"
                         onClick={() => handleZoomChange(zoom + 0.1)}
-                        className="w-7 h-7 rounded-lg bg-[#0A1128] hover:bg-[#162247] text-sm font-bold text-[#E2E8F0] cursor-pointer"
+                        className="grid h-8 w-8 cursor-pointer place-items-center rounded-full bg-pink-50 text-sm font-bold text-rose-950 dark:bg-slate-800 dark:text-pink-50"
                     >
                         +
                     </button>
                 </div>
             </header>
 
-            <div className="sticky top-4 z-30 w-full bg-[#111C3D]/95 backdrop-blur-md border-2 border-blue-900/60 rounded-2xl p-4 my-6 shadow-[0_10px_30px_rgba(0,0,0,0.6)] flex flex-wrap items-center justify-between gap-4">
-                <div className="flex items-center gap-3">
-                    <button
-                        type="button"
-                        onClick={handleRestartScore}
-                        disabled={isLoadingScore}
-                        title="Reiniciar partitura"
-                        className="p-2.5 rounded-xl bg-[#0A1128] hover:bg-[#162247] border border-blue-900/50 text-sm font-bold text-[#E2E8F0] cursor-pointer transition-colors disabled:opacity-40"
-                    >
-                        ↺
-                    </button>
-                    <button
-                        type="button"
-                        onClick={handleTogglePlay}
-                        disabled={isLoadingScore || isLoadingAudio || !!loadError}
-                        className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-bold text-[#F1F5F9] shadow-lg cursor-pointer transition-all active:scale-95 disabled:opacity-40 disabled:pointer-events-none ${isPlaying
-                                ? "bg-amber-600 hover:bg-amber-500"
-                                : "bg-emerald-600 hover:bg-emerald-500"
-                            }`}
-                    >
-                        <span>{isPlaying ? "⏸" : "▶"}</span>
-                        <span>
-                            {isLoadingAudio
-                                ? "Cargando audio HD..."
-                                : isPlaying
-                                    ? "Pausar Obra"
-                                    : "Reproducir Obra"}
-                        </span>
-                    </button>
+            <div className="relative rounded-[2rem] border border-pink-200/70 bg-[radial-gradient(circle_at_top,rgba(255,228,236,0.95),rgba(255,248,250,0.45))] p-3 shadow-xl shadow-pink-200/30 dark:border-pink-500/20 dark:bg-[radial-gradient(circle_at_top,rgba(244,114,182,0.18),rgba(11,13,23,0.45))] dark:shadow-black/50 md:p-4">
+                <div className="relative min-h-[560px] overflow-x-auto rounded-[1.5rem] border border-white/80 bg-[#FFFDFB] px-4 py-8 shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_24px_50px_-36px_rgba(190,24,93,0.45)] md:px-10">
+                    {isLoadingScore && (
+                        <div className="absolute inset-0 z-10 flex items-center justify-center rounded-[1.5rem] bg-[#FFFDFB]/92">
+                            <p className="animate-pulse font-display text-xl text-rose-900/70">
+                                Renderizando partitura de alta definición...
+                            </p>
+                        </div>
+                    )}
+                    {loadError && (
+                        <div className="mx-auto my-12 max-w-lg rounded-3xl border border-rose-200 bg-rose-50 px-6 py-8 text-center">
+                            <p className="text-sm font-bold text-rose-700">{loadError}</p>
+                            <p className="mt-1 text-xs text-rose-900/60">
+                                Verifica que la partitura esté correctamente almacenada en la base de datos.
+                            </p>
+                        </div>
+                    )}
+                    <div ref={osmdContainerRef} className="w-full" />
+                    <div className="h-28" />
                 </div>
 
-                <div className="flex-1 min-w-[200px] max-w-md flex flex-col gap-1.5">
-                    <div className="flex justify-between text-[11px] font-semibold text-[#94A3B8]">
-                        <span>
-                            Compás {currentMeasure} de {totalMeasures}
-                        </span>
-                        <span className="text-emerald-400">
-                            {isLoadingAudio
-                                ? "Descargando muestras..."
-                                : `Audio: ${score.instrument.toUpperCase()} HD`}
-                        </span>
-                    </div>
-                    <div className="w-full h-2 rounded-full bg-[#0A1128] overflow-hidden border border-blue-900/50">
-                        <div
-                            style={{ width: `${progressPercent}%` }}
-                            className="h-full bg-blue-500 transition-all duration-200"
-                        />
+                <div className="pointer-events-none sticky bottom-24 z-30 -mt-24 px-1 md:bottom-4">
+                    <div className="pointer-events-auto flex flex-wrap items-center justify-between gap-4 rounded-[1.5rem] border border-pink-200/80 bg-white/92 px-4 py-3 shadow-2xl shadow-pink-300/35 backdrop-blur-xl dark:border-pink-500/25 dark:bg-slate-900/92 dark:shadow-black/50">
+                        <div className="flex items-center gap-2">
+                            <button
+                                type="button"
+                                onClick={handleRestartScore}
+                                disabled={isLoadingScore}
+                                title="Reiniciar partitura"
+                                className="grid h-11 w-11 cursor-pointer place-items-center rounded-full border border-pink-200/80 bg-pink-50 text-base font-bold text-rose-950 transition disabled:opacity-40 dark:border-pink-500/20 dark:bg-slate-800 dark:text-pink-50"
+                            >
+                                ↺
+                            </button>
+                            <button
+                                type="button"
+                                onClick={handleTogglePlay}
+                                disabled={isLoadingScore || isLoadingAudio || !!loadError}
+                                className={`flex cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold shadow-lg transition active:scale-95 disabled:pointer-events-none disabled:opacity-40 ${
+                                    isPlaying
+                                        ? "bg-gradient-to-r from-amber-200 to-orange-200 text-rose-950"
+                                        : "bg-gradient-to-r from-pink-400 to-rose-400 text-rose-950 shadow-pink-300/40"
+                                }`}
+                            >
+                                <span>{isPlaying ? "⏸" : "▶"}</span>
+                                <span>
+                                    {isLoadingAudio
+                                        ? "Cargando audio HD..."
+                                        : isPlaying
+                                            ? "Pausar Obra"
+                                            : "Reproducir Obra"}
+                                </span>
+                            </button>
+                        </div>
+
+                        <div className="flex min-w-[200px] flex-1 flex-col gap-1.5">
+                            <div className="flex justify-between text-[11px] font-semibold text-rose-900/55 dark:text-pink-100/55">
+                                <span>
+                                    Compás {currentMeasure} de {totalMeasures}
+                                </span>
+                                <span className="text-rose-500 dark:text-pink-300">
+                                    {isLoadingAudio
+                                        ? "Descargando muestras..."
+                                        : `Audio: ${score.instrument.toUpperCase()} HD`}
+                                </span>
+                            </div>
+                            <div className="h-1.5 w-full overflow-hidden rounded-full bg-pink-100 dark:bg-slate-800">
+                                <div
+                                    style={{ width: `${progressPercent}%` }}
+                                    className="h-full rounded-full bg-gradient-to-r from-pink-400 to-rose-400 transition-all duration-200"
+                                />
+                            </div>
+                        </div>
+
+                        <div className="flex items-center gap-3 rounded-full border border-pink-100 bg-rose-50/80 px-4 py-2 dark:border-pink-500/20 dark:bg-slate-950/50">
+                            <div className="flex flex-col">
+                                <span className="text-[10px] font-bold uppercase tracking-wider text-rose-400">
+                                    Tempo
+                                </span>
+                                <span className="font-mono text-sm font-extrabold text-rose-950 dark:text-pink-50">
+                                    {bpm} <span className="text-[11px] text-rose-400">BPM</span>
+                                </span>
+                            </div>
+                            <input
+                                type="range"
+                                min={40}
+                                max={200}
+                                step={2}
+                                value={bpm}
+                                onChange={(e) => setBpm(Number(e.target.value))}
+                                className="w-28 cursor-pointer accent-rose-400"
+                            />
+                        </div>
                     </div>
                 </div>
-
-                <div className="flex items-center gap-3 bg-[#0A1128] px-4 py-2 rounded-xl border border-blue-900/50">
-                    <div className="flex flex-col">
-                        <span className="text-[10px] font-bold uppercase tracking-wider text-[#94A3B8]">
-                            Tempo
-                        </span>
-                        <span className="text-sm font-mono font-extrabold text-[#F1F5F9]">
-                            {bpm} <span className="text-[11px] text-blue-400">BPM</span>
-                        </span>
-                    </div>
-                    <input
-                        type="range"
-                        min={40}
-                        max={200}
-                        step={2}
-                        value={bpm}
-                        onChange={(e) => setBpm(Number(e.target.value))}
-                        className="w-28 accent-blue-500 cursor-pointer"
-                    />
-                </div>
-            </div>
-
-            <div className="relative w-full bg-[#F8FAFC] text-[#0A1128] rounded-2xl p-6 md:p-10 shadow-2xl min-h-[520px] overflow-x-auto border-4 border-blue-900/40">
-                {isLoadingScore && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-[#F8FAFC]/90 z-10 rounded-2xl">
-                        <p className="text-sm font-bold text-slate-600 animate-pulse">
-                            Renderizando partitura de alta definición...
-                        </p>
-                    </div>
-                )}
-                {loadError && (
-                    <div className="p-6 rounded-xl bg-rose-500/10 border border-rose-500/30 text-center my-12">
-                        <p className="text-sm font-bold text-rose-600 mb-1">{loadError}</p>
-                        <p className="text-xs text-slate-600">
-                            Verifica que la partitura esté correctamente almacenada en la base de datos.
-                        </p>
-                    </div>
-                )}
-                <div ref={osmdContainerRef} className="w-full" />
             </div>
         </section>
     );

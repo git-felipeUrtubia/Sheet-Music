@@ -46,38 +46,38 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
     };
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-sm p-4 select-none">
-            <div className="w-full max-w-lg bg-[#111C3D] border-2 border-blue-900/70 rounded-2xl p-6 md:p-8 shadow-2xl text-[#E2E8F0] animate-in fade-in zoom-in-95 duration-150">
-
-                <div className="flex items-center justify-between pb-4 mb-6 border-b border-blue-900/50">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-rose-950/25 p-4 backdrop-blur-md dark:bg-black/70">
+            <div className="studio-fade w-full max-w-lg rounded-[1.8rem_2.3rem_1.6rem_2rem] border border-pink-200/80 bg-white/90 p-6 text-slate-800 shadow-2xl shadow-pink-200/40 backdrop-blur-xl dark:border-pink-500/20 dark:bg-slate-900/90 dark:text-slate-100 dark:shadow-black/50 md:p-8">
+                <div className="mb-6 flex items-start justify-between border-b border-pink-100 pb-4 dark:border-pink-500/15">
                     <div>
-                        <h2 className="text-xl font-extrabold text-[#F1F5F9]">
+                        <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-rose-400">
+                            Estudio
+                        </p>
+                        <h2 className="mt-1 font-display text-3xl text-rose-950 dark:text-pink-50">
                             Configuración del Sistema
                         </h2>
-                        <p className="text-xs text-[#94A3B8]">
+                        <p className="mt-1 text-xs text-rose-900/60 dark:text-pink-100/55">
                             Ajusta tu instrumento MIDI, notación musical y metrónomo.
                         </p>
                     </div>
                     <button
                         type="button"
                         onClick={onClose}
-                        className="w-8 h-8 rounded-lg bg-[#0A1128] hover:bg-[#162247] text-[#94A3B8] hover:text-white font-bold cursor-pointer transition-colors"
+                        className="grid h-9 w-9 cursor-pointer place-items-center rounded-full border border-pink-200/80 bg-pink-50 text-sm font-bold text-rose-800 transition hover:bg-pink-100 dark:border-pink-500/25 dark:bg-slate-800 dark:text-pink-50"
                     >
                         ✕
                     </button>
                 </div>
 
-                <div className="flex flex-col gap-6">
-
-                    {/* 1. Selector de Instrumento MIDI */}
-                    <div className="flex flex-col gap-2 p-4 rounded-xl bg-[#0A1128] border border-blue-900/60">
-                        <div className="flex justify-between items-center mb-1">
-                            <label className="text-xs font-bold uppercase tracking-wider text-blue-300">
+                <div className="flex flex-col gap-5">
+                    <div className="flex flex-col gap-2 rounded-[1.3rem] border border-pink-100 bg-rose-50/70 p-4 dark:border-pink-500/15 dark:bg-slate-950/50">
+                        <div className="mb-1 flex items-center justify-between">
+                            <label className="text-[11px] font-bold uppercase tracking-[0.16em] text-rose-500 dark:text-pink-300">
                                 🎹 Dispositivo de Entrada MIDI
                             </label>
-                            <span className={`flex items-center gap-1.5 text-[10px] font-bold uppercase ${isConnected ? 'text-emerald-400' : 'text-rose-400'}`}>
-                                <span className={`w-2 h-2 rounded-full ${isConnected ? 'bg-emerald-400 animate-pulse' : 'bg-rose-500'}`}></span>
-                                {isConnected ? 'Conectado' : 'Desconectado'}
+                            <span className={`flex items-center gap-1.5 text-[10px] font-bold uppercase ${isConnected ? "text-emerald-600 dark:text-emerald-300" : "text-rose-500"}`}>
+                                <span className={`h-2 w-2 rounded-full ${isConnected ? "animate-pulse bg-emerald-400" : "bg-rose-400"}`} />
+                                {isConnected ? "Conectado" : "Desconectado"}
                             </span>
                         </div>
                         <select
@@ -85,7 +85,7 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                             onChange={(e) =>
                                 setSettings({ ...settings, selectedMidiId: e.target.value })
                             }
-                            className="w-full px-3.5 py-2.5 rounded-xl bg-[#111C3D] border border-blue-800/60 text-sm text-[#F1F5F9] focus:outline-none focus:border-blue-400 cursor-pointer"
+                            className="w-full cursor-pointer rounded-2xl border border-pink-200/80 bg-white px-3.5 py-2.5 text-sm text-rose-950 focus:border-pink-400 focus:outline-none dark:border-pink-500/25 dark:bg-slate-900 dark:text-pink-50"
                         >
                             <option value="default">Cualquier dispositivo MIDI USB (Automático)</option>
                             {availableDevices.map((device) => (
@@ -95,15 +95,14 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                             ))}
                         </select>
                         {!isConnected && (
-                            <p className="text-[11px] text-rose-300/80 mt-1">
+                            <p className="mt-1 text-[11px] text-rose-600/80 dark:text-rose-300/80">
                                 Conecta tu piano digital por cable USB al computador para poder realizar los ejercicios.
                             </p>
                         )}
                     </div>
 
-                    {/* 2. Sistema de Notación Musical */}
                     <div className="flex flex-col gap-2">
-                        <span className="text-xs font-bold uppercase tracking-wider text-blue-300">
+                        <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-rose-500 dark:text-pink-300">
                             🎵 Nomenclatura de Notas
                         </span>
                         <div className="grid grid-cols-2 gap-3">
@@ -119,14 +118,14 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                                         key={opt.id}
                                         type="button"
                                         onClick={() => setSettings({ ...settings, notation: opt.id })}
-                                        className={`p-3 rounded-xl border text-left cursor-pointer transition-all ${
+                                        className={`cursor-pointer rounded-2xl border p-3 text-left transition ${
                                             isSelected
-                                                ? "bg-blue-600/20 border-blue-400 text-[#F1F5F9]"
-                                                : "bg-[#0A1128] border-blue-900/50 text-[#94A3B8] hover:bg-[#162247]"
+                                                ? "border-transparent bg-gradient-to-br from-pink-400 to-rose-400 text-rose-950 shadow-md shadow-pink-300/40"
+                                                : "border-pink-200/80 bg-white/80 text-rose-900 hover:bg-pink-50 dark:border-pink-500/20 dark:bg-slate-950/40 dark:text-pink-50"
                                         }`}
                                     >
                                         <div className="text-xs font-bold">{opt.title}</div>
-                                        <div className="text-[11px] font-mono text-blue-300 mt-1">
+                                        <div className={`mt-1 font-mono text-[11px] ${isSelected ? "text-rose-950/80" : "text-rose-400"}`}>
                                             {opt.desc}
                                         </div>
                                     </button>
@@ -135,13 +134,12 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                         </div>
                     </div>
 
-                    {/* 3. Volumen del Metrónomo */}
-                    <div className="flex flex-col gap-2 bg-[#0A1128]/70 p-4 rounded-xl border border-blue-900/40">
-                        <div className="flex justify-between items-center">
-                            <span className="text-xs font-bold uppercase tracking-wider text-[#94A3B8]">
+                    <div className="flex flex-col gap-2 rounded-[1.3rem] border border-pink-100 bg-rose-50/70 p-4 dark:border-pink-500/15 dark:bg-slate-950/50">
+                        <div className="flex items-center justify-between">
+                            <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-rose-500 dark:text-pink-300">
                                 🔊 Volumen del Metrónomo
                             </span>
-                            <span className="text-xs font-mono font-bold text-emerald-400">
+                            <span className="font-mono text-xs font-bold text-rose-600 dark:text-pink-300">
                                 {settings.metronomeVolume}%
                             </span>
                         </div>
@@ -154,32 +152,32 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                             onChange={(e) =>
                                 setSettings({ ...settings, metronomeVolume: Number(e.target.value) })
                             }
-                            className="w-full accent-emerald-500 cursor-pointer"
+                            className="w-full cursor-pointer accent-rose-400"
                         />
                     </div>
                 </div>
 
-                <div className="mt-8 pt-4 border-t border-blue-900/50 flex items-center justify-between gap-3">
+                <div className="mt-7 flex items-center justify-between gap-3 border-t border-pink-100 pt-4 dark:border-pink-500/15">
                     <button
                         type="button"
                         onClick={handleResetDefaults}
-                        className="text-xs font-semibold text-[#94A3B8] hover:text-rose-400 underline cursor-pointer transition-colors"
+                        className="cursor-pointer text-xs font-semibold text-rose-400 underline decoration-rose-200 underline-offset-4 transition hover:text-rose-600"
                     >
                         Restaurar valores
                     </button>
 
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2">
                         <button
                             type="button"
                             onClick={onClose}
-                            className="px-4 py-2 rounded-xl bg-[#0A1128] hover:bg-[#162247] text-xs font-bold text-[#94A3B8] cursor-pointer transition-colors"
+                            className="cursor-pointer rounded-full px-4 py-2 text-xs font-bold text-rose-700 transition hover:bg-pink-50 dark:text-pink-100 dark:hover:bg-white/5"
                         >
                             Cancelar
                         </button>
                         <button
                             type="button"
                             onClick={handleSave}
-                            className="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-xs font-bold text-[#F1F5F9] shadow-lg cursor-pointer transition-all"
+                            className="cursor-pointer rounded-full bg-gradient-to-r from-pink-400 to-rose-400 px-5 py-2 text-xs font-bold text-rose-950 shadow-lg shadow-pink-300/40"
                         >
                             {savedBanner ? "¡Guardado! ✓" : "Guardar Cambios"}
                         </button>
