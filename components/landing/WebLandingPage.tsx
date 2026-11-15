@@ -122,7 +122,7 @@ export default function WebLandingPage({ onEnterApp }: WebLandingPageProps) {
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 rounded-full border border-pink-200/80 bg-white/85 px-3 py-2 shadow-xl shadow-pink-200/30 backdrop-blur-xl dark:border-pink-500/20 dark:bg-slate-900/80 dark:shadow-black/40">
           <div className="flex min-w-0 items-center gap-2.5 pl-1">
             <img
-              src="/icon2.png"
+              src="/icon3.png"
               alt=""
               className="h-9 w-9 shrink-0 rounded-xl object-cover shadow-md shadow-pink-300/40"
             />
