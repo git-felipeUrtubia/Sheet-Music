@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ArrowRight, Coffee, GraduationCap, Music2 } from "lucide-react";
+import SupportButton from "@/components/shell/SupportButton";
 
 export default function HomePage() {
   return (
@@ -31,13 +32,9 @@ export default function HomePage() {
               {name}
             </span>
           ))}
-          <button
-            type="button"
-            className="ml-1 inline-flex cursor-pointer items-center gap-2 rounded-full border border-pink-200/80 bg-white/70 px-4 py-1.5 text-sm font-medium text-rose-950 transition hover:-translate-y-0.5 dark:border-pink-500/20 dark:bg-slate-950/40 dark:text-pink-50"
-          >
-            <Coffee className="h-4 w-4" strokeWidth={1.75} />
-            <span>Apoyar proyecto</span>
-          </button>
+
+          <SupportButton variant="sidebar" />
+
         </div>
       </section>
 
