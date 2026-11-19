@@ -13,9 +13,38 @@ interface ScoreViewerProps {
     onBack: () => void;
 }
 
+const GRACE_NOTE_DURATION_SEC = 0.075;
+
+function getIteratorTimestamp(iterator: any): number | null {
+    const ts =
+        iterator?.currentTimeStamp?.RealValue ??
+        iterator?.CurrentTimestamp?.RealValue ??
+        null;
+    return typeof ts === "number" && Number.isFinite(ts) ? ts : null;
+}
+
+function getStepFraction(iterator: any, fallbackFraction: number): number {
+    const currentTs = getIteratorTimestamp(iterator);
+    if (currentTs !== null && typeof iterator?.clone === "function") {
+        const nextIterator = iterator.clone();
+        nextIterator.moveToNext();
+        if (!nextIterator.EndReached) {
+            const nextTs = getIteratorTimestamp(nextIterator);
+            if (nextTs !== null) {
+                const delta = nextTs - currentTs;
+                if (delta > 0.0001) {
+                    return delta;
+                }
+            }
+        }
+    }
+    return fallbackFraction;
+}
+
 export default function ScoreViewer({ score, onBack }: ScoreViewerProps) {
     const [isLoadingScore, setIsLoadingScore] = useState<boolean>(true);
     const [isLoadingAudio, setIsLoadingAudio] = useState<boolean>(true);
+    const [audioUnavailable, setAudioUnavailable] = useState<boolean>(false);
     const [loadError, setLoadError] = useState<string | null>(null);
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
     const [bpm, setBpm] = useState<number>(score.bpm);
@@ -27,30 +56,56 @@ export default function ScoreViewer({ score, onBack }: ScoreViewerProps) {
     const osmdRef = useRef<OpenSheetMusicDisplay | null>(null);
     const audioCtxRef = useRef<AudioContext | null>(null);
     const instrumentPlayerRef = useRef<SplendidGrandPiano | Soundfont | null>(null);
-    const playbackTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+    const playbackTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
     const isPlayingRef = useRef<boolean>(false);
     isPlayingRef.current = isPlaying;
     const bpmRef = useRef<number>(bpm);
     bpmRef.current = bpm;
+    const zoomRef = useRef<number>(zoom);
+    zoomRef.current = zoom;
+
     const isPdf = isPdfAsset(score.scoreFile);
 
-    // Inicialización del motor de audio realista (Smplr)
+    const stopPlaybackEngine = useCallback(() => {
+        setIsPlaying(false);
+        isPlayingRef.current = false;
+        if (playbackTimeoutRef.current) {
+            clearTimeout(playbackTimeoutRef.current);
+            playbackTimeoutRef.current = null;
+        }
+        instrumentPlayerRef.current?.stop();
+    }, []);
+
+    // Sincronizar BPM inicial al cambiar de obra
+    useEffect(() => {
+        setBpm(score.bpm);
+    }, [score.id, score.bpm]);
+
+    // Inicialización del motor de audio (Smplr) solo para partituras MusicXML
     useEffect(() => {
         let isMounted = true;
+
+        if (isPdf) {
+            setIsLoadingAudio(false);
+            setAudioUnavailable(false);
+            return;
+        }
+
         setIsLoadingAudio(true);
+        setAudioUnavailable(false);
+
         const initAudioEngine = async () => {
             try {
                 const ctx = new AudioContext();
                 audioCtxRef.current = ctx;
-                let player: SplendidGrandPiano | Soundfont;
 
-                if (score.instrument === "piano") {
-                    player = new SplendidGrandPiano(ctx);
-                } else {
-                    const sfInstrumentName = score.instrument === "violin" ? "violin" : "flute";
-                    player = new Soundfont(ctx, { instrument: sfInstrumentName });
-                }
+                const player: SplendidGrandPiano | Soundfont =
+                    score.instrument === "piano"
+                        ? new SplendidGrandPiano(ctx)
+                        : new Soundfont(ctx, {
+                            instrument: score.instrument === "violin" ? "violin" : "flute",
+                        });
 
                 await player.load;
                 if (isMounted) {
@@ -59,22 +114,37 @@ export default function ScoreViewer({ score, onBack }: ScoreViewerProps) {
                 }
             } catch (error) {
                 console.error("Error cargando samples del instrumento:", error);
-                if (isMounted) setIsLoadingAudio(false);
+                if (isMounted) {
+                    instrumentPlayerRef.current = null;
+                    setAudioUnavailable(true);
+                    setIsLoadingAudio(false);
+                }
             }
         };
+
         initAudioEngine();
 
         return () => {
             isMounted = false;
-            if (playbackTimeoutRef.current) clearTimeout(playbackTimeoutRef.current);
-            if (instrumentPlayerRef.current) instrumentPlayerRef.current.stop();
-            if (audioCtxRef.current) audioCtxRef.current.close();
+            if (playbackTimeoutRef.current) {
+                clearTimeout(playbackTimeoutRef.current);
+                playbackTimeoutRef.current = null;
+            }
+            instrumentPlayerRef.current?.stop();
+            instrumentPlayerRef.current = null;
+            if (audioCtxRef.current && audioCtxRef.current.state !== "closed") {
+                audioCtxRef.current.close().catch(() => undefined);
+            }
+            audioCtxRef.current = null;
         };
-    }, [score.instrument]);
+    }, [score.instrument, isPdf]);
 
     // Inicialización y renderizado de la partitura (IPC en escritorio, archivo público en web)
     useEffect(() => {
         let isMounted = true;
+        stopPlaybackEngine();
+        osmdRef.current = null;
+
         if (isPdf) {
             setIsLoadingScore(false);
             setLoadError(null);
@@ -104,13 +174,14 @@ export default function ScoreViewer({ score, onBack }: ScoreViewerProps) {
                 await osmd.load(xmlDataOrUrl);
                 if (!isMounted) return;
 
-                osmd.zoom = zoom;
+                osmd.zoom = zoomRef.current;
                 osmd.render();
                 osmd.cursor.show();
                 osmd.cursor.reset();
                 osmdRef.current = osmd;
 
-                const realMeasuresCount = osmd.Sheet?.SourceMeasures?.length || score.measuresCount;
+                const realMeasuresCount =
+                    osmd.Sheet?.SourceMeasures?.length || score.measuresCount;
                 setTotalMeasures(realMeasuresCount);
                 setCurrentMeasure(1);
                 setIsLoadingScore(false);
@@ -124,14 +195,16 @@ export default function ScoreViewer({ score, onBack }: ScoreViewerProps) {
         };
 
         loadAndRenderScore();
+
         return () => {
             isMounted = false;
         };
-    }, [isPdf, score]);
+    }, [isPdf, score, stopPlaybackEngine]);
 
     const handleZoomChange = (newZoom: number) => {
         const clampedZoom = Math.min(1.6, Math.max(0.6, Number(newZoom.toFixed(1))));
         setZoom(clampedZoom);
+        zoomRef.current = clampedZoom;
         if (osmdRef.current) {
             osmdRef.current.zoom = clampedZoom;
             osmdRef.current.render();
@@ -142,23 +215,26 @@ export default function ScoreViewer({ score, onBack }: ScoreViewerProps) {
     const playCurrentCursorStep = useCallback(() => {
         const osmd = osmdRef.current;
         const player = instrumentPlayerRef.current;
-        if (!osmd || !osmd.cursor || !isPlayingRef.current) return;
-        const iterator = osmd.cursor.Iterator;
+        const ctx = audioCtxRef.current;
 
+        if (!osmd || !osmd.cursor || !isPlayingRef.current) return;
+
+        const iterator = osmd.cursor.Iterator;
         if (iterator.EndReached) {
-            setIsPlaying(false);
-            isPlayingRef.current = false;
+            stopPlaybackEngine();
             osmd.cursor.reset();
             setCurrentMeasure(1);
             return;
         }
 
         setCurrentMeasure(iterator.CurrentMeasureIndex + 1);
+
         const wholeNoteSeconds = (60 / bpmRef.current) * 4;
-        let minStepFraction = 1.0;
+        let minStepFraction = Number.POSITIVE_INFINITY;
 
         const voiceEntries = iterator.CurrentVoiceEntries || [];
         const graceNotesToPlay: number[] = [];
+
         voiceEntries.forEach((ve: any) => {
             if (ve.GraceNotes && ve.GraceNotes.length > 0) {
                 ve.GraceNotes.forEach((gn: any) => {
@@ -179,15 +255,14 @@ export default function ScoreViewer({ score, onBack }: ScoreViewerProps) {
             }
         });
 
-        const graceNoteDurationSec = 0.075;
-        const totalGraceOffsetSec = graceNotesToPlay.length * graceNoteDurationSec;
-        if (player && audioCtxRef.current && graceNotesToPlay.length > 0) {
-            const now = audioCtxRef.current.currentTime;
+        const totalGraceOffsetSec = graceNotesToPlay.length * GRACE_NOTE_DURATION_SEC;
+        if (player && ctx && graceNotesToPlay.length > 0) {
+            const now = ctx.currentTime;
             graceNotesToPlay.forEach((midi, idx) => {
                 player.start({
                     note: midi,
-                    time: now + idx * graceNoteDurationSec,
-                    duration: graceNoteDurationSec * 0.95,
+                    time: now + idx * GRACE_NOTE_DURATION_SEC,
+                    duration: GRACE_NOTE_DURATION_SEC * 0.95,
                     velocity: 72,
                 });
             });
@@ -195,13 +270,16 @@ export default function ScoreViewer({ score, onBack }: ScoreViewerProps) {
 
         notesUnderCursor.forEach((note: any) => {
             if (!note) return;
-            const noteFraction = note.Length.RealValue;
+            const noteFraction = note.Length?.RealValue ?? 0;
             if (note.IsGraceNote || noteFraction <= 0) return;
+
             if (noteFraction < minStepFraction) {
                 minStepFraction = noteFraction;
             }
+
             if (note.isRest()) return;
 
+            // Evitar volver a disparar notas que son continuación de una ligadura
             if (note.NoteTie) {
                 const tieNotes = note.NoteTie.Notes || [];
                 const isFirstNoteOfTie =
@@ -218,11 +296,12 @@ export default function ScoreViewer({ score, onBack }: ScoreViewerProps) {
                 );
             }
 
-            if (player && audioCtxRef.current) {
+            if (player && ctx) {
                 const midiNote = note.halfTone + 12;
                 const totalDurationSec = totalTiedFraction * wholeNoteSeconds;
-                const now = audioCtxRef.current.currentTime;
+                const now = ctx.currentTime;
                 const effectiveDuration = Math.max(0.1, totalDurationSec - totalGraceOffsetSec);
+
                 player.start({
                     note: midiNote,
                     time: now + totalGraceOffsetSec,
@@ -232,28 +311,26 @@ export default function ScoreViewer({ score, onBack }: ScoreViewerProps) {
             }
         });
 
-        if (minStepFraction === 1.0 && notesUnderCursor.length === 0) {
-            minStepFraction = 0.25;
-        }
-        const stepWaitMs = minStepFraction * wholeNoteSeconds * 1000;
+        const fallbackFraction = Number.isFinite(minStepFraction) ? minStepFraction : 0.25;
+        const stepFraction = getStepFraction(iterator, fallbackFraction);
+        const stepWaitMs = stepFraction * wholeNoteSeconds * 1000;
 
         playbackTimeoutRef.current = setTimeout(() => {
             if (!isPlayingRef.current || !osmdRef.current) return;
             osmdRef.current.cursor.next();
             playCurrentCursorStep();
         }, stepWaitMs);
-    }, []);
+    }, [stopPlaybackEngine]);
 
     const handleTogglePlay = async () => {
-        if (!osmdRef.current) return;
+        if (!osmdRef.current || isPdf) return;
+
         if (audioCtxRef.current && audioCtxRef.current.state === "suspended") {
             await audioCtxRef.current.resume();
         }
+
         if (isPlaying) {
-            setIsPlaying(false);
-            isPlayingRef.current = false;
-            if (playbackTimeoutRef.current) clearTimeout(playbackTimeoutRef.current);
-            if (instrumentPlayerRef.current) instrumentPlayerRef.current.stop();
+            stopPlaybackEngine();
         } else {
             setIsPlaying(true);
             isPlayingRef.current = true;
@@ -262,11 +339,8 @@ export default function ScoreViewer({ score, onBack }: ScoreViewerProps) {
     };
 
     const handleRestartScore = () => {
-        setIsPlaying(false);
-        isPlayingRef.current = false;
-        if (playbackTimeoutRef.current) clearTimeout(playbackTimeoutRef.current);
-        if (instrumentPlayerRef.current) instrumentPlayerRef.current.stop();
-        if (osmdRef.current && osmdRef.current.cursor) {
+        stopPlaybackEngine();
+        if (osmdRef.current?.cursor) {
             osmdRef.current.cursor.reset();
             setCurrentMeasure(1);
         }
@@ -276,6 +350,14 @@ export default function ScoreViewer({ score, onBack }: ScoreViewerProps) {
         100,
         Math.round((currentMeasure / Math.max(1, totalMeasures)) * 100)
     );
+
+    const audioStatusLabel = isPdf
+        ? "Vista PDF"
+        : isLoadingAudio
+            ? "Descargando muestras..."
+            : audioUnavailable
+                ? "Audio no disponible (sin conexión)"
+                : `Audio: ${score.instrument.toUpperCase()} HD`;
 
     return (
         <section className="studio-fade relative mx-auto flex w-full max-w-6xl flex-col">
@@ -309,26 +391,33 @@ export default function ScoreViewer({ score, onBack }: ScoreViewerProps) {
                         </p>
                     </div>
                 </div>
-                <div className="flex items-center gap-2 rounded-full border border-pink-200/80 bg-white/85 px-2 py-1.5 shadow-sm backdrop-blur-xl dark:border-pink-500/20 dark:bg-slate-900/80">
-                    <span className="pl-2 text-[10px] font-bold uppercase tracking-[0.16em] text-rose-400">Zoom:</span>
-                    <button
-                        type="button"
-                        onClick={() => handleZoomChange(zoom - 0.1)}
-                        className="grid h-8 w-8 cursor-pointer place-items-center rounded-full bg-pink-50 text-sm font-bold text-rose-950 dark:bg-slate-800 dark:text-pink-50"
-                    >
-                        -
-                    </button>
-                    <span className="min-w-[46px] text-center font-mono text-xs font-bold text-rose-700 dark:text-pink-200">
-                        {Math.round(zoom * 100)}%
-                    </span>
-                    <button
-                        type="button"
-                        onClick={() => handleZoomChange(zoom + 0.1)}
-                        className="grid h-8 w-8 cursor-pointer place-items-center rounded-full bg-pink-50 text-sm font-bold text-rose-950 dark:bg-slate-800 dark:text-pink-50"
-                    >
-                        +
-                    </button>
-                </div>
+
+                {!isPdf && (
+                    <div className="flex items-center gap-2 rounded-full border border-pink-200/80 bg-white/85 px-2 py-1.5 shadow-sm backdrop-blur-xl dark:border-pink-500/20 dark:bg-slate-900/80">
+                        <span className="pl-2 text-[10px] font-bold uppercase tracking-[0.16em] text-rose-400">
+                            Zoom:
+                        </span>
+                        <button
+                            type="button"
+                            disabled={isLoadingScore}
+                            onClick={() => handleZoomChange(zoom - 0.1)}
+                            className="grid h-8 w-8 cursor-pointer place-items-center rounded-full bg-pink-50 text-sm font-bold text-rose-950 disabled:opacity-40 dark:bg-slate-800 dark:text-pink-50"
+                        >
+                            -
+                        </button>
+                        <span className="min-w-[46px] text-center font-mono text-xs font-bold text-rose-700 dark:text-pink-200">
+                            {Math.round(zoom * 100)}%
+                        </span>
+                        <button
+                            type="button"
+                            disabled={isLoadingScore}
+                            onClick={() => handleZoomChange(zoom + 0.1)}
+                            className="grid h-8 w-8 cursor-pointer place-items-center rounded-full bg-pink-50 text-sm font-bold text-rose-950 disabled:opacity-40 dark:bg-slate-800 dark:text-pink-50"
+                        >
+                            +
+                        </button>
+                    </div>
+                )}
             </header>
 
             <div className="relative rounded-[2rem] border border-pink-200/70 bg-[radial-gradient(circle_at_top,rgba(255,228,236,0.95),rgba(255,248,250,0.45))] p-3 shadow-xl shadow-pink-200/30 dark:border-pink-500/20 dark:bg-[radial-gradient(circle_at_top,rgba(244,114,182,0.18),rgba(11,13,23,0.45))] dark:shadow-black/50 md:p-4">
@@ -366,7 +455,7 @@ export default function ScoreViewer({ score, onBack }: ScoreViewerProps) {
                             <button
                                 type="button"
                                 onClick={handleRestartScore}
-                                disabled={isLoadingScore}
+                                disabled={isPdf || isLoadingScore}
                                 title="Reiniciar partitura"
                                 className="grid h-11 w-11 cursor-pointer place-items-center rounded-full border border-pink-200/80 bg-pink-50 text-base font-bold text-rose-950 transition disabled:opacity-40 dark:border-pink-500/20 dark:bg-slate-800 dark:text-pink-50"
                             >
@@ -376,11 +465,10 @@ export default function ScoreViewer({ score, onBack }: ScoreViewerProps) {
                                 type="button"
                                 onClick={handleTogglePlay}
                                 disabled={isPdf || isLoadingScore || isLoadingAudio || !!loadError}
-                                className={`flex cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold shadow-lg transition active:scale-95 disabled:pointer-events-none disabled:opacity-40 ${
-                                    isPlaying
+                                className={`flex cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold shadow-lg transition active:scale-95 disabled:pointer-events-none disabled:opacity-40 ${isPlaying
                                         ? "bg-gradient-to-r from-amber-200 to-orange-200 text-rose-950"
                                         : "bg-gradient-to-r from-pink-400 to-rose-400 text-rose-950 shadow-pink-300/40"
-                                }`}
+                                    }`}
                             >
                                 {isPlaying ? (
                                     <Pause className="h-4 w-4 fill-current" strokeWidth={1.75} />
@@ -403,9 +491,7 @@ export default function ScoreViewer({ score, onBack }: ScoreViewerProps) {
                                     Compás {currentMeasure} de {totalMeasures}
                                 </span>
                                 <span className="text-rose-500 dark:text-pink-300">
-                                    {isLoadingAudio
-                                        ? "Descargando muestras..."
-                                        : `Audio: ${score.instrument.toUpperCase()} HD`}
+                                    {audioStatusLabel}
                                 </span>
                             </div>
                             <div className="h-1.5 w-full overflow-hidden rounded-full bg-pink-100 dark:bg-slate-800">
@@ -430,9 +516,10 @@ export default function ScoreViewer({ score, onBack }: ScoreViewerProps) {
                                 min={40}
                                 max={200}
                                 step={2}
+                                disabled={isPdf}
                                 value={bpm}
                                 onChange={(e) => setBpm(Number(e.target.value))}
-                                className="w-28 cursor-pointer accent-rose-400"
+                                className="w-28 cursor-pointer accent-rose-400 disabled:opacity-40"
                             />
                         </div>
                     </div>
