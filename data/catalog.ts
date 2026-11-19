@@ -104,7 +104,7 @@ export const SHEET_MUSIC_CATALOG: SheetMusicItem[] = [
         timeSignature: "2/4",
         bpm: 60,
         measuresCount: 34,
-        scoreFile: "/scores/Por una Cabeza.musicxml",
+        scoreFile: "/scores/Por Una Cabeza.musicxml",
     },
     {
         id: "frieren-time-flows-ever-onward-flute",
@@ -154,7 +154,7 @@ export const SHEET_MUSIC_CATALOG: SheetMusicItem[] = [
         instrument: "piano",
         clef: "treble",
         timeSignature: "2/4",
-        bpm: 64,
+        bpm: 70,
         measuresCount: 98,
         scoreFile: "/scores/REVIVER - Solo Leveling S2.musicxml",
     },
