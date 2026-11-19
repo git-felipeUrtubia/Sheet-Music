@@ -85,7 +85,7 @@ export const SHEET_MUSIC_CATALOG: SheetMusicItem[] = [
         title: "Game of Thrones (Main Theme)",
         composer: "Ramin Djawadi",
         level: "intermedio",
-        genre: "clasica", // O el género que prefieras asignarle dentro de MusicGenre
+        genre: "popular", // O el género que prefieras asignarle dentro de MusicGenre
         instrument: "violin",
         clef: "treble",
         timeSignature: "3/4",
@@ -98,7 +98,7 @@ export const SHEET_MUSIC_CATALOG: SheetMusicItem[] = [
         title: "Por una Cabeza",
         composer: "Carlos Gardel (Arr. Mateus Tonette)",
         level: "avanzado",
-        genre: "folclore", // O "clasica" según cómo prefieras clasificar el tango
+        genre: "popular", // O "clasica" según cómo prefieras clasificar el tango
         instrument: "violin",
         clef: "treble",
         timeSignature: "2/4",
@@ -119,4 +119,57 @@ export const SHEET_MUSIC_CATALOG: SheetMusicItem[] = [
         measuresCount: 50,
         scoreFile: "/scores/Frieren Flows Ever Onwerd.musicxml",
     },
+    {
+        id: "zelda-lost-woods-flute",
+        title: "Lost Woods (The Legend of Zelda: Ocarina of Time)",
+        composer: "Koji Kondo",
+        level: "intermedio",
+        genre: "popular", // Ajusta a "soundtrack" o "anime" según tus categorías permitidas en TypeScript
+        instrument: "flute", // Partitura monofónica en clave de sol (ideal para flauta o violín)
+        clef: "treble",
+        timeSignature: "4/4",
+        bpm: 140,
+        measuresCount: 55,
+        scoreFile: "/scores/Lost Woods - The Legend of Zelda Ocarina of Time - Koji Kondo.musicxml",
+    },
+    {
+        id: "zelda-song-of-storms-piano",
+        title: "Song of Storms (The Legend of Zelda: Ocarina of Time)",
+        composer: "Koji Kondo (Arr. Shreyan Das)",
+        level: "intermedio",
+        genre: "videojuegos", // Ajusta según tu unión de tipos de género
+        instrument: "piano",
+        clef: "treble", // Usa "grand" o "both" si tu tipado distingue doble pentagrama (sol + fa)
+        timeSignature: "3/4",
+        bpm: 70,
+        measuresCount: 67,
+        scoreFile: "/scores/Song Of Storms - The Legend of Zelda Ocarina of Time.musicxml",
+    },
+    {
+        id: "solo-leveling-reviver-piano",
+        title: "REVIVER (Solo Leveling S2 OST)",
+        composer: "Hiroyuki Sawano feat. SennaRin (Arr. Futoore)",
+        level: "avanzado", // o "avanzado"
+        genre: "anime",
+        instrument: "piano",
+        clef: "treble",
+        timeSignature: "2/4",
+        bpm: 64,
+        measuresCount: 98,
+        scoreFile: "/scores/REVIVER - Solo Leveling S2.musicxml",
+    },
+    {
+        id: "inuyasha-affections-touching-across-time-piano",
+        title: "Affections Touching Across Time (InuYasha OST)",
+        composer: "Kaoru Wada",
+        level: "intermedio",
+        genre: "anime",
+        instrument: "piano",
+        clef: "treble",
+        timeSignature: "4/4",
+        bpm: 120, // No viene impreso en la partitura; ~70–75 es el tempo habitual de esta pieza
+        measuresCount: 72,
+        scoreFile: "/scores/Affections Touching Across Time - InuYasha OST.musicxml",
+    },
+
 ];

@@ -22,5 +22,7 @@ export function useCatalog() {
     };
   }, []);
 
+  // console.log(catalog)
+
   return catalog;
 }

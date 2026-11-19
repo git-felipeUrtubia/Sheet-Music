@@ -1,8 +1,11 @@
 // types/catalog.ts
 import { DifficultyLevel, ClefType } from "./exercise";
 
-export type MusicGenre = "anime" | "clasica" | "rock" | "videojuegos" | "folclore";
+export type MusicGenre = "anime" | "clasica" | "rock" | "videojuegos" | "popular";
 export type InstrumentType = "piano" | "violin" | "flute";
+
+export const CATALOG_VERSION = "1.1";
+
 
 export interface SheetMusicItem {
     id: string;

@@ -2,7 +2,7 @@ import { EXERCISES_DATA } from "@/data/exercises";
 import { SHEET_MUSIC_CATALOG } from "@/data/catalog";
 import { SCALES, type MusicalScale } from "@/data/scales";
 import { THEORY_CHAPTERS, type TheoryChapter } from "@/data/theoryLessons";
-import type { SheetMusicItem, InstrumentType, MusicGenre } from "@/types/catalog";
+import { type SheetMusicItem, type InstrumentType, type MusicGenre, CATALOG_VERSION } from "@/types/catalog";
 import type { DifficultyLevel, ElectronDataBridge, Exercise } from "@/types/exercise";
 
 export const PROGRESS_KEY = "sheetmusic_progress";
@@ -101,7 +101,7 @@ export function loadWebDatabase(): Promise<WebDatabase> {
   }
 
   if (!webDatabasePromise) {
-    webDatabasePromise = fetch("/web-db.json", { cache: "force-cache" })
+    webDatabasePromise = fetch(`/web-db.json?v=${CATALOG_VERSION}`, { cache: "force-cache" })
       .then((response) => {
         if (!response.ok) {
           throw new Error(`web-db.json respondió ${response.status}`);
@@ -113,6 +113,7 @@ export function loadWebDatabase(): Promise<WebDatabase> {
         throw error;
       });
   }
+  // console.log(webDatabasePromise.then(it => it.scores))
 
   return webDatabasePromise;
 }

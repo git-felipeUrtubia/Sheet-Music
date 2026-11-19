@@ -38,7 +38,7 @@ const GENRE_OPTIONS: { value: "todos" | MusicGenre; label: string }[] = [
   { value: "clasica", label: "Clásica" },
   { value: "rock", label: "Rock" },
   { value: "videojuegos", label: "Videojuegos" },
-  { value: "folclore", label: "Folclore" },
+  { value: "popular", label: "Popular" },
 ];
 
 const pillClass = (active: boolean) =>
@@ -56,6 +56,7 @@ export default function SheetMusicPage() {
   const [selectedGenre, setSelectedGenre] = useState<"todos" | MusicGenre>("todos");
   const [query, setQuery] = useState("");
   const [selectedScoreId, setSelectedScoreId] = useState<string | null>(null);
+
 
   const filteredCatalog = filterScores(catalog, {
     instrument: selectedInstrument,

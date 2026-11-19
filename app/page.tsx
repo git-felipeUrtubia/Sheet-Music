@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Coffee, GraduationCap, Music2 } from "lucide-react";
+import { ArrowRight, GraduationCap, Music2 } from "lucide-react";
 import SupportButton from "@/components/shell/SupportButton";
 
 export default function HomePage() {
