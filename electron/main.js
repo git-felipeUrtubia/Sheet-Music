@@ -1,5 +1,5 @@
 // electron/main.js
-const { app, BrowserWindow, ipcMain } = require("electron");
+const { app, BrowserWindow, ipcMain, shell } = require("electron");
 const path = require("path");
 const fs = require("fs");
 const http = require("http");
@@ -234,6 +234,18 @@ async function createWindow() {
         },
     });
 
+    win.webContents.setWindowOpenHandler(({ url }) => {
+        // Si la URL es externa (Mercado Pago, Ko-fi, etc.), ábrela en el navegador del sistema
+        if (url.startsWith("https://") || url.startsWith("http://")) {
+            // Evita redirigir fuera si es tu propio localhost en desarrollo
+            if (!url.startsWith("http://localhost:3000")) {
+                shell.openExternal(url);
+                return { action: "deny" }; // Impide que Electron abra su propia ventana
+            }
+        }
+        return { action: "allow" };
+    })
+
     win.maximize();
     win.show();
 
@@ -250,6 +262,7 @@ async function createWindow() {
         win.loadURL(`http://127.0.0.1:${staticServerPort}`);
     }
 }
+
 
 app.whenReady().then(async () => {
     initDatabase();
