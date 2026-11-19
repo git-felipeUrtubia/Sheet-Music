@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
 // database/init-seed.js
+const { SHEET_MUSIC_CATALOG } = require("../data/catalog");
 const Database = require("better-sqlite3");
 const path = require("path");
 const fs = require("fs");
@@ -113,125 +114,7 @@ function seededRandom(seed) {
 }
 
 // 3. Catálogo inicial de Partituras
-const INITIAL_SCORES = [
-  {
-    id: "genshin-impact-main-theme",
-    title: "Genshin Impact Main Theme OST",
-    composer: "Yu-Peng Chen",
-    level: "principiante",
-    genre: "videojuegos",
-    instrument: "piano",
-    clef: "grand",
-    timeSignature: "3/4",
-    bpm: 80,
-    measuresCount: 52,
-    scoreFile: "/scores/Genshin Impact Main Theme.musicxml",
-  },
-  {
-    id: "je-te-laisserai-des-mots",
-    title: "Je Te Laisserai Des Mots",
-    composer: "Patrick Watson",
-    level: "principiante",
-    genre: "clasica",
-    instrument: "piano",
-    clef: "grand",
-    timeSignature: "3/4",
-    bpm: 108,
-    measuresCount: 92,
-    scoreFile: "/scores/Je Te Laisserai Des Mots - Patrick Watson.musicxml",
-  },
-  {
-    id: "if-i-am-with-you-jjk",
-    title: "If I Am With You (Jujutsu Kaisen)",
-    composer: "Yoshimasa Terui (Arr. Welder Dias)",
-    level: "principiante",
-    genre: "anime",
-    instrument: "piano",
-    clef: "grand",
-    timeSignature: "3/4",
-    bpm: 140,
-    measuresCount: 48,
-    scoreFile: "/scores/Jujutsu Kaisen -If i am with you- - Yoshimasa Terui.musicxml",
-  },
-  {
-    id: "kamado-tanjiro-no-uta",
-    title: "Kamado Tanjiro no Uta (Kimetsu no Yaiba)",
-    composer: "Go Shiina",
-    level: "principiante",
-    genre: "anime",
-    instrument: "piano",
-    clef: "grand",
-    timeSignature: "4/4",
-    bpm: 150,
-    measuresCount: 59,
-    scoreFile: "/scores/Kamado Tanjiro no Uta - Demon Slayer Kimetsu no yaiba EASSY.musicxml",
-  },
-  {
-    id: "nezukos-theme-easy",
-    title: "Nezuko's Theme EASY (Demon Slayer)",
-    composer: "Yuki Kajiura & Go Shiina (Arr. Maytas Dhamalongkrot)",
-    level: "principiante",
-    genre: "anime",
-    instrument: "piano",
-    clef: "grand",
-    timeSignature: "4/4",
-    bpm: 140,
-    measuresCount: 114,
-    scoreFile: "/scores/Nezuko-s Theme - Demon Slayer.musicxml",
-  },
-  {
-    id: "minecraft-sweden",
-    title: "Minecraft: Sweden",
-    composer: "Daniel Rosenfeld (C418)",
-    level: "principiante",
-    genre: "videojuegos",
-    instrument: "piano",
-    clef: "grand",
-    timeSignature: "4/4",
-    bpm: 50,
-    measuresCount: 10,
-    scoreFile: "/scores/Sweden from Minecraft - C418.musicxml",
-  },
-  {
-    id: "game-of-thrones-violin",
-    title: "Game of Thrones (Main Theme)",
-    composer: "Ramin Djawadi",
-    level: "intermedio",
-    genre: "clasica",
-    instrument: "violin",
-    clef: "treble",
-    timeSignature: "3/4",
-    bpm: 172,
-    measuresCount: 88,
-    scoreFile: "/scores/Game of Thrones.musicxml",
-  },
-  {
-    id: "por-una-cabeza-violin",
-    title: "Por una Cabeza",
-    composer: "Carlos Gardel (Arr. Mateus Tonette)",
-    level: "avanzado",
-    genre: "folclore",
-    instrument: "violin",
-    clef: "treble",
-    timeSignature: "2/4",
-    bpm: 60,
-    measuresCount: 34,
-    scoreFile: "/scores/Por una Cabeza.musicxml",
-  },
-  {
-    id: "frieren-time-flows-ever-onward-flute",
-    title: "Time Flows Ever Onward (Frieren)",
-    composer: "Evan Call (Arr. Jch)",
-    level: "intermedio",
-    genre: "anime",
-    instrument: "flute",
-    clef: "treble",
-    timeSignature: "3/4",
-    bpm: 112,
-    measuresCount: 50,
-    scoreFile: "/scores/Frieren Flows Ever Onwerd.musicxml",
-  },
-];
+const INITIAL_SCORES = SHEET_MUSIC_CATALOG;
 
 const insertExercise = db.prepare(`
   INSERT INTO exercises (id, title, level, clef, time_signature, notes_json)

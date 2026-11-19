@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "db:seed": "npm rebuild better-sqlite3 && node database/init-seed.js && electron-builder install-app-deps",
+    "db:seed": "npm rebuild better-sqlite3 && tsx database/init-seed.js && electron-builder install-app-deps",
     "electron:preview": "next build && electron .",
     "electron:build": "next build && electron-builder",
     "postinstall": "node scripts/postinstall.js"
@@ -40,7 +40,7 @@
         }
       ],
       "icon": "public/icon3.png",
-      "artifactName": "${productName}-Setup-${version}.${ext}"
+      "artifactName": "${productName}-Setup.${ext}"
     },
     "nsis": {
       "oneClick": false,
@@ -79,6 +79,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.4.6",
     "tailwindcss": "4.3.3",
+    "tsx": "^4.23.15",
     "typescript": "^5"
   }
 }
