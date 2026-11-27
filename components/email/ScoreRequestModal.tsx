@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { X } from "lucide-react";
 
 // Pega aquí la URL de tu Webhook (o guárdala en NEXT_PUBLIC_SCORE_WEBHOOK_URL en tu .env.local)
-const WEBHOOK_URL = "https://discord.com/api/webhooks/1571312953578364930/_Scou5lZG7NvgASChTRUKgb3nXcVlPHveLSI6ucyowzuks0LomZXlkkpn4lMmw7BhKRJ";
+const WEBHOOK_URL = process.env.DISCORD_WEBHOOK;
 
 interface ScoreRequestModalProps {
   isOpen: boolean;
